@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram API. Data collection using location and time as parameters</title>
+
+<meta name="description" content="Instagram data collection described. Use Instagram API and Python to collect the data and save it to MongoDB for furhter processing.">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-instagram fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Instagram API. Data collection using location and time as parameters</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">May 8, 2016</span>
+           under Data
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          4 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p><strong>UPDATE 2019:</strong> Instagram API is much more restricted now so API endpoints described in this blog post are not available by default anymore. Hashtag Search API is still available though so the code below can be used as skeleton for new queries.</p>
+
+<p>Social networks research is quite popular topic nowadays. I found many interesting surveys describing the nature and patterns of the most popular networks like Twitter, Facebook and YouTube, however I did not see much work that has been done on Instagram data. Despite the fact that Instagram is relatively young social network, it has huge, dynamic and fast growing community of users. It would be interesting to look at the social graph of this network and try to find hidden patterns. I am going to collect the data using <a href="https://www.instagram.com/developer/endpoints/">Instagram API</a> and analyze it from this perspective.</p>
+
+<p>This is my first blog post of Instagram analysis series that shows how to collect the data in order to start our research.</p>
+
+<p>Instagram search API allows to get posts by the following parameters: time frame, location and number of posts from the location. However it has rate limits per access token - 5000 requests/hour (at the moment of writing this blog post). Apart from this, beware of connection errors if you are going to send more than 500 requests and you want your data collection script to remain stable.</p>
+
+<p>I used the following method in order to get the data from Instagram server:</p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/ce96d0217516dcd1aca9a39bce55e6e5.js"> </script>
+
+<!-- 
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">Session</span><span class="p">,</span> <span class="n">adapters</span>
+
+<span class="k">def</span> <span class="nf">getInstaPosts</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">minTimestamp</span><span class="p">,</span> <span class="n">maxTimestamp</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'lat'</span><span class="p">:</span> <span class="n">latitude</span><span class="p">,</span>
+        <span class="s">'lng'</span><span class="p">:</span> <span class="n">longitude</span><span class="p">,</span>
+        <span class="s">'distance'</span><span class="p">:</span> <span class="n">distance</span><span class="p">,</span> <span class="c1"># radius of requested area
+</span>        <span class="s">'min_timestamp'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">minTimestamp</span><span class="p">),</span> <span class="c1">#start date
+</span>        <span class="s">'max_timestamp'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">maxTimestamp</span><span class="p">),</span> <span class="c1">#end date
+</span>        <span class="s">'count'</span><span class="p">:</span> <span class="n">COUNT</span><span class="p">,</span> <span class="c1"># number of posts(100 max)
+</span>        <span class="s">'access_token'</span><span class="p">:</span> <span class="n">INSTAGRAM_ACCESS_TOKEN</span> <span class="c1">#your access token
+</span>    <span class="p">}</span>   
+    <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s">"https://"</span><span class="p">,</span> <span class="n">adapters</span><span class="o">.</span><span class="n">HTTPAdapter</span><span class="p">(</span><span class="n">max_retries</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"https://api.instagram.com/v1/media/search"</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></code></pre></figure>
+ -->
+
+<p>Next, we can get information about the connections between users (follows and followers). Before doing that I extract user ids from the collected posts. I store the data in local <a href="https://docs.mongodb.com/manual/introduction/">MongoDB instance</a>. I will use <a href="https://docs.mongodb.com/manual/aggregation/">Mongo Aggregation</a> in order to get the ids from our data.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/d23e0c7e4225187852b48727c51c3514.js"> </script>
+
+<!-- 
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">allPosts</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">([</span>
+    <span class="p">{</span><span class="na">$group</span><span class="p">:</span> <span class="p">{</span><span class="na">_id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">$user.id</span><span class="dl">"</span><span class="p">}},</span>
+    <span class="p">{</span><span class="na">$out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">users</span><span class="dl">"</span><span class="p">}</span>
+<span class="p">]);</span></code></pre></figure>
+ -->
+
+<p>Now we can collect information about the connections. Here I get followers for each user. If you want to collect follows, change <code class="highlighter-rouge">followed-by</code> in the request to <code class="highlighter-rouge">follows</code>.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/d9d1b033456e6d75ce16424bc2520cc0.js"> </script>
+
+<!-- 
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">getFollowers</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span> <span class="n">nextCursor</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'cursor'</span><span class="p">:</span> <span class="n">nextCursor</span><span class="p">,</span>
+        <span class="s">'access_token'</span><span class="p">:</span> <span class="n">INSTAGRAM_ACCESS_TOKEN</span>
+    <span class="p">}</span>
+    
+    <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s">"https://"</span><span class="p">,</span> <span class="n">adapters</span><span class="o">.</span><span class="n">HTTPAdapter</span><span class="p">(</span><span class="n">max_retries</span><span class="o">=</span><span class="mi">50</span><span class="p">))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"https://api.instagram.com/v1/users/"</span> <span class="o">+</span> <span class="n">userId</span> <span class="o">+</span> <span class="s">"/followed-by"</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></code></pre></figure>
+ -->
+
+<p>The API returns maximum 50 users in one request, so we need to use <code class="highlighter-rouge">nextCursor</code> if we want to get all followers. Same is true for follows.</p>
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/dce8c41456da99961863478fbd7d26d6.js"> </script>
+
+<!-- ``` python
+def getFullListOfFollowers(userId):
+    fullFollowersList = []
+    response = getFollowers(userId, '')
+    
+    if response.get('data') == None:
+        print "Access denied"
+        return fullFollowersList
+    
+    while(1):
+        fullFollowersList.extend(response.get('data'))
+        nextCursor = response.get('pagination').get('next_cursor')
+        if nextCursor == None:
+            break
+        
+    return fullFollowersList
+``` -->
+
+<p>Now you know how to collect the data about users and connections on Instagram.</p>
+
+<p>If you need to send a lot more than 5000 requests and you do not want to wait an hour every time you exceed the limit, I know some tips and tricks how to arrange that. Contact me or leave a comment and I share them with you.</p>
+
+<p>In my <a href="/graphs/2016/05/10/instagram-social-graph-analysis-spark-graph-frames/">next</a> blog post I describe how to build a social graph based on this data and analyze it using Apache Spark and Graph Frames library.</p>
+
+<p>Read another <a href="/clustering/2016/05/13/clustering-instagram-users-using-hashtags/">post</a> where I describe clustering Instagram users with help of Apache Spark and MLlib.</p>
+
+<p>As always, feel free to leave questions in comments below.</p>
+
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Data collection, Instagram API, Time, Location, Python
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gephi tutorial. Publishing interactive graphs online</title>
+
+<meta name="description" content="Want to learn how to create and publish online graph and network visualizations using Gephi? Follow this step by step tutorial. No coding skills required. SigmaJS template is generated automatically for you.">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-lightbulb-o fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Gephi tutorial. Publishing interactive graphs online</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">January 5, 2020</span>
+           under Tutorial
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          4 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p><a href="https://mizvol.github.io/gephi-tutorials/SigmaJS%20exporter/final-result/network/index.html" target="_blank"><img src="/data/images/gephi-tutorials/teaser-graph-sigmajs.png" alt="Graph. Gephi. SigmaJS Example" height="50%" width="50%" align="right" /></a></p>
+
+<p>Ever wondered how to publish interactive graph visualizations online? This tutorial is for you then, the second one in the series of Gephi tutorials. If you want to learn more about layouts and attributes in Gephi, check out the <a href="https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-layouts-force-atlas-circle-pack-radial-axis/" target="_blank">first tutorial</a>.</p>
+
+<p>As a result of this tutorial, you will create an interactive visualization that will look similar to <a href="https://mizvol.github.io/gephi-tutorials/SigmaJS%20exporter/final-result/network/index.html" target="_blank">this one</a>.</p>
+
+<p>In this tutorial we will learn:</p>
+<ul>
+  <li>How to prepare a graph layout before publishing it online.</li>
+  <li>How to export SigmaJS template and customize it.</li>
+  <li>How to publish your interactive graph visualization online using GitHub pages.</li>
+</ul>
+
+<p>If you don’t feel like reading the instructions, watch a short step-by-step walk-through screencast to get an idea of what we are going to do. The video reproduces all the steps listed below.</p>
+
+<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/ok4iFOe9niU?ecver=2" width="640" height="360" frameborder="0" gesture="media" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen=""></iframe></div>
+
+<h3 id="1-install-plugins">1. Install plugins</h3>
+<p>Install all necessary plugins <strong>before starting this tutorial</strong> (unless they are already installed in your verstion of Gephi):</p>
+<ul>
+  <li>Multigravity Force Atlas 2</li>
+  <li>Circle Pack</li>
+  <li>Label Adjust</li>
+  <li>SigmaJS exporter.</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/Plugins.png" alt="Plugins" /></p>
+
+<h3 id="2-import-graph">2. Import graph</h3>
+<p>Open GEXF file in Gephi (<code class="highlighter-rouge">File-&gt;Open...</code>). In this example, we are going to work with a subsample of English Wikipedia. The graph contains pages that had anomalous visitor activity over the period 16-31 August 2018. You can find  corresponding <code class="highlighter-rouge">.gexf</code> file in this folder.</p>
+
+<h3 id="3-compute-layout">3. Compute layout</h3>
+<p>Let’s start with <strong>Multigravity Force Atlas 2</strong>. Take a look at <a href="https://github.com/mizvol/gephi-tutorials/tree/master/Layouts">this</a> tutorial for inspiration if you want to use another layout.</p>
+
+<p>Parameters:</p>
+<ul>
+  <li>Scaling: 10</li>
+  <li>Edge Weight Influence: 0</li>
+  <li>Dissuade hubs: True</li>
+</ul>
+
+<h3 id="4-export-sigmajs-template">4. Export SigmaJS template</h3>
+<p>Export <strong>SigmaJS template</strong> <code class="highlighter-rouge">File-&gt;Export-&gt;SigmaJS template</code> and fill in all required fields.</p>
+
+<h3 id="5-test-locally">5. Test locally</h3>
+<p>Go to the exported folder and start a simple Python HTTP server to test your visualization. Depending on Python version, in the terminal, type the following command.</p>
+
+<ul>
+  <li>Python 3.X <code class="highlighter-rouge">python -m http.server</code></li>
+  <li>Python 2.7 <code class="highlighter-rouge">python -m SimpleHTTPServer</code></li>
+</ul>
+
+<p>Now, you can interact with your graph using your web-browser (works best in Chrome). Go to <a href="http://localhost:8000/" target="_blank">http://localhost:8000/</a> and play with it.</p>
+
+<p>That is all we need to do to publish our visualization online. Although, as we can see, the graph looks quite raw and it is hard to interact with it. Let’s compute more attributes and make the graph look nicer and more user-friendly.</p>
+
+<h3 id="6-compute-attributes">6. Compute attributes.</h3>
+<p>We are going to use attributed layouts to enhance readability. Before doing that, we need to compute attributes.</p>
+
+<ul>
+  <li>Modularity (Use weights: <code class="highlighter-rouge">False</code>)</li>
+  <li>Average Degree
+<img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/modularity-degree.gif" alt="Modularity" /></li>
+</ul>
+
+<h3 id="7-color-nodes-according-to-their-community">7. Color nodes according to their community</h3>
+<p>Color nodes according to their modularity class and make their size correspond to their degree.
+<img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/color-and-size.gif" alt="Attributes" /></p>
+
+<h3 id="8-circle-pack-layout">8. Circle Pack layout</h3>
+<p>Use <strong>Circle Pack layout</strong> to rearrange nodes according to attributes. Use <em>modularity</em> and <em>degree</em> as parameters.
+<img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/CirclePack.png" alt="CirclePack" /></p>
+
+<h3 id="9-scale-and-labels">9. Scale and labels</h3>
+<p>Adjust the scale and labels. Use <strong>Expansion layout</strong> to increase the scale of the layout. Display labels, reduce the font size and use <strong>Label Adjust layout</strong> to prevent overlapping node labels.
+<img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/scale.gif" alt="LabelAdjust" /></p>
+
+<h3 id="10-export-sigmajs-template-once-again-and-test-it-locally">10. Export SigmaJS template once again and test it locally</h3>
+<p>Our graph looks more readable now and it’s much easier to interact with it. Export SigmaJS template once again and check it on localhost (steps 4 and 5).</p>
+
+<h3 id="11-publish-your-graph-on-github-pages">11. Publish your graph on GitHub pages.</h3>
+<p>Now, we can publish everything to GitHub pages.</p>
+<ul>
+  <li>Create a GitHub repository.</li>
+  <li>Go to the <strong>settings</strong> of your repository and find <strong>GitHub pages</strong> section. Specify <code class="highlighter-rouge">master branch</code> as a source.</li>
+  <li>Clone the repository.</li>
+  <li>Copy the exported SigmaJS template that we have prepared to the cloned folder.</li>
+  <li>Push the files to the repository.</li>
+  <li>Check the website with your interactive visualization <code class="highlighter-rouge">https://[YOUR-GITHUB-USER-NAME].github.io/[VIS-REPOSITORY-NAME]/network/</code></li>
+  <li>Et voila. You have just published your interactive graph visualization online.</li>
+</ul>
+
+<h3 id="12-optional-play-with-the-config-file">12. <em>Optional.</em> Play with the config file</h3>
+<p>You can adjust properties of the visualization using the <code class="highlighter-rouge">config.json</code> file that you can find in the folder with our SigmaJS template. Play with SigmaJS config file:</p>
+<ul>
+  <li>Adjust node sizes using <code class="highlighter-rouge">minNodeSize</code> and <code class="highlighter-rouge">maxNodeSize</code>.</li>
+  <li>Adjust label thresholds using <code class="highlighter-rouge">labelThreshold</code>.</li>
+</ul>
+
+<h3 id="13-optional-customize-htmlcss">13. <em>Optional.</em> Customize HTML/CSS</h3>
+<p>If you are familiar with HTML/CSS, you can customize the style of the web page. All HTML and CSS files are in the generated foloder. With just a few adjustments, you could create something like <a href="https://blog.miz.space/wikiBrain/january/index.html" target="_blank">this</a>. I have customized this template for one of our projects (see more details and examples <a href="https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/" target="_blank">here</a>)</p>
+
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Graph, Gephi, SigmaJS, Interactive, Visualization, Network, Tutorial
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

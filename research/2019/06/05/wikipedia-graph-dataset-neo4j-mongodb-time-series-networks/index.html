@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikipedia Graph Dataset</title>
+
+<meta name="description" content="Wikipedia graph dataset. Wikipedia viewership activity (pagecounts) (Apache Cassandra) + graph structure representing web network of Wikipedia (Neo4J).">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-database fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Wikipedia Graph Dataset</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">June 5, 2019</span>
+           under Research
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          8 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p>Needless to say that <a href="https://www.wikipedia.org/" target="_blank">Wikipedia</a> is an invaluable source of free knowledge. In addition to that, Wikipedia weblogs data is a great resource for the research in many different fields such as collective behavior, data mining or network science. After all the projects and hours spent on wikipedia data, we got really tired of the data pre-processing. Even though Wikipedia data dumps are quite organized and clean, it takes time to pre-process data to represent and handle it as a graph data structure. <a href="https://wikimediafoundation.org/" target="_blank">Wikimedia Foundation</a> has already done a great job making this data quite well structured and publicly available (consider <a href="https://donate.wikimedia.org" target="_blank">donating</a>). We wanted to make this data even more accessible to researchers and tech-savvy Wikipedia enthusiasts interested in studying network-related and socio-dynamic aspects of this knowledge base.</p>
+
+<p><img src="/data/images/wikiGraphDataset/structure.png" alt="Dataset structure" height="50%" width="50%" align="right" /></p>
+
+<p>We are focusing on two aspects of the data dumps, <strong>Wikipedia web network</strong> and <strong>pagecounts</strong> (number of visits per Wiki page per hour). While working on multiple Wikipedia-related projects, we realized that the life of researchers interested in getting insights from Wikipedia web network structure would have been much easier if the data was natively represented as a graph. Also, we thought that it would be nicer and more convenient to have pagecounts stored in a database. This would allow us to ask questions not only about the static network structure but also about the dynamic aspects of Wikipedia, such as visitors’ interests over time, anomalies in viewership activity, or any other questions related to collective behavior.</p>
+
+<p>All in all, we provide tools to pre-process two types of Wikipedia dumps, page graph (pages as nodes, hyperlinks as edges) and pagecounts. We store the <strong>graph</strong> in <strong>Neo4J</strong> graph database. To use the graph dataset you need to deploy Neo4J database on your local computer or a remote server (preferably Debian-based distribution). <strong>Pagecounts</strong> are stored in <strong>.parquet</strong> so you can use the files with any compatible framework. You can use the datasets together as well as independently. If you decide to use the datasets together, they can be connected using a key PAGE_ID (as shown in the igure). Take a look at the detailed deployment instructions at the end of this post.</p>
+
+<p>To incentivize you to start using these databases, we will show a few use cases and queries that should give you an idea of what you potentially could do with them in your Wikipedia-related research projects.</p>
+
+<h3 id="queries-and-use-cases">Queries and use cases</h3>
+
+<p>Pretty much everyone is crazy about <a href="https://en.wikipedia.org/wiki/Game_of_Thrones" target="_blank">Game of Thrones</a> these days so let’s use it as a demonstration example just to show courtesy to pop culture trends. Let’s take a look at the subnetwork of GoT characters and the activity of Wikipedia visitors over time. To do that, we will need to perform the following steps.</p>
+
+<h4 id="1-graph-database-neo4j">1. Graph database. Neo4J.</h4>
+
+<p>We will start with a simple Cypher query. To which Wikipedia categories does <a href="https://en.wikipedia.org/wiki/Daenerys_Targaryen" target="_blank">Daenerys_Targaryen</a> page belong to?</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">MATCH <span class="o">(</span>page:Page <span class="o">{</span>title: <span class="s2">"Daenerys_Targaryen"</span><span class="o">})</span>-[:BELONGS_TO]-&gt;<span class="o">(</span>category:Category<span class="o">)</span> RETURN category.title</code></pre></figure>
+
+<p>This query returns 15 categories to which Daenerys Targaryen BELOGNS_TO. For example, this list includes <em>Fictional_princesses</em>, <em>Fictional_victims_of_child_abuse</em>, and <em>Female_characters_in_television</em>. Taking this into account, we may assume that all GoT characters belong to two large categories, <em>Female_characters_in_television</em> and <em>Male_characters_in_television</em>. Let’s keep this in mind until we write the final query.</p>
+
+<p>Now, we are interested in a sub-network around category <strong>GoT</strong>. To get this subnetwork we need to submit the following query:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">MATCH <span class="o">(</span>page<span class="o">)</span>-[relationship<span class="k">*</span>1..2]-&gt;<span class="o">(</span>category:Category <span class="o">{</span> title: <span class="s1">'Game_of_Thrones'</span><span class="o">})</span> RETURN page,relationship,category</code></pre></figure>
+
+<p><em>Technical note</em>: in this query, we set <strong>depth</strong> of the neighborhood to 2, which means we want a sub-network that includes nodes not further than 2 hops from the GoT category page.</p>
+
+<p>The response is too large to visualize in Neo4j browser. I would recommend either storing the resulting graph in a file and then visualizing it elsewhere or limiting the size of the response with <a href="https://neo4j.com/docs/cypher-manual/current/clauses/limit/" target="_blank">LIMIT</a> keyword at the end of the query. For example, we can save the response in GraphML format and use <a href="https://gephi.org/" target="_blank">Gephi</a> to visualize it. To do that, we need to use <a href="http://neo4j-contrib.github.io/neo4j-apoc-procedures/3.5/export-import/graphml/" target="_blank">APOC procedures</a> and the query would look as follows.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">CALL apoc.export.graphml.query<span class="o">(</span><span class="s2">"MATCH (page)-[relationship*1..2]-&gt;(category:Category { title: 'Game_of_Thrones'}) RETURN page,relationship,category"</span>, <span class="s1">'/tmp/got-graph.graphml'</span>, <span class="o">{</span>useTypes:true, storeNodeIds:false<span class="o">})</span></code></pre></figure>
+
+<p>Once you get the file and apply some Gephi-fu, you will get a graph similar to the one shown on the image below. To take a closer look on this graph, open <a href="https://drive.google.com/open?id=1mcI5MxJjq688dum72gYsxlQo-XvKF0ht" target="_blank">this</a> project file in Gephi. You can also <strong>click on the image</strong> and explore the network in an interactive environment.</p>
+
+<p><a href="https://blog.miz.space/got-graphs/got.html" target="_blank"><img src="/data/images/wikiGraphDataset/got_subgraph.png" alt="GoT sub-graph" /></a></p>
+
+<p>In this graph, you can find Wikipedia pages related to GoT such as actors, characters, seasons, episodes, and other related pages. Note that Wikipedia structure can be confusing due to two types of Wikipedia articles: pages and categories. You should take this into account when working with the dataset. For example, in this graph, you will find both types of nodes. Do not get confused when you find two nodes with title <em>Game_of_Thrones</em>. One of them (green) is a <em>category</em>, another one (pink) is a <em>page</em>.</p>
+
+<p>Finally, <strong>to extract a subnetwork of GoT characters</strong>, we need all Wikipedia pages that BELONGS_TO categories <em>Game_of_Thrones</em>, <em>Female_characters_in_television</em> and <em>Male_characters_in_television</em>. To do this trick, we need a bit more sophisticated yet very concise and self-descriptive query. Combining the two previous queries, we get something like this:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">MATCH <span class="o">(</span>c1:Category<span class="o">)</span>&lt;-[:BELONGS_TO]-<span class="o">(</span>p<span class="o">)</span>-[r<span class="k">*</span>1..2]-&gt;<span class="o">(</span>c2:Category <span class="o">{</span>title:<span class="s2">"Game_of_Thrones"</span><span class="o">})</span> WHERE c1.title <span class="o">=</span> <span class="s2">"Female_characters_in_television"</span> OR c1.title <span class="o">=</span> <span class="s2">"Male_characters_in_television"</span> RETURN DISTINCT p.id, p.title<span class="p">;</span></code></pre></figure>
+
+<p>This query returns characters and corresponding page IDs. If we wanted to get the full network of characters with edges between them, we would have to extend the query above in the following way:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">MATCH <span class="o">(</span>c1:Category<span class="o">)</span>&lt;-[:BELONGS_TO]-<span class="o">(</span>p<span class="o">)</span>-[r<span class="k">*</span>1..2]-&gt;<span class="o">(</span>c2:Category <span class="o">{</span>title:<span class="s1">'Game_of_Thrones'</span><span class="o">})</span> WHERE c1.title <span class="o">=</span> <span class="s1">'Female_characters_in_television'</span> OR c1.title <span class="o">=</span> <span class="s1">'Male_characters_in_television'</span> WITH COLLECT<span class="o">(</span>distinct p<span class="o">)</span> AS pages UNWIND pages AS p1 MATCH <span class="o">(</span>p1<span class="o">)</span>-[rel]-&gt;<span class="o">(</span>p2<span class="o">)</span> WHERE p2 IN pages RETURN pages, rel<span class="p">;</span></code></pre></figure>
+
+<p>It is a bit longer than the previous one. We have added the part that fetches edges between all pages that we have extracted in the previous query. <strong>Click on the image below to interact with the network.</strong></p>
+
+<p><a href="https://blog.miz.space/got-graphs/characters.html" target="_blank"><img src="/data/images/wikiGraphDataset/characters.png" alt="GoT characters sub-graph" /></a></p>
+
+<p>Once we have extracted the subnetwork of GoT characters, we can look at the popularity of the characters on Wikipedia according to visitor interests. To do that, we need to query another part of our dataset that is stored in .parquet files.</p>
+
+<h4 id="2-pagecouts-dataset">2. Pagecouts dataset</h4>
+
+<p>In this section, we will take a look at the viewership activity on a couple of pages.</p>
+
+<p>To take a look at the popularity of GoT characters over time on Wikipedia, we need IDs of the pages we are interested in. We can extract the IDs from the previous query (we can export them in a CSV file) and use them to query tables stored in parquet files.</p>
+
+<p>In the image below, you can see a partial result of such query. We can notice the day and night fluctuations in the time-series. Here, we display the activity of only two pages to avoid the clutter.</p>
+
+<p><img src="/data/images/wikiGraphDataset/activity.png" alt="Activity example" /></p>
+
+<p>There are many ways to use activity information. For example, take a look at one of our latest projects on <a href="https://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/" target="_blank">Wikipedia viewership anomaly detection</a>.</p>
+
+<h3 id="more-details-and-the-team">More details and the team</h3>
+
+<p>If you are interested in other languages (apart from English), our pre-processing tools allow you to work with dumps of any language edition of Wikipedia. More details in the deployment instructions below. GitHub repo with the deployment instructions is available <a href="https://github.com/epfl-lts2/sparkwiki" target="_blank">here</a>. A step-by-step deployment tutorial is available <a href="https://github.com/epfl-lts2/sparkwiki/tree/master/helpers" target="_blank">here</a>.</p>
+
+<p>If you have any problems related to deployment or usage of the dataset, we encourage you to create an issue on <a href="https://github.com/epfl-lts2/sparkwiki" target="_blank">GitHub</a>. This is the most efficient way of communication. You can also leave a comment below or <a href="http://miz.space" target="_blank">contact me</a> directly.</p>
+
+<p>This dataset is a joint effort of <a href="https://ch.linkedin.com/in/naspert" target="_blank">Nicolas Aspert</a>, <a href="http://miz.space" target="_blank">Volodymyr Miz</a>, <a href="https://people.epfl.ch/benjamin.ricaud" target="_blank">Benjamin Ricaud</a>, and <a href="https://people.epfl.ch/pierre.vandergheynst" target="_blank">Pierre Vandergheynst</a> (<a href="https://www.epfl.ch/" target="_blank">EPFL</a>, <a href="https://lts2.epfl.ch/" target="_blank">LTS2</a>). For more details, take a look at the <a href="https://arxiv.org/abs/1903.08597" target="_blank">paper</a> we have recently published in the proceedings of the <a href="http://wikiworkshop.org/2019/" target="_blank">Wiki Workshop 2019</a> held at <a href="https://www2019.thewebconf.org/" target="_blank">The Web Conference 2019</a>.</p>
+
+<h3 id="acknowledgements">Acknowledgements</h3>
+<p>Kudos to <a href="https://www.kirellbenzi.com/" target="_blank">Kirell Benzi</a> for the idea of the GoT case study.</p>
+
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Wikipedia Graph, Data analysis, Temporal Graph, Time-series, Dynamic Networks, Machine Learning, Research, Network analysis
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

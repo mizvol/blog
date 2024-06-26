@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anomaly detection in the dynamics of Web and social networks</title>
+
+<meta name="description" content="A graph algorithm for anomaly detection in the dynamics of Web and social networks. Temporal graph analysis. Investigation of anomalies in case of network attacks.">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-user-secret fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Anomaly detection in the dynamics of Web and social networks</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">February 13, 2019</span>
+           under Research
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          11 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p>Imagine, you have a large network. Say, a social one. Every day, users of this network (aka nodes) generate massive amounts of likes, messages, and clicks (aka activity logs). Also, these users are connected through some links (aka edges), say, follow or befriend each other. There is nothing special about daily activity in this network. But, at some point, something unexpected happens in the network dynamics (e.g. an attack). Since the network is huge and the activity logs are massive, it is hard to explain WHAT happened, WHERE it happened, and, what is more important, WHY it happened. And the more active your users and the larger your network, the more complicated these questions become to answer.</p>
+
+<p>This social network is just one example of a large dynamic network where anomaly detection, inspection, and analysis may be required. Apart from that, good candidates are Web networks, email networks, and brain networks. You can think of any other domain that could fit this data model. There are only three requirements for the data. Entities in the dataset 1) could be represented as nodes, 2) have some relations among each other, and 3) generate some activity over time.</p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>In this post, I am going to present our recent work with <a href="https://people.epfl.ch/benjamin.ricaud" target="_blank">Benjamin Ricaud</a>, <a href="http://www.kirellbenzi.com/" target="_blank">Kirell Benzi</a>, and <a href="https://people.epfl.ch/pierre.vandergheynst" target="_blank">Pierre Vandergheynst</a> (<a href="https://www.epfl.ch/" target="_blank">EPFL</a>, <a href="https://lts2.epfl.ch/" target="_blank">LTS2</a>). It is about anomaly detection in the dynamics of social and Web networks (preprint is available on <a href="https://arxiv.org/abs/1901.09688" target="_blank">ArXiV</a>). This is yet another application of our algorithm that I already described in the previous blog posts. So far, we were able to <a href="https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/" target="_blank">detect events</a> and study <a href="https://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/" target="_blank">collective memories</a>. This time, we realized that we can use the same (but slightly modified) algorithm to detect anomalies in the dynamics of communication networks. Moreover, I will show you how we can use it to investigate network attacks and recover traces of an attack if the intruders tried to hide or erase them.</p>
+
+<p>Take a look at the related research and interactive demos on the <a href="https://wiki-insights.epfl.ch/" target="_blank">website</a> of our <strong>Wikipedia Insights</strong> project.</p>
+
+<h3 id="method">Method</h3>
+<p>We define an anomaly in the network dynamics as an unexpected spike of activity in a cluster of nodes. So, the objective is to find those clusters. As I said before, our networks are very dense, large, and the corresponding activity recordings are very noisy. This makes it hard to localize the anomalous clusters. This is where we came up with an idea of the algorithm that would help us to <strong>keep only those parts of the network that could potentially be related to anomalies in the network</strong>.</p>
+
+<p>The core of the algorithm is a modified Hebbian learning rule, a theoretical assumption made by neuroscientists to explain the learning function of the brain. The simplified original rule implies that if two neurons (nodes) are active together, they tend to increase the strength of the connecting synapse (edge weight) between them. We modify this rule to fit our dynamic network data model. First, we do not care about the causality of activations and focus on simultaneous activation of the nodes in the network. Second, we introduce a convenient update function that allows us to forget about such problems as normalization and weight thresholds during learning.</p>
+
+<p>Speaking of our data model, the algorithm consists of three main steps and works as follows. First, we select “spiky” nodes that have unexpected bursts of activity. We simply use <em>mean</em> and <em>standard deviation</em> to assess the level of the bursts. Once we identify the spiky nodes, we remove the ones with uniform activity. Second, we compute the strength of the connections (weights of the edges) between the spiky nodes using the modified Hebbian learning rule. In other words, if two nodes are active at the same time, the weight of an edge connecting them increases, otherwise, it either remains unchanged or decreases when the forgetting parameter is on. When the forgetting parameter is on, we want the algorithm to forget about previous anomalies. If it is off, the algorithm accumulates anomalous events and stores them as a memory. Finally, when the weights are computed, we remove low weight edges so the remainder of the initial graph contains clusters of the nodes with anomalous activity.</p>
+
+<p>As you can see, all computations are local on the graph. This means that the weight updates of adjacent edges of a node depend on the node’s attributes and the attributes of its neighbors. This allowed us to fit the algorithm in <a href="https://spark.apache.org/graphx/" target="_blank">GraphX framework</a> and implement it in a distributed fashion. See the code on <a href="https://github.com/mizvol/wikibrain" target="_blank">GitHub</a>. If you are new to Scala and Spark, take a look at <a href="https://blog.miz.space/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/" target="_blank">this tutorial</a>.</p>
+
+<p><strong>UPDATE 0</strong>: We have a <strong>new enhanced and more readable version of the code</strong> available <a href="https://github.com/epfl-lts2/sparkwiki/blob/master/src/main/scala/ch/epfl/lts2/wikipedia/PeakFinder.scala" target="_blank">here</a>. To run it, you need to deploy Neo4J and Apache Cassandra databases. You can find deployment instructions in the same repo on <a href="https://github.com/epfl-lts2/sparkwiki/tree/master/helpers" target="_blank">GitHub</a>. See details <a href="https://blog.miz.space/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/" target="_blank">here</a>.</p>
+
+<p><strong>UPDATE 1</strong>: If Scala code is confusing, I wrote a <strong>minimal Python code example with experiments on random data</strong>. Check out <a href="https://github.com/mizvol/anomaly-detection" target="_blank">this GitHub repo</a> for more details. It should provide a quick but good understanding of our approach. Since the algorithm relies on the structure on the graph, the results with random graph are not very impressive. However, even though the structure of random graph is very dense we have managed to get decent results (see images below below).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Anomalous time-series</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Initial random graph</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Detected anomalous cluster (bold edges)</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><!-- TS --> <img src="/data/images/anomalyDetection/ts.png" alt="" /></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Initial --> <img src="/data/images/anomalyDetection/init.png" alt="" /></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Anomalous --> <img src="/data/images/anomalyDetection/learned.png" alt="" /></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="experiments">Experiments</h3>
+<p>We conduct experiments on two datasets: <a href="https://zenodo.org/record/886484#.XFRigctKhhE" target="_blank"><strong>Wikipedia web network</strong></a> and <a href="https://zenodo.org/record/1342353#.XFRig8tKhhE" target="_blank"><strong>Enron email communication network</strong></a>. The datasets are publicly available (check out the links).</p>
+
+<h4 id="wikipedia-web-network">Wikipedia web network</h4>
+
+<p>In this experiment, we studied Wikipedia web network. The aim was to detect anomalous behavior of Wikipedia visitors. Here, we use <strong>Wikipedia pages</strong> as <em>nodes</em> and <strong>hyperlinks connecting the pages</strong> as <em>edges</em> of the graph. Every node has a <strong>time-series attribute</strong> corresponding to the number of visits per hour. Wikimedia Foundation makes viewership activity publicly available so we used <a href="https://dumps.wikimedia.org/other/pagecounts-ez/" target="_blank">this data</a> to run the experiment. The pre-processed dataset is on Zenodo (see links in the previous paragraph).</p>
+
+<p>This experiment is quite interesting because it is hard to validate the results quantitatively or present a numerical measure that would reflect the success rate of the algorithm. As a workaround, we decided to validate its results using another anomaly detection framework as ground truth. In this experiment, we use <a href="https://trends.google.com/trends/?geo=US" target="_blank">Google Trends API</a> as a benchmark.</p>
+
+<p>As you see in the figures below, the results are quite impressive. The algorithm has managed to detect multiple anomalies in Wikipedia viewership activity. These anomalies correlate with the trending keywords on Google Trends.</p>
+
+<p>Besides, there is another detail I want you to focus on. Look at the figure reflecting anomaly related to Germanwings 9525 crash. There is a smaller spike of activity at the end of December 2014. The fact is that there was another airplane crash at the end of December 2014, <a href="https://en.wikipedia.org/wiki/Indonesia_AirAsia_Flight_8501" target="_blank">Indonesia AirAsia Flight 8501</a>. We detected this event not because of a bug or a noisy activity pattern. This is a feature of our approach that reflects an aspect of collective behavior of Wikipedia visitors, which is called <a href="https://en.wikipedia.org/wiki/Collective_memory" target="_blank">Collective Memory</a>. The phenomenon of collective memory suggests that social groups recall past traumatic events when another similar traumatic event happens at present. This is exactly what our algorithm detected. When Germanwings crash happened, people started searching for other related airplane accidents. Google Trends has not reflected this since it focuses on particular keywords whereas our approach looks at more general picture due to the graph representation of the data. This means that our algorithm detects complex anomalies in the viewership dynamics that can only be spotted if one looks at the group of concepts rather than a particular keyword.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ferguson unrest</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Charlie Hebdo attack</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Germanwings 9525 crash</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><!-- Ferguson --> <img src="/data/images/anomalyDetection/ferguson_activity.svg" alt="" /></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Charlie Hebdo --> <img src="/data/images/anomalyDetection/charlie_activity.svg" alt="" /></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Germanwings --> <img src="/data/images/anomalyDetection/germanwings_activity.svg" alt="" /></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="enron-email-network">Enron email network</h4>
+
+<p>We also investigated Enron email dataset and ran another anomaly detection experiment on it. We built a communication network based on the emails sent among employees. Nodes of the network correspond to employees; we drew an edge between two employees if they have exchanged at least a few emails. Activity on the nodes is the number of emails sent by corresponding employees.</p>
+
+<p>In this experiment, we had ground truth. We knew when the anomalies in the dynamics happened. This gave us a chance to verify the accuracy of our algorithm. There are four main events related to the Enron scandal (see details in the paper). We found that the real-world events related to the scandal triggered the anomalies in the communication dynamics of the corporate email network. The image below shows the result of the anomaly detection algorithm.</p>
+
+<p><img src="/data/images/anomalyDetection/enron.svg" alt="" /></p>
+
+<h3 id="attack-investigation-data-recovery">Attack investigation. Data recovery</h3>
+<p>We got to the final part of the blog post. Imagine, someone attacked your network trying to wipe network activity data and this resulted in an anomalous spike of activity on the nodes of your network. Or, simply, you lost information about network activity due to an unexpected shutdown of the hosting server. In any case, the main problem when this happens is to <strong>recover missing information about the network activity</strong>. Our algorithm can help.</p>
+
+<p>Below, you see an example of the recovery of damaged parts of the data. Here, we wipe 20% of viewership activity data in a cluster of Wikipedia pages and recover it using our algorithm. To memorize and recover missing data we used Hopfield neural network, a basic model of artificial associative memory. Incidentally, Hopfield nets also use the Hebbian learning rule.</p>
+
+<p><a href="https://blog.miz.space/ferguson-recall.html" target="_blank"><img src="/data/images/wikiBrain/ferguson-recall.svg" alt="" /> </a></p>
+
+<p>We use prior activity of the network to learn collective patterns in the network dynamics. The patterns correspond to clusters of pages with similar anomalous behavior. We then use these clusters to recover the missing data. We found that the algorithm allows recovering missing data for the period when the anomaly has happened (in this example, it is bounded by the red vertical lines). It is also possible to recover more information outside these bounds but here we focused on the information that is most interesting for us, the missing information related to the moment of the attack.</p>
+
+<p>As you can see, when recovering the data we heavily rely on the neighboring nodes in the cluster. This means, if we had the entire cluster wiped by the intruders, we would not be able to recover the original data. To recover missing information in the cluster we need to have at least 50% of nodes with valid undamaged observations. This is a limitation of our approach.</p>
+
+<p>Read more about the memory properties and the data recovery feature of our algorithm in my <a href="https://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/" target="_blank">previous blog post</a>.</p>
+
+<h3 id="conclusions">Conclusions</h3>
+<p>Networks are everywhere. We are surrounded by networks in pretty much all aspects of our lives explicitly or implicitly. It is important to develop a stable and robust toolkit for monitoring these networks and protect us from unexpected accidents related to them. Here, we introduced a new method for anomaly detection and missing information recovery in the large networks. We showed that the network structure carries a lot of useful information in itself, hence, it is very important to use it when working with the dynamic or time-varying data that have spatial or structural component. All things considered, I believe that in the following years, we will see more and more applications related to spatio-temporal data mining (for more details about this emerging field, take a look at <a href="https://arxiv.org/abs/1711.04710" target="_blank">this recent survey</a>).</p>
+
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Anomaly Detection, Data analysis, Temporal Graph, Time-series, Dynamic Networks, Machine Learning, Research, Network analysis
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

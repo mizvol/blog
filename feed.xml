@@ -1,0 +1,1936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Volodymyr Miz</title>
+    <description>Volodymyr Miz. Technical Blog. Machine Learning Research. Large Scale Data Mining. Data visulalization.</description>
+    <link>http://blog.miz.space/</link>
+    <atom:link href="http://blog.miz.space/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 10 Nov 2020 12:07:37 +0100</pubDate>
+    <lastBuildDate>Tue, 10 Nov 2020 12:07:37 +0100</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Wikipedia, COVID-19, and readers' interests across languages</title>
+        <description>&lt;p&gt;To tell you the truth, I’d better be writing my PhD thesis right now. But the recent findings got me so excited that I cannot wait to share them. Anyways, the thesis can wait; hello &lt;del&gt;darkness&lt;/del&gt; procrastination, my old friend.&lt;/p&gt;
+
+&lt;p&gt;If you are only interested in the results, feel free to skip to &lt;strong&gt;3. Results&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h3&gt;
+
+&lt;p&gt;A few months before I started writing my thesis, &lt;a href=&quot;https://en.wikipedia.org/wiki/Timeline_of_the_COVID-19_pandemic&quot; target=&quot;_blank&quot;&gt;the COVID-19 pandemic&lt;/a&gt; had unfolded. At the beginning of the pandemic, strict confinement measures were introduced, first, in China, then in several other countries in Asia, and finally, across Europe and in other countries around the world. These measures globally affected the world, leading to drastic changes in mobility patterns, among many others. Following these restrictions, the interests of Wikipedia readers have also changed (you can read more about it in a &lt;a href=&quot;https://arxiv.org/abs/2005.08505&quot; target=&quot;_blank&quot;&gt;recent study by Manoel Horta Ribeiro et al.&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;All in all, the striking influence of the pandemic on everyday life inspired us to run another experiment. We decided to investigate the evolution of trending topics throughout the pandemic across different language editions of Wikipedia. We focused on the data over the period from December 2019 until May 2020. The study involves 7 language editions of Wikipedia, including English, French, Russian, Italian, Spanish, German, and Chinese (note that Wikipedia &lt;a href=&quot;https://en.wikipedia.org/wiki/Censorship_of_Wikipedia#China&quot; target=&quot;_blank&quot;&gt;has been banned in China since 23 April 2019&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;2-method&quot;&gt;2. Method&lt;/h3&gt;
+
+&lt;p&gt;In the previous &lt;a href=&quot;https://blog.miz.space/research/2020/06/07/what-is-trending-on-wikipedia-across-languages/&quot; target=&quot;_blank&quot;&gt;post&lt;/a&gt;, I wrote about an algorithm for detecting and comparing trending topics across different Wikipedia language editions. The trend detection approach we use here is almost the same as in our previous study. The core difference is the classification engine. This time, we didn’t train it. Instead, we adopted a model designed and trained by Wikimedia Foundation researchers, &lt;a href=&quot;https://meta.wikimedia.org/wiki/User:Isaac_(WMF)&quot; target=&quot;_blank&quot;&gt;Isaac Johnson&lt;/a&gt;, &lt;a href=&quot;https://meta.wikimedia.org/wiki/User:MGerlach_(WMF)&quot; target=&quot;_blank&quot;&gt;Martin Gerlach&lt;/a&gt;, and &lt;a href=&quot;https://meta.wikimedia.org/wiki/User:Diego_(WMF)&quot; target=&quot;_blank&quot;&gt;Diego Saez-Trumper&lt;/a&gt;. This model is more versatile than the one we used before because it makes predictions for Wikidata items instead of Wikipedia articles, which makes its application in multilingual settings easier. Read more about their classification model &lt;a href=&quot;https://meta.wikimedia.org/wiki/Research:Language-Agnostic_Topic_Classification#Topic_Classification_of_Wikipedia_Articles&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another difference is the way we label trends. In the previous study, we labeled an entire cluster with the most popular topic, computing popularity of the topic using a complex formula that involves graph-based attributes. This time, we decided to keep it simple. Each cluster has multiple topic labels that give a more fine-grained outlook on each trend. As we can see in the figure below, when we use the Wikidata-based approach for topic classification, we obtain heterogeneous clusters. &lt;strong&gt;Left:&lt;/strong&gt; general trends with mixed topic labels; &lt;strong&gt;right:&lt;/strong&gt; the same general trends decomposed into sub-clusters of articles on the same topic.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/covid/graphs.png&quot; alt=&quot;Labeled graphs&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hence, each cluster corresponds to one trend, which covers multiple topics. These topics are implicitly related to trending events that triggered the creation of each cluster. To understand better, let us look at several examples in more detail. The majority of pages in Sports-related clusters (highlighted in blue) are labeled as Sports. However, depending on the nature of sports, we can also see smaller sub-clusters of pages related to other topics, such as Media, Education, Healthcare, and Engineering inside of the main cluster. Needless to say that media and education are inalienable parts of many popular sports these days.&lt;/p&gt;
+
+&lt;p&gt;We can also see that trends related to politics (highlighted in red) are also very diverse. If we look at the cluster that emerged after the death of John McCain, we can see that the majority of pages, indeed, belong to politics. What is interesting is that we can also see fairly big sub-clusters that comprise articles on topics such as Society, Military and Warfare, History, and Business. All these areas are inevitably involved in political careers and processes.&lt;/p&gt;
+
+&lt;p&gt;Clusters created as a result of the readers’ interest in natural disasters (yellow) are also heterogeneous. In the cluster that emerged after the Hurricane Florence, we can see that it is comprised of pages that cover a wide range of topics including STEM (mostly articles on Earth &amp;amp; Environment), Politics (articles about politicians involved into solving the crisis), and History (articles related to previous disasters and their causalities).&lt;/p&gt;
+
+&lt;p&gt;Finally, art-related topics (green) are also diverse. We can see that the cluster that emerged due to the anniversary of Aretha Franklin’s death includes articles on different topics associated with various artistries, such as Media, Music, and Visual Arts.&lt;/p&gt;
+
+&lt;p&gt;To get a better view of the heterogeneity of the clusters classified using the Wikidata-based approach, let’s look at another plot, which illustrates more concrete examples.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/covid/examples.png&quot; alt=&quot;Trend examples&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can see that clusters related to sports, such as NCAA (American football), US Open (Tennis), and Belgian Grand Prix (Auto racing, Formula~1), have the least diverse set of topics among others. Naturally, most of the pages are classified as Sports. Media, Business, and Politics are also among common topics in the sports-related clusters. However, it is interesting to see that secondary topics in these clusters reflect specific features of different sports. Engineering advancements in the automotive industry play a significant role in Formula~1, which is reflected by the presence of topics Transportation and Engineering in its cluster. NCAA is an organization that regulates student athletes from North American institutions, so we can see Education among the most represented secondary topics in that cluster. We can also notice a similar effect in the clusters related to politics and show business where secondary topics give us a wider perspective on the specific nature of the occurred events.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-results&quot;&gt;3. Results&lt;/h3&gt;
+
+&lt;h4 id=&quot;31-covid-19-and-trends&quot;&gt;&lt;strong&gt;3.1 COVID-19 and trends&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Now, let’s focus on general trends over the first months of the pandemic. On the plot below, we can see that the distribution of trending topics looks similar to what we saw in &lt;a href=&quot;https://blog.miz.space/research/2020/06/07/what-is-trending-on-wikipedia-across-languages/&quot; target=&quot;_blank&quot;&gt;the previous experiments&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/covid/trends.png&quot; alt=&quot;Trend distribution&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Sports&lt;/em&gt; and &lt;em&gt;Media&lt;/em&gt; are the leading trends, followed by &lt;em&gt;Music&lt;/em&gt;, &lt;em&gt;Films&lt;/em&gt;, and &lt;em&gt;Politics &amp;amp; Government&lt;/em&gt;. We also noticed an emergence of two new clusters that were not captured before, namely &lt;em&gt;Medicine &amp;amp; Health&lt;/em&gt;, and &lt;em&gt;Biology&lt;/em&gt;, which was triggered by the increased interest of the readers in the articles related to viruses, influenza, and the COVID-19 pandemic itself.&lt;/p&gt;
+
+&lt;p&gt;The popularity of &lt;em&gt;Society&lt;/em&gt; is 20-25% higher in Chinese and Russian editions compared to other languages that we analyzed. After a qualitative analysis of the classification results, we have discovered that there is a significant overlap between the topics Politics and Society in Chinese and Russian editions. We found that Wikidata items, related to local political figures and elections in the regions where the majority of people speak Russian and Chinese, often belong to the topic Society. This finding is thought-provoking and requires more research.&lt;/p&gt;
+
+&lt;h4 id=&quot;32-evolution-of-trends-during-covid-19&quot;&gt;&lt;strong&gt;3.2 Evolution of trends during COVID-19&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;The evolution of trends during the pandemic is even more interesting. To capture the dynamics, we aggregated trending topics bi-weekly; each data point represents the popularity of a topic during a selected two-weeks period. In this study, we focus on the short-term dynamics, which reflects change points in the trends in a moving time-window. This allows us to get a live picture of how users shifted their attention from one topic to another. In the stacked chart below, you can see a dynamic view of the changing popularity of some of the most popular topics. We normalized the popularity of each topic in each language between 0 and 1. The more drastic the attention shift, the thicker the line on the plot.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/covid/evolution.png&quot; alt=&quot;Evolution of trends&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can see that the COVID-19-related topics, such as &lt;em&gt;Biology&lt;/em&gt; and &lt;em&gt;Medicine &amp;amp; Health&lt;/em&gt;, have an attention spike in January. Then, after a short-term drop, these topics develop a steady momentum starting from February. In Chinese Wikipedia, we observe the most significant increase in attention to these topics in January. The interest in the topics remains consistent throughout the entire period and only slightly diminishes in April. Looking at other language editions, we observe that at the beginning of February, the interest of the readers to &lt;em&gt;Biology&lt;/em&gt; and &lt;em&gt;Medicine &amp;amp; Health&lt;/em&gt; drops. However, soon after that, the topic &lt;em&gt;Biology&lt;/em&gt; regains popularity among Italian-speaking readers, followed by English- and German-speaking audience. Attention to &lt;em&gt;Medicine &amp;amp; Health&lt;/em&gt; also bounces back, first, in Italian and French editions, and then in German and English. Russian-speaking readers develop an interest in both topics closer to the end of March. All in all, most of these observations reflect the COVID-19 development timeline in the locations where these languages are spoken primarily, however, it is still hard to align geographically the results for English, French, and Spanish language editions because of their global adoption in different regions of the world.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Sports&lt;/em&gt; is the most popular topic in all languages at the beginning of the pandemic. However, we can notice an abrupt change of attention levels across all languages. The readers become indifferent to this topic starting from March. One of the possible explanations is that the pandemic resulted in the cancellation of the majority of sports events around the world.&lt;/p&gt;
+
+&lt;p&gt;Attention to &lt;em&gt;Media&lt;/em&gt;, &lt;em&gt;Films&lt;/em&gt;, and &lt;em&gt;Music&lt;/em&gt; is mostly uniform across all languages during the pandemic. The spike in the topic Films can be explained by the worldwide popularity 92nd Academy Awards ceremony, which took place on February 9. When we look at &lt;em&gt;Music&lt;/em&gt;, we can see slight shifts towards indifference among Italian-speaking readers, which happens in the second half of February. This can be attributed to the strict lock-down measures that were introduced on March 9, however, this is just an observational hypothesis.&lt;/p&gt;
+
+&lt;p&gt;Finally, let’s compare our results to the ones reported in the &lt;a href=&quot;https://arxiv.org/abs/2005.08505&quot; target=&quot;_blank&quot;&gt;study by Manoel Horta Ribeiro et al.&lt;/a&gt; The main difference between the two approaches is the comparison strategy. In our approach, we focused on the &lt;strong&gt;live short-term&lt;/strong&gt; attention shifts or change-points, while the authors of the study compared attention levels to the previous year, reporting &lt;strong&gt;long-term&lt;/strong&gt; changes. Even though we used a different approach, it is exciting to see that our findings confirm some of the observations reported in that study. During the first months of the pandemic, Wikipedia articles on &lt;em&gt;Biology&lt;/em&gt; and &lt;em&gt;Medicine &amp;amp; Health&lt;/em&gt; gained a lot of interest from readers across all language editions, while Sports-related articles lost a significant share of their audience. Nonetheless, there are a few discrepancies. For instance, we did not notice similar short-term changes in the attention to the topics &lt;em&gt;Media&lt;/em&gt;, &lt;em&gt;Films&lt;/em&gt;, and &lt;em&gt;Music&lt;/em&gt;. We found that these topics retained the same level of short-term attention throughout the studied period.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-conclusions&quot;&gt;4. Conclusions&lt;/h3&gt;
+&lt;p&gt;The COVID-19 pandemic has affected pretty much every aspect of everyday life, including collective behavior and interests of digital users worldwide. &lt;strong&gt;This global crisis highlighted the utter importance of Wikipedia.&lt;/strong&gt; We can see that people reached out to the encyclopedia looking for answers to pandemic-related questions. It is also exciting to see that, despite the ban, Chinese Wikipedia is still very active.&lt;/p&gt;
+
+&lt;p&gt;The difference between long- and short-term changes is interesting too. Attention to &lt;em&gt;Biology&lt;/em&gt;, &lt;em&gt;Medicine &amp;amp; Health&lt;/em&gt;, and &lt;em&gt;Sports&lt;/em&gt; changed the most in the long- and short-term. Other topics, mostly related to entertainment, such as &lt;em&gt;Media&lt;/em&gt;, &lt;em&gt;Films&lt;/em&gt;, and &lt;em&gt;Music&lt;/em&gt;, gained more interest compared to the previous year. However, throughout the pandemic, the attention level to these topics did not fluctuate.&lt;/p&gt;
+
+&lt;p&gt;Also, we noticed that trends in Wikipedia’s viewership are more complex than we previously thought. Each trend that we detected contains a set of articles on various topics. This gives an interesting perspective on the collective perception of trends across languages. We can see which topics are associated to which trends in every language edition.&lt;/p&gt;
+
+&lt;p&gt;From a technical point of view, the new topic classification model gives really promising results and inspires us to develop the project further. Now, the master plan is to &lt;del&gt;finish my thesis&lt;/del&gt; scale the study to even more languages, make it more automated, and create web-based service reporting trends in different languages editions of Wikipedia.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-code-data-results&quot;&gt;5. Code, data, results&lt;/h3&gt;
+&lt;p&gt;Everything related to the COVID-19 case study is on &lt;a href=&quot;https://github.com/etiennechlt/Wikipedia&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;. If you are interested in the trend detection algorithm, take a look at another &lt;a href=&quot;https://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/&quot; target=&quot;_blank&quot;&gt;blog post&lt;/a&gt; explaining it in more detail. If you want to run similar experiments, take a look at the &lt;a href=&quot;https://blog.miz.space/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/&quot; target=&quot;_blank&quot;&gt;distributed graph-based framework&lt;/a&gt; for Wikipedia data processing, which we use in all experiments.&lt;/p&gt;
+
+&lt;p&gt;Interactive visualizations (similar to &lt;a href=&quot;https://wiki-insights.epfl.ch/wikitrends/&quot; target=&quot;_blank&quot;&gt;this one&lt;/a&gt;) are coming soon. Stay tuned!&lt;/p&gt;
+
+&lt;h3 id=&quot;6-acknowledgments&quot;&gt;6. Acknowledgments&lt;/h3&gt;
+&lt;p&gt;This project would not have happened without a great effort by Etienne Chalot, who did a summer internship (and the actual work on the project) in &lt;a href=&quot;https://lts2.epfl.ch&quot; target=&quot;_blank&quot;&gt;LTS2&lt;/a&gt;. I would like to thank Isaac Johnson for sharing the topic classification model and for providing advice on how to deploy it locally. Also, kudos to Nicolas Aspert and Benjamin Ricaud for coming up with interesting ideas that shaped this project. Special thanks to Nicolas for helping us with technical issues and taming our greed for computing power. Lastly, I hope my advisor, Pierre Vandergheynst, is not reading this, but just in case he is, I am grateful to him for letting me spend the entire morning not writing my thesis and writing this blog post instead :D&lt;/p&gt;
+
+&lt;h3 id=&quot;7-questions&quot;&gt;7. Questions?&lt;/h3&gt;
+&lt;p&gt;If you have any questions or suggestions, leave a comment below or contact me directly.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 05 Aug 2020 13:13:13 +0200</pubDate>
+        <link>http://blog.miz.space/research/2020/08/05/what-is-trending-on-wikipedia-across-languages-during-covid-coronavirus-pandemic/</link>
+        <guid isPermaLink="true">http://blog.miz.space/research/2020/08/05/what-is-trending-on-wikipedia-across-languages-during-covid-coronavirus-pandemic/</guid>
+        
+        <category>Collective behavior</category>
+        
+        <category>Data analysis</category>
+        
+        <category>Graph</category>
+        
+        <category>Time-series</category>
+        
+        <category>Dynamic Networks</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Research</category>
+        
+        <category>Network analysis</category>
+        
+        <category>Wikipedia</category>
+        
+        
+        <category>Research</category>
+        
+      </item>
+    
+      <item>
+        <title>What's trending on Wikipedia?</title>
+        <description>&lt;p&gt;There are as many opinions as there are people, they say. After a recent study we have done in &lt;a href=&quot;https://lts2.epfl.ch&quot; target=&quot;_blank&quot;&gt;LTS2&lt;/a&gt;, I can paraphrase it. &lt;strong&gt;There are as many opinions as there are languages on Wikipedia.&lt;/strong&gt; In our case though it was more about people’s interests rather than opinions.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/trends/bar.png&quot; alt=&quot;Trends distribution across languages&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;right&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In a recent study, we found that &lt;strong&gt;interests of Wikipedia readers largely depend on the language in which they read Wikipedia&lt;/strong&gt;. We compared English, French, and Russian language editions and found that certain topics are more popular in one language than in the others. For instance, topic Sports dominates among users reading Wikipedia in English, Francophone readers prefer Wikipedia articles about Movies, and Russian-speaking audience is obsessed with Wikipedia articles related to Science. Also, we found that topics related to pop-culture (e.g. release of a movie by Marvell) and global dramatic events (September 11) are popular across all languages that we have studied.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/trends/line.png&quot; alt=&quot;Comparison across languages&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, what’s trending on Wikipedia? It depends. Specifically, it depends on the language you are interested in. If you want to learn more, watch our presentation at &lt;a href=&quot;https://wikiworkshop.org/2020/&quot;&gt;Wikipedia Workshop 2020&lt;/a&gt; and read a review of our study by &lt;a href=&quot;https://en.wikipedia.org/wiki/User:Isaac_(WMF)&quot;&gt;Isaac Johnson&lt;/a&gt; in &lt;a href=&quot;https://meta.wikimedia.org/wiki/Research:Newsletter/2020/April&quot; target=&quot;_blank&quot;&gt;Wikipedia Research Newsletter&lt;/a&gt;. If you are interested in the technical details, our method, and the dataset, take a look at the &lt;a href=&quot;https://dl.acm.org/doi/abs/10.1145/3366424.3383567&quot; target=&quot;_blank&quot;&gt;paper&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div style=&quot;position:relative;height:0;padding-bottom:56.25%&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/Oa6WPOv6sHQ?ecver=2&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; style=&quot;position:absolute;width:100%;height:100%;left:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;p&gt;I worked on this project with &lt;a href=&quot;https://www.linkedin.com/in/joelle-hanna/&quot; target=&quot;_blank&quot;&gt;Joëlle Hanna&lt;/a&gt;, &lt;a href=&quot;https://www.linkedin.com/in/naspert/&quot; target=&quot;_blank&quot;&gt;Nicolas Aspert&lt;/a&gt;, &lt;a href=&quot;https://bricaud.github.io/personal-blog/&quot; target=&quot;_blank&quot;&gt;Benjamin Ricaud&lt;/a&gt;, and &lt;a href=&quot;https://people.epfl.ch/pierre.vandergheynst&quot; target=&quot;_blank&quot;&gt;Pierre Vandergheynst&lt;/a&gt;. You can find this and many other Wikipedia-related projects and resources by our lab on &lt;a href=&quot;https://wiki-insights.epfl.ch&quot; target=&quot;_blank&quot;&gt;Wikipedia Insights&lt;/a&gt; project website, for instance, an &lt;a href=&quot;https://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/&quot; target=&quot;_blank&quot;&gt;anomaly detection algorithm&lt;/a&gt; and a &lt;a href=&quot;https://blog.miz.space/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/&quot; target=&quot;_blank&quot;&gt;graph-based dataset with pre-processing tools&lt;/a&gt; that we used to detect trending topics on Wikipeida.&lt;/p&gt;
+
+&lt;p&gt;If you are interested in the graph visualization tools we used in this project, take a look at the following tutorials:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-layouts-force-atlas-circle-pack-radial-axis/&quot; target=&quot;_blank&quot;&gt;Gephi layouts tutorial&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/&quot; target=&quot;_blank&quot;&gt;SigmaJS exporter tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Stay tuned for more!&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 07 Jun 2020 13:13:13 +0200</pubDate>
+        <link>http://blog.miz.space/research/2020/06/07/what-is-trending-on-wikipedia-across-languages/</link>
+        <guid isPermaLink="true">http://blog.miz.space/research/2020/06/07/what-is-trending-on-wikipedia-across-languages/</guid>
+        
+        <category>Collective behavior</category>
+        
+        <category>Data analysis</category>
+        
+        <category>Graph</category>
+        
+        <category>Time-series</category>
+        
+        <category>Dynamic Networks</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Research</category>
+        
+        <category>Network analysis</category>
+        
+        <category>Wikipedia</category>
+        
+        
+        <category>Research</category>
+        
+      </item>
+    
+      <item>
+        <title>Gephi tutorial. Publishing interactive graphs online</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://mizvol.github.io/gephi-tutorials/SigmaJS%20exporter/final-result/network/index.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/gephi-tutorials/teaser-graph-sigmajs.png&quot; alt=&quot;Graph. Gephi. SigmaJS Example&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ever wondered how to publish interactive graph visualizations online? This tutorial is for you then, the second one in the series of Gephi tutorials. If you want to learn more about layouts and attributes in Gephi, check out the &lt;a href=&quot;https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-layouts-force-atlas-circle-pack-radial-axis/&quot; target=&quot;_blank&quot;&gt;first tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a result of this tutorial, you will create an interactive visualization that will look similar to &lt;a href=&quot;https://mizvol.github.io/gephi-tutorials/SigmaJS%20exporter/final-result/network/index.html&quot; target=&quot;_blank&quot;&gt;this one&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In this tutorial we will learn:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;How to prepare a graph layout before publishing it online.&lt;/li&gt;
+  &lt;li&gt;How to export SigmaJS template and customize it.&lt;/li&gt;
+  &lt;li&gt;How to publish your interactive graph visualization online using GitHub pages.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you don’t feel like reading the instructions, watch a short step-by-step walk-through screencast to get an idea of what we are going to do. The video reproduces all the steps listed below.&lt;/p&gt;
+
+&lt;div style=&quot;position:relative;height:0;padding-bottom:56.25%&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/ok4iFOe9niU?ecver=2&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; style=&quot;position:absolute;width:100%;height:100%;left:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;1-install-plugins&quot;&gt;1. Install plugins&lt;/h3&gt;
+&lt;p&gt;Install all necessary plugins &lt;strong&gt;before starting this tutorial&lt;/strong&gt; (unless they are already installed in your verstion of Gephi):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Multigravity Force Atlas 2&lt;/li&gt;
+  &lt;li&gt;Circle Pack&lt;/li&gt;
+  &lt;li&gt;Label Adjust&lt;/li&gt;
+  &lt;li&gt;SigmaJS exporter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/Plugins.png&quot; alt=&quot;Plugins&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-import-graph&quot;&gt;2. Import graph&lt;/h3&gt;
+&lt;p&gt;Open GEXF file in Gephi (&lt;code class=&quot;highlighter-rouge&quot;&gt;File-&amp;gt;Open...&lt;/code&gt;). In this example, we are going to work with a subsample of English Wikipedia. The graph contains pages that had anomalous visitor activity over the period 16-31 August 2018. You can find  corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;.gexf&lt;/code&gt; file in this folder.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-compute-layout&quot;&gt;3. Compute layout&lt;/h3&gt;
+&lt;p&gt;Let’s start with &lt;strong&gt;Multigravity Force Atlas 2&lt;/strong&gt;. Take a look at &lt;a href=&quot;https://github.com/mizvol/gephi-tutorials/tree/master/Layouts&quot;&gt;this&lt;/a&gt; tutorial for inspiration if you want to use another layout.&lt;/p&gt;
+
+&lt;p&gt;Parameters:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Scaling: 10&lt;/li&gt;
+  &lt;li&gt;Edge Weight Influence: 0&lt;/li&gt;
+  &lt;li&gt;Dissuade hubs: True&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-export-sigmajs-template&quot;&gt;4. Export SigmaJS template&lt;/h3&gt;
+&lt;p&gt;Export &lt;strong&gt;SigmaJS template&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;File-&amp;gt;Export-&amp;gt;SigmaJS template&lt;/code&gt; and fill in all required fields.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-test-locally&quot;&gt;5. Test locally&lt;/h3&gt;
+&lt;p&gt;Go to the exported folder and start a simple Python HTTP server to test your visualization. Depending on Python version, in the terminal, type the following command.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Python 3.X &lt;code class=&quot;highlighter-rouge&quot;&gt;python -m http.server&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Python 2.7 &lt;code class=&quot;highlighter-rouge&quot;&gt;python -m SimpleHTTPServer&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now, you can interact with your graph using your web-browser (works best in Chrome). Go to &lt;a href=&quot;http://localhost:8000/&quot; target=&quot;_blank&quot;&gt;http://localhost:8000/&lt;/a&gt; and play with it.&lt;/p&gt;
+
+&lt;p&gt;That is all we need to do to publish our visualization online. Although, as we can see, the graph looks quite raw and it is hard to interact with it. Let’s compute more attributes and make the graph look nicer and more user-friendly.&lt;/p&gt;
+
+&lt;h3 id=&quot;6-compute-attributes&quot;&gt;6. Compute attributes.&lt;/h3&gt;
+&lt;p&gt;We are going to use attributed layouts to enhance readability. Before doing that, we need to compute attributes.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Modularity (Use weights: &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Average Degree
+&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/modularity-degree.gif&quot; alt=&quot;Modularity&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;7-color-nodes-according-to-their-community&quot;&gt;7. Color nodes according to their community&lt;/h3&gt;
+&lt;p&gt;Color nodes according to their modularity class and make their size correspond to their degree.
+&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/color-and-size.gif&quot; alt=&quot;Attributes&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;8-circle-pack-layout&quot;&gt;8. Circle Pack layout&lt;/h3&gt;
+&lt;p&gt;Use &lt;strong&gt;Circle Pack layout&lt;/strong&gt; to rearrange nodes according to attributes. Use &lt;em&gt;modularity&lt;/em&gt; and &lt;em&gt;degree&lt;/em&gt; as parameters.
+&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/CirclePack.png&quot; alt=&quot;CirclePack&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;9-scale-and-labels&quot;&gt;9. Scale and labels&lt;/h3&gt;
+&lt;p&gt;Adjust the scale and labels. Use &lt;strong&gt;Expansion layout&lt;/strong&gt; to increase the scale of the layout. Display labels, reduce the font size and use &lt;strong&gt;Label Adjust layout&lt;/strong&gt; to prevent overlapping node labels.
+&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/SigmaJS%20exporter/images/scale.gif&quot; alt=&quot;LabelAdjust&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;10-export-sigmajs-template-once-again-and-test-it-locally&quot;&gt;10. Export SigmaJS template once again and test it locally&lt;/h3&gt;
+&lt;p&gt;Our graph looks more readable now and it’s much easier to interact with it. Export SigmaJS template once again and check it on localhost (steps 4 and 5).&lt;/p&gt;
+
+&lt;h3 id=&quot;11-publish-your-graph-on-github-pages&quot;&gt;11. Publish your graph on GitHub pages.&lt;/h3&gt;
+&lt;p&gt;Now, we can publish everything to GitHub pages.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Create a GitHub repository.&lt;/li&gt;
+  &lt;li&gt;Go to the &lt;strong&gt;settings&lt;/strong&gt; of your repository and find &lt;strong&gt;GitHub pages&lt;/strong&gt; section. Specify &lt;code class=&quot;highlighter-rouge&quot;&gt;master branch&lt;/code&gt; as a source.&lt;/li&gt;
+  &lt;li&gt;Clone the repository.&lt;/li&gt;
+  &lt;li&gt;Copy the exported SigmaJS template that we have prepared to the cloned folder.&lt;/li&gt;
+  &lt;li&gt;Push the files to the repository.&lt;/li&gt;
+  &lt;li&gt;Check the website with your interactive visualization &lt;code class=&quot;highlighter-rouge&quot;&gt;https://[YOUR-GITHUB-USER-NAME].github.io/[VIS-REPOSITORY-NAME]/network/&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Et voila. You have just published your interactive graph visualization online.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;12-optional-play-with-the-config-file&quot;&gt;12. &lt;em&gt;Optional.&lt;/em&gt; Play with the config file&lt;/h3&gt;
+&lt;p&gt;You can adjust properties of the visualization using the &lt;code class=&quot;highlighter-rouge&quot;&gt;config.json&lt;/code&gt; file that you can find in the folder with our SigmaJS template. Play with SigmaJS config file:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Adjust node sizes using &lt;code class=&quot;highlighter-rouge&quot;&gt;minNodeSize&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;maxNodeSize&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Adjust label thresholds using &lt;code class=&quot;highlighter-rouge&quot;&gt;labelThreshold&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;13-optional-customize-htmlcss&quot;&gt;13. &lt;em&gt;Optional.&lt;/em&gt; Customize HTML/CSS&lt;/h3&gt;
+&lt;p&gt;If you are familiar with HTML/CSS, you can customize the style of the web page. All HTML and CSS files are in the generated foloder. With just a few adjustments, you could create something like &lt;a href=&quot;https://blog.miz.space/wikiBrain/january/index.html&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt;. I have customized this template for one of our projects (see more details and examples &lt;a href=&quot;https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;)&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 05 Jan 2020 13:13:13 +0100</pubDate>
+        <link>http://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/</link>
+        <guid isPermaLink="true">http://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/</guid>
+        
+        <category>Graph</category>
+        
+        <category>Gephi</category>
+        
+        <category>SigmaJS</category>
+        
+        <category>Interactive</category>
+        
+        <category>Visualization</category>
+        
+        <category>Network</category>
+        
+        <category>Tutorial</category>
+        
+        
+        <category>Tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Gephi tutorial. Layouts</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/data/images/gephi-tutorials/layouts-teaser-graph-gephi.png&quot; alt=&quot;Graph. Gephi. Example&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;right&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Colleagues and students often ask me whether it is easy to create a nice graph visualization. My answer is always positive but such conversations often end up where they started for multiple reasons. First, it is hard to understand what people want to do with their visualization. Second, it is hard to summarize everything in one 3-5 minutes step by step explanation. Finally, even if we have managed to resolve first two issues, I still feel like my verbal explanations sound obscure so they feel discouraged and don’t even try. Although, after I show them how to do it, things get much easier. As we all know, it is “better to see something once than to hear about it a hundred times”.&lt;/p&gt;
+
+&lt;p&gt;I have decided to create a series of tutorials on Gephi graph visualization. Each tutorial has a short ~3min long walk-through videos. These videos demonstrate that creating interpretable, interactive and nice looking graph data visualizations can be fast and easy. Moreover, it doesn’t require any coding skills, so it can be used by people who just need to get quick insights from their graph-structured data.&lt;/p&gt;
+
+&lt;p&gt;I also gave these tutorials after my lecture on data visualization for &lt;a href=&quot;https://edu.epfl.ch/coursebook/en/a-network-tour-of-data-science-EE-558&quot; target=&quot;_blank&quot;&gt;A Network Tour of Data Science course&lt;/a&gt; at EPFL.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This tutorial is about some of the most popular layouts in Gephi.&lt;/strong&gt; In the &lt;a href=&quot;https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/&quot; target=&quot;_blank&quot;&gt;next one&lt;/a&gt;, I’m going to show how to make your graph visualization interactive and publish it online in a few clicks.&lt;/p&gt;
+
+&lt;h3 id=&quot;layouts-graph-attributes-data-exploration&quot;&gt;Layouts. Graph attributes. Data exploration&lt;/h3&gt;
+
+&lt;p&gt;In this tutorial, we will try the most popular tools for graph exploration in Gephi. We will learn how to get visual insights by spatializing and highlighting important attributes of graphs. As an example, we will use a subnetwork of Wikipedia pages that had anomalous visitor activity over the period 15-31 October 2018. You can find the corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;.gexf&lt;/code&gt; in this &lt;a href=&quot;https://github.com/mizvol/gephi-tutorials/tree/master/Layouts&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Before starting this tutorial&lt;/strong&gt;, install the following plugins (unless they are already installed in your version of Gephi):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Multigravity Force Atlas 2&lt;/li&gt;
+  &lt;li&gt;Circle Pack layout&lt;/li&gt;
+  &lt;li&gt;Leiden algorithm&lt;/li&gt;
+  &lt;li&gt;Bridging centrality&lt;/li&gt;
+  &lt;li&gt;Clustering coefficient&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As promised, here is a short step-by-step walk-through screencast to give you an idea of what we are going to do in this tutorial. Also, if you don’t feel like reading the tutorial, just follow the steps in this video. &lt;strong&gt;The video reproduces all the steps listed below.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div style=&quot;position:relative;height:0;padding-bottom:56.25%&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/aRZIeTroUog?ecver=2&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; style=&quot;position:absolute;width:100%;height:100%;left:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;1-spatialize-your-graph-with-force-directed-layouts&quot;&gt;1. Spatialize your graph with force-directed layouts.&lt;/h3&gt;
+
+&lt;p&gt;To start with, let’s spatialize our graph. To do that, we can use force-directed layouts. They don’t require any attributes and quite easy to setup. We will try four layouts: &lt;strong&gt;Multigravity Force Atlas 2&lt;/strong&gt;, &lt;strong&gt;Yuifan Hu&lt;/strong&gt;, &lt;strong&gt;Fruchterman-Reingold&lt;/strong&gt;, &lt;strong&gt;Open Ord&lt;/strong&gt;. You can find all these layouts in the “Layout” pane. Here are some tips related to the parameters of each algorithm:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Multigravity Force Atlas 2&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Scaling&lt;/em&gt;. Control scale of the expansion of the graph.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Dissuade hubs&lt;/em&gt;. Apply stronger repulsive forces to hubs.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Prevent overlap&lt;/em&gt;. Prevent nodes from overlapping.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Yifan Hu&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Step ratio&lt;/em&gt;. High ratio improves quality (at the expense of speed)&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Optimal distance&lt;/em&gt;. Controls distance between nodes&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Theta&lt;/em&gt;. Smaller Theta gives leads to more accurate results (slower)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fruchterman-Reingold (expensive)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Gravity&lt;/em&gt;. Attraction strength.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Speed&lt;/em&gt;. A tradeoff between speed and accuracy. Higher values lead to faster but less accurate results&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Open Ord&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Edge Cut (0 to 1)&lt;/em&gt;. Higher values lead to more clustered results.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Num Iterations&lt;/em&gt;. Higher values lead to larger expansion.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In the following examples, colors correspond to &lt;em&gt;modularity&lt;/em&gt;.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Multigravity Force Atlas 2&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Yifan Hu&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Fruchterman-Reingold&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Open Ord&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/force-atlas.gif&quot; alt=&quot;Multigravity Force Atlas 2&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/yifan-hu.gif&quot; alt=&quot;Yifan-hu&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/f-r.gif&quot; alt=&quot;Fruchterman-Reingold&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/openord.gif&quot; alt=&quot;Open Ord&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;2-highlight-attributes&quot;&gt;2. Highlight attributes&lt;/h3&gt;
+
+&lt;p&gt;With Gephi, we can highlight attributes of the nodes using different colors and sizes, reflecting the scale of the attributes. You can do it using “Appearance” pane. Before using the attributes, we should compute them using “Statistics” pane. Some examples of attributes that can be used for sizing and coloring are listed below.&lt;/p&gt;
+
+&lt;h4 id=&quot;node-and-label-size&quot;&gt;Node and label size&lt;/h4&gt;
+
+&lt;p&gt;We can use the size to highlight local attributes of nodes.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Degree_(graph_theory)&quot;&gt;Degree&lt;/a&gt;. Connectivity of a node&lt;/li&gt;
+  &lt;li&gt;Centrality
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Betweenness_centrality&quot;&gt;Betweenness&lt;/a&gt;. Number of random walks passing through the node&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.cbmc.it/fastcent/doc/Bridging.htm&quot;&gt;Bridging&lt;/a&gt;. A measure of bi-partisanship of a node. Nodes that connect multiple communities (serve as bridges) have high bridging centrality&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/PageRank&quot;&gt;Page rank&lt;/a&gt;. Importance of a node&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Clustering_coefficient&quot;&gt;Local clustering coefficient&lt;/a&gt;. Determines how close are neighbors of a node to a complete graph&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;color&quot;&gt;Color&lt;/h4&gt;
+
+&lt;p&gt;Coloring different communities of the graph is a allows to explore the structure of your graph and make it more visually appealing. To do that, we need to run a community detection algorithm. Once you compute communities, you can color the graph using “Appearance” pane.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Community detection algorithms
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Louvain_modularity&quot;&gt;Louvain modularity&lt;/a&gt; (&lt;em&gt;Modularity&lt;/em&gt; in Gephi)&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.nature.com/articles/s41598-019-41695-z&quot;&gt;Leiden algorithm&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;3-use-attributed-layouts&quot;&gt;3. Use attributed layouts&lt;/h3&gt;
+
+&lt;p&gt;Gephi also provides a set of attributed layouts. You can use them to spatialize nodes according to their attributes. Here are a few examples of attributed layouts:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Circular&lt;/strong&gt;. We can use it to show the distribution of nodes and their links and order nodes by an attribute and draw them on a circle.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Radial Axis&lt;/strong&gt;. This layout allows studying homophily by showing distributions of nodes inside groups. Axes radiate from the central circle. The layout groups nodes by an attribute and draw them in axes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Network splitter 3D&lt;/strong&gt;. Use this if you want to unfold the graph in layers based on attributes. However, there is a trick. To use it, you need to copy a column with an attribute of interest and add &lt;em&gt;[Z]&lt;/em&gt; in the end of the name of the column. &lt;em&gt;Z-maximum level&lt;/em&gt; parameter should be equal to the number of layers you want to get, e.g. number of communities if you use communities as a splitting attribute.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Circle pack&lt;/strong&gt;. This layout allows to group nodes by attribute(s) and plotting them in circles.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In the examples below, we use &lt;em&gt;modularity&lt;/em&gt; (community ID) as an attribute.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Circular&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Radial Axis&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Network splitter 3D&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Circle pack&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/data/images/gephi-tutorials/circular-t.png&quot; alt=&quot;Circular&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/data/images/gephi-tutorials/radial-axis-t.png&quot; alt=&quot;Radial Axis&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/data/images/gephi-tutorials/net-splitter-t.png&quot; alt=&quot;Network splitter 3D&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/data/images/gephi-tutorials/circle-pack-t.png&quot; alt=&quot;Circle pack&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;4-enhance-readability-with-spatial-transformation-layouts&quot;&gt;4. Enhance readability with spatial transformation layouts&lt;/h3&gt;
+
+&lt;p&gt;Normally, after all the transformations we have performed, it’s hard to read labels. To enhance readability and interpretability of your graph, use the following layouts.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Expansion/Contraction&lt;/strong&gt;. This layout simply changes the scale of the graph.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Noverlap&lt;/strong&gt;. Use it to prevent overlapping nodes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Label adjust&lt;/strong&gt;. This layout spatializes labels so that they are easier to read. Before running it, you should display labels.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;5-additional-resources&quot;&gt;5. Additional resources&lt;/h3&gt;
+
+&lt;p&gt;If you want to learn how to publish Gephi graphs online, take a look at &lt;a href=&quot;https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt; tutorial. For more information, check out official Gephi tutorials:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gephi.org/users/tutorial-layouts/&quot; target=&quot;_blank&quot;&gt;Gephi tutorial&lt;/a&gt; on layouts.&lt;/li&gt;
+  &lt;li&gt;Other &lt;a href=&quot;https://gephi.org/users/&quot; target=&quot;_blank&quot;&gt;Gephi tutorials&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Sun, 05 Jan 2020 12:13:13 +0100</pubDate>
+        <link>http://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-layouts-force-atlas-circle-pack-radial-axis/</link>
+        <guid isPermaLink="true">http://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-layouts-force-atlas-circle-pack-radial-axis/</guid>
+        
+        <category>Graph</category>
+        
+        <category>Gephi</category>
+        
+        <category>Layouts</category>
+        
+        <category>Visualization</category>
+        
+        <category>Network</category>
+        
+        <category>Tutorial</category>
+        
+        
+        <category>Tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Wikipedia Graph Dataset</title>
+        <description>&lt;p&gt;Needless to say that &lt;a href=&quot;https://www.wikipedia.org/&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt; is an invaluable source of free knowledge. In addition to that, Wikipedia weblogs data is a great resource for the research in many different fields such as collective behavior, data mining or network science. After all the projects and hours spent on wikipedia data, we got really tired of the data pre-processing. Even though Wikipedia data dumps are quite organized and clean, it takes time to pre-process data to represent and handle it as a graph data structure. &lt;a href=&quot;https://wikimediafoundation.org/&quot; target=&quot;_blank&quot;&gt;Wikimedia Foundation&lt;/a&gt; has already done a great job making this data quite well structured and publicly available (consider &lt;a href=&quot;https://donate.wikimedia.org&quot; target=&quot;_blank&quot;&gt;donating&lt;/a&gt;). We wanted to make this data even more accessible to researchers and tech-savvy Wikipedia enthusiasts interested in studying network-related and socio-dynamic aspects of this knowledge base.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/wikiGraphDataset/structure.png&quot; alt=&quot;Dataset structure&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;right&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We are focusing on two aspects of the data dumps, &lt;strong&gt;Wikipedia web network&lt;/strong&gt; and &lt;strong&gt;pagecounts&lt;/strong&gt; (number of visits per Wiki page per hour). While working on multiple Wikipedia-related projects, we realized that the life of researchers interested in getting insights from Wikipedia web network structure would have been much easier if the data was natively represented as a graph. Also, we thought that it would be nicer and more convenient to have pagecounts stored in a database. This would allow us to ask questions not only about the static network structure but also about the dynamic aspects of Wikipedia, such as visitors’ interests over time, anomalies in viewership activity, or any other questions related to collective behavior.&lt;/p&gt;
+
+&lt;p&gt;All in all, we provide tools to pre-process two types of Wikipedia dumps, page graph (pages as nodes, hyperlinks as edges) and pagecounts. We store the &lt;strong&gt;graph&lt;/strong&gt; in &lt;strong&gt;Neo4J&lt;/strong&gt; graph database. To use the graph dataset you need to deploy Neo4J database on your local computer or a remote server (preferably Debian-based distribution). &lt;strong&gt;Pagecounts&lt;/strong&gt; are stored in &lt;strong&gt;.parquet&lt;/strong&gt; so you can use the files with any compatible framework. You can use the datasets together as well as independently. If you decide to use the datasets together, they can be connected using a key PAGE_ID (as shown in the igure). Take a look at the detailed deployment instructions at the end of this post.&lt;/p&gt;
+
+&lt;p&gt;To incentivize you to start using these databases, we will show a few use cases and queries that should give you an idea of what you potentially could do with them in your Wikipedia-related research projects.&lt;/p&gt;
+
+&lt;h3 id=&quot;queries-and-use-cases&quot;&gt;Queries and use cases&lt;/h3&gt;
+
+&lt;p&gt;Pretty much everyone is crazy about &lt;a href=&quot;https://en.wikipedia.org/wiki/Game_of_Thrones&quot; target=&quot;_blank&quot;&gt;Game of Thrones&lt;/a&gt; these days so let’s use it as a demonstration example just to show courtesy to pop culture trends. Let’s take a look at the subnetwork of GoT characters and the activity of Wikipedia visitors over time. To do that, we will need to perform the following steps.&lt;/p&gt;
+
+&lt;h4 id=&quot;1-graph-database-neo4j&quot;&gt;1. Graph database. Neo4J.&lt;/h4&gt;
+
+&lt;p&gt;We will start with a simple Cypher query. To which Wikipedia categories does &lt;a href=&quot;https://en.wikipedia.org/wiki/Daenerys_Targaryen&quot; target=&quot;_blank&quot;&gt;Daenerys_Targaryen&lt;/a&gt; page belong to?&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;MATCH &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;page:Page &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;title: &lt;span class=&quot;s2&quot;&gt;&quot;Daenerys_Targaryen&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;-[:BELONGS_TO]-&amp;gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;category:Category&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RETURN category.title&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This query returns 15 categories to which Daenerys Targaryen BELOGNS_TO. For example, this list includes &lt;em&gt;Fictional_princesses&lt;/em&gt;, &lt;em&gt;Fictional_victims_of_child_abuse&lt;/em&gt;, and &lt;em&gt;Female_characters_in_television&lt;/em&gt;. Taking this into account, we may assume that all GoT characters belong to two large categories, &lt;em&gt;Female_characters_in_television&lt;/em&gt; and &lt;em&gt;Male_characters_in_television&lt;/em&gt;. Let’s keep this in mind until we write the final query.&lt;/p&gt;
+
+&lt;p&gt;Now, we are interested in a sub-network around category &lt;strong&gt;GoT&lt;/strong&gt;. To get this subnetwork we need to submit the following query:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;MATCH &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;page&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[relationship&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;1..2]-&amp;gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;category:Category &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; title: &lt;span class=&quot;s1&quot;&gt;'Game_of_Thrones'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt; RETURN page,relationship,category&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;em&gt;Technical note&lt;/em&gt;: in this query, we set &lt;strong&gt;depth&lt;/strong&gt; of the neighborhood to 2, which means we want a sub-network that includes nodes not further than 2 hops from the GoT category page.&lt;/p&gt;
+
+&lt;p&gt;The response is too large to visualize in Neo4j browser. I would recommend either storing the resulting graph in a file and then visualizing it elsewhere or limiting the size of the response with &lt;a href=&quot;https://neo4j.com/docs/cypher-manual/current/clauses/limit/&quot; target=&quot;_blank&quot;&gt;LIMIT&lt;/a&gt; keyword at the end of the query. For example, we can save the response in GraphML format and use &lt;a href=&quot;https://gephi.org/&quot; target=&quot;_blank&quot;&gt;Gephi&lt;/a&gt; to visualize it. To do that, we need to use &lt;a href=&quot;http://neo4j-contrib.github.io/neo4j-apoc-procedures/3.5/export-import/graphml/&quot; target=&quot;_blank&quot;&gt;APOC procedures&lt;/a&gt; and the query would look as follows.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;CALL apoc.export.graphml.query&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;MATCH (page)-[relationship*1..2]-&amp;gt;(category:Category { title: 'Game_of_Thrones'}) RETURN page,relationship,category&quot;&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'/tmp/got-graph.graphml'&lt;/span&gt;, &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;useTypes:true, storeNodeIds:false&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Once you get the file and apply some Gephi-fu, you will get a graph similar to the one shown on the image below. To take a closer look on this graph, open &lt;a href=&quot;https://drive.google.com/open?id=1mcI5MxJjq688dum72gYsxlQo-XvKF0ht&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt; project file in Gephi. You can also &lt;strong&gt;click on the image&lt;/strong&gt; and explore the network in an interactive environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.miz.space/got-graphs/got.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiGraphDataset/got_subgraph.png&quot; alt=&quot;GoT sub-graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In this graph, you can find Wikipedia pages related to GoT such as actors, characters, seasons, episodes, and other related pages. Note that Wikipedia structure can be confusing due to two types of Wikipedia articles: pages and categories. You should take this into account when working with the dataset. For example, in this graph, you will find both types of nodes. Do not get confused when you find two nodes with title &lt;em&gt;Game_of_Thrones&lt;/em&gt;. One of them (green) is a &lt;em&gt;category&lt;/em&gt;, another one (pink) is a &lt;em&gt;page&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finally, &lt;strong&gt;to extract a subnetwork of GoT characters&lt;/strong&gt;, we need all Wikipedia pages that BELONGS_TO categories &lt;em&gt;Game_of_Thrones&lt;/em&gt;, &lt;em&gt;Female_characters_in_television&lt;/em&gt; and &lt;em&gt;Male_characters_in_television&lt;/em&gt;. To do this trick, we need a bit more sophisticated yet very concise and self-descriptive query. Combining the two previous queries, we get something like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;MATCH &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c1:Category&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;lt;-[:BELONGS_TO]-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[r&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;1..2]-&amp;gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c2:Category &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;title:&lt;span class=&quot;s2&quot;&gt;&quot;Game_of_Thrones&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt; WHERE c1.title &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Female_characters_in_television&quot;&lt;/span&gt; OR c1.title &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Male_characters_in_television&quot;&lt;/span&gt; RETURN DISTINCT p.id, p.title&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This query returns characters and corresponding page IDs. If we wanted to get the full network of characters with edges between them, we would have to extend the query above in the following way:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;MATCH &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c1:Category&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;lt;-[:BELONGS_TO]-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[r&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;1..2]-&amp;gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c2:Category &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;title:&lt;span class=&quot;s1&quot;&gt;'Game_of_Thrones'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt; WHERE c1.title &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Female_characters_in_television'&lt;/span&gt; OR c1.title &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Male_characters_in_television'&lt;/span&gt; WITH COLLECT&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;distinct p&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AS pages UNWIND pages AS p1 MATCH &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;p1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-[rel]-&amp;gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;p2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; WHERE p2 IN pages RETURN pages, rel&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;It is a bit longer than the previous one. We have added the part that fetches edges between all pages that we have extracted in the previous query. &lt;strong&gt;Click on the image below to interact with the network.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.miz.space/got-graphs/characters.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiGraphDataset/characters.png&quot; alt=&quot;GoT characters sub-graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Once we have extracted the subnetwork of GoT characters, we can look at the popularity of the characters on Wikipedia according to visitor interests. To do that, we need to query another part of our dataset that is stored in .parquet files.&lt;/p&gt;
+
+&lt;h4 id=&quot;2-pagecouts-dataset&quot;&gt;2. Pagecouts dataset&lt;/h4&gt;
+
+&lt;p&gt;In this section, we will take a look at the viewership activity on a couple of pages.&lt;/p&gt;
+
+&lt;p&gt;To take a look at the popularity of GoT characters over time on Wikipedia, we need IDs of the pages we are interested in. We can extract the IDs from the previous query (we can export them in a CSV file) and use them to query tables stored in parquet files.&lt;/p&gt;
+
+&lt;p&gt;In the image below, you can see a partial result of such query. We can notice the day and night fluctuations in the time-series. Here, we display the activity of only two pages to avoid the clutter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/wikiGraphDataset/activity.png&quot; alt=&quot;Activity example&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are many ways to use activity information. For example, take a look at one of our latest projects on &lt;a href=&quot;https://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/&quot; target=&quot;_blank&quot;&gt;Wikipedia viewership anomaly detection&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;more-details-and-the-team&quot;&gt;More details and the team&lt;/h3&gt;
+
+&lt;p&gt;If you are interested in other languages (apart from English), our pre-processing tools allow you to work with dumps of any language edition of Wikipedia. More details in the deployment instructions below. GitHub repo with the deployment instructions is available &lt;a href=&quot;https://github.com/epfl-lts2/sparkwiki&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;. A step-by-step deployment tutorial is available &lt;a href=&quot;https://github.com/epfl-lts2/sparkwiki/tree/master/helpers&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have any problems related to deployment or usage of the dataset, we encourage you to create an issue on &lt;a href=&quot;https://github.com/epfl-lts2/sparkwiki&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;. This is the most efficient way of communication. You can also leave a comment below or &lt;a href=&quot;http://miz.space&quot; target=&quot;_blank&quot;&gt;contact me&lt;/a&gt; directly.&lt;/p&gt;
+
+&lt;p&gt;This dataset is a joint effort of &lt;a href=&quot;https://ch.linkedin.com/in/naspert&quot; target=&quot;_blank&quot;&gt;Nicolas Aspert&lt;/a&gt;, &lt;a href=&quot;http://miz.space&quot; target=&quot;_blank&quot;&gt;Volodymyr Miz&lt;/a&gt;, &lt;a href=&quot;https://people.epfl.ch/benjamin.ricaud&quot; target=&quot;_blank&quot;&gt;Benjamin Ricaud&lt;/a&gt;, and &lt;a href=&quot;https://people.epfl.ch/pierre.vandergheynst&quot; target=&quot;_blank&quot;&gt;Pierre Vandergheynst&lt;/a&gt; (&lt;a href=&quot;https://www.epfl.ch/&quot; target=&quot;_blank&quot;&gt;EPFL&lt;/a&gt;, &lt;a href=&quot;https://lts2.epfl.ch/&quot; target=&quot;_blank&quot;&gt;LTS2&lt;/a&gt;). For more details, take a look at the &lt;a href=&quot;https://arxiv.org/abs/1903.08597&quot; target=&quot;_blank&quot;&gt;paper&lt;/a&gt; we have recently published in the proceedings of the &lt;a href=&quot;http://wikiworkshop.org/2019/&quot; target=&quot;_blank&quot;&gt;Wiki Workshop 2019&lt;/a&gt; held at &lt;a href=&quot;https://www2019.thewebconf.org/&quot; target=&quot;_blank&quot;&gt;The Web Conference 2019&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h3&gt;
+&lt;p&gt;Kudos to &lt;a href=&quot;https://www.kirellbenzi.com/&quot; target=&quot;_blank&quot;&gt;Kirell Benzi&lt;/a&gt; for the idea of the GoT case study.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 05 Jun 2019 13:13:13 +0200</pubDate>
+        <link>http://blog.miz.space/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/</link>
+        <guid isPermaLink="true">http://blog.miz.space/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/</guid>
+        
+        <category>Wikipedia Graph</category>
+        
+        <category>Data analysis</category>
+        
+        <category>Temporal Graph</category>
+        
+        <category>Time-series</category>
+        
+        <category>Dynamic Networks</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Research</category>
+        
+        <category>Network analysis</category>
+        
+        
+        <category>Research</category>
+        
+      </item>
+    
+      <item>
+        <title>How to install Apache Spark on Ubuntu using Apache Bigtop</title>
+        <description>&lt;p&gt;Has this ever happened to you? A new version of Spark is coming out and you want to try it out. To do that, you have to remove the previous version, download and extract a new one and hope that everything still works. Or, sometimes, you are just getting started with a Spark project and want the installation process to be seamless and easy. A one-liner command would be nice, wouldn’t it? Making this process more organized and user-friendly is one of the goals of Apache Bigtop. This post is for ML and infrastructure engineers, data scientists, and those who are just willing to try Spark out.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://bigtop.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache Bigtop&lt;/a&gt; is aimed at providing ML engineers, infrastructure engineers, and data scientists with a convenient tool for packaging, deployment, and integration of Hadoop-related projects such as HDFS, MapReduce, Pig, Hive, HBase, ZooKeeper, Spark, and many others.&lt;/p&gt;
+
+&lt;p&gt;In this tutorial, I will show how to install Apache Bigtop and how to use it to install &lt;a href=&quot;https://spark.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache Spark&lt;/a&gt;. Here, I will focus on Ubuntu. For other distributions, check out &lt;a href=&quot;https://cwiki.apache.org/confluence/display/BIGTOP/How+to+install+Hadoop+distribution+from+Bigtop+0.5.0&quot; target=&quot;_blank&quot;&gt;this link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;bigtop-installation&quot;&gt;Bigtop installation&lt;/h3&gt;
+
+&lt;p&gt;This tutorial is for Bigtop version 1.3.0. If you want to isntall other versions, change the version in the commands below accordingly.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Make sure that you have the latest JDK installed on your system (so far, JDK 8 works well).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Install the Apache Bigtop GPG key.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget &lt;span class=&quot;nt&quot;&gt;-O-&lt;/span&gt; http://archive.apache.org/dist/bigtop/bigtop-1.3.0/repos/GPG-KEY-bigtop | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Make sure to grab the repo file.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; /etc/apt/sources.list.d/bigtop-1.3.0.list http://archive.apache.org/dist/bigtop/bigtop-1.3.0/repos/ubuntu16.04/bigtop.list&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Update the &lt;code class=&quot;highlighter-rouge&quot;&gt;apt&lt;/code&gt; cache.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Browse through the artifacts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-cache search mahout&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install &lt;code class=&quot;highlighter-rouge&quot;&gt;bigtop-utils&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bigtop-utils&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now you can install Spark and other Hadoop-related projects.&lt;/p&gt;
+
+&lt;h3 id=&quot;spark-installation&quot;&gt;Spark installation&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install Spark.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;spark&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Take a look at the &lt;a href=&quot;https://cwiki.apache.org/confluence/display/BIGTOP&quot; target=&quot;_blank&quot;&gt;Wiki&lt;/a&gt; of the Bigtop project for more information concerning other Hadoop-related projects.&lt;/p&gt;
+
+&lt;p&gt;If you are looking for an easier way to try out Spark, check out another tutorial on how to create &lt;a href=&quot;https://blog.miz.space/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/&quot; target=&quot;_blank&quot;&gt;Spark Scala project in Intellij IDEA&lt;/a&gt;. This way you do not have to install anything except Intellij IDEA.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 04 Apr 2019 17:07:13 +0200</pubDate>
+        <link>http://blog.miz.space/tutorial/2019/04/04/how-to-install-spark-using-apache-bigtop-ubuntu/</link>
+        <guid isPermaLink="true">http://blog.miz.space/tutorial/2019/04/04/how-to-install-spark-using-apache-bigtop-ubuntu/</guid>
+        
+        <category>Apache Spark</category>
+        
+        <category>Apache Bigtop</category>
+        
+        <category>Development</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Tutorial</category>
+        
+        <category>Install</category>
+        
+        
+        <category>Tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Anomaly detection in the dynamics of Web and social networks</title>
+        <description>&lt;p&gt;Imagine, you have a large network. Say, a social one. Every day, users of this network (aka nodes) generate massive amounts of likes, messages, and clicks (aka activity logs). Also, these users are connected through some links (aka edges), say, follow or befriend each other. There is nothing special about daily activity in this network. But, at some point, something unexpected happens in the network dynamics (e.g. an attack). Since the network is huge and the activity logs are massive, it is hard to explain WHAT happened, WHERE it happened, and, what is more important, WHY it happened. And the more active your users and the larger your network, the more complicated these questions become to answer.&lt;/p&gt;
+
+&lt;p&gt;This social network is just one example of a large dynamic network where anomaly detection, inspection, and analysis may be required. Apart from that, good candidates are Web networks, email networks, and brain networks. You can think of any other domain that could fit this data model. There are only three requirements for the data. Entities in the dataset 1) could be represented as nodes, 2) have some relations among each other, and 3) generate some activity over time.&lt;/p&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In this post, I am going to present our recent work with &lt;a href=&quot;https://people.epfl.ch/benjamin.ricaud&quot; target=&quot;_blank&quot;&gt;Benjamin Ricaud&lt;/a&gt;, &lt;a href=&quot;http://www.kirellbenzi.com/&quot; target=&quot;_blank&quot;&gt;Kirell Benzi&lt;/a&gt;, and &lt;a href=&quot;https://people.epfl.ch/pierre.vandergheynst&quot; target=&quot;_blank&quot;&gt;Pierre Vandergheynst&lt;/a&gt; (&lt;a href=&quot;https://www.epfl.ch/&quot; target=&quot;_blank&quot;&gt;EPFL&lt;/a&gt;, &lt;a href=&quot;https://lts2.epfl.ch/&quot; target=&quot;_blank&quot;&gt;LTS2&lt;/a&gt;). It is about anomaly detection in the dynamics of social and Web networks (preprint is available on &lt;a href=&quot;https://arxiv.org/abs/1901.09688&quot; target=&quot;_blank&quot;&gt;ArXiV&lt;/a&gt;). This is yet another application of our algorithm that I already described in the previous blog posts. So far, we were able to &lt;a href=&quot;https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/&quot; target=&quot;_blank&quot;&gt;detect events&lt;/a&gt; and study &lt;a href=&quot;https://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/&quot; target=&quot;_blank&quot;&gt;collective memories&lt;/a&gt;. This time, we realized that we can use the same (but slightly modified) algorithm to detect anomalies in the dynamics of communication networks. Moreover, I will show you how we can use it to investigate network attacks and recover traces of an attack if the intruders tried to hide or erase them.&lt;/p&gt;
+
+&lt;p&gt;Take a look at the related research and interactive demos on the &lt;a href=&quot;https://wiki-insights.epfl.ch/&quot; target=&quot;_blank&quot;&gt;website&lt;/a&gt; of our &lt;strong&gt;Wikipedia Insights&lt;/strong&gt; project.&lt;/p&gt;
+
+&lt;h3 id=&quot;method&quot;&gt;Method&lt;/h3&gt;
+&lt;p&gt;We define an anomaly in the network dynamics as an unexpected spike of activity in a cluster of nodes. So, the objective is to find those clusters. As I said before, our networks are very dense, large, and the corresponding activity recordings are very noisy. This makes it hard to localize the anomalous clusters. This is where we came up with an idea of the algorithm that would help us to &lt;strong&gt;keep only those parts of the network that could potentially be related to anomalies in the network&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The core of the algorithm is a modified Hebbian learning rule, a theoretical assumption made by neuroscientists to explain the learning function of the brain. The simplified original rule implies that if two neurons (nodes) are active together, they tend to increase the strength of the connecting synapse (edge weight) between them. We modify this rule to fit our dynamic network data model. First, we do not care about the causality of activations and focus on simultaneous activation of the nodes in the network. Second, we introduce a convenient update function that allows us to forget about such problems as normalization and weight thresholds during learning.&lt;/p&gt;
+
+&lt;p&gt;Speaking of our data model, the algorithm consists of three main steps and works as follows. First, we select “spiky” nodes that have unexpected bursts of activity. We simply use &lt;em&gt;mean&lt;/em&gt; and &lt;em&gt;standard deviation&lt;/em&gt; to assess the level of the bursts. Once we identify the spiky nodes, we remove the ones with uniform activity. Second, we compute the strength of the connections (weights of the edges) between the spiky nodes using the modified Hebbian learning rule. In other words, if two nodes are active at the same time, the weight of an edge connecting them increases, otherwise, it either remains unchanged or decreases when the forgetting parameter is on. When the forgetting parameter is on, we want the algorithm to forget about previous anomalies. If it is off, the algorithm accumulates anomalous events and stores them as a memory. Finally, when the weights are computed, we remove low weight edges so the remainder of the initial graph contains clusters of the nodes with anomalous activity.&lt;/p&gt;
+
+&lt;p&gt;As you can see, all computations are local on the graph. This means that the weight updates of adjacent edges of a node depend on the node’s attributes and the attributes of its neighbors. This allowed us to fit the algorithm in &lt;a href=&quot;https://spark.apache.org/graphx/&quot; target=&quot;_blank&quot;&gt;GraphX framework&lt;/a&gt; and implement it in a distributed fashion. See the code on &lt;a href=&quot;https://github.com/mizvol/wikibrain&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;. If you are new to Scala and Spark, take a look at &lt;a href=&quot;https://blog.miz.space/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/&quot; target=&quot;_blank&quot;&gt;this tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATE 0&lt;/strong&gt;: We have a &lt;strong&gt;new enhanced and more readable version of the code&lt;/strong&gt; available &lt;a href=&quot;https://github.com/epfl-lts2/sparkwiki/blob/master/src/main/scala/ch/epfl/lts2/wikipedia/PeakFinder.scala&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;. To run it, you need to deploy Neo4J and Apache Cassandra databases. You can find deployment instructions in the same repo on &lt;a href=&quot;https://github.com/epfl-lts2/sparkwiki/tree/master/helpers&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;. See details &lt;a href=&quot;https://blog.miz.space/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATE 1&lt;/strong&gt;: If Scala code is confusing, I wrote a &lt;strong&gt;minimal Python code example with experiments on random data&lt;/strong&gt;. Check out &lt;a href=&quot;https://github.com/mizvol/anomaly-detection&quot; target=&quot;_blank&quot;&gt;this GitHub repo&lt;/a&gt; for more details. It should provide a quick but good understanding of our approach. Since the algorithm relies on the structure on the graph, the results with random graph are not very impressive. However, even though the structure of random graph is very dense we have managed to get decent results (see images below below).&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Anomalous time-series&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Initial random graph&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Detected anomalous cluster (bold edges)&lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- TS --&gt; &lt;img src=&quot;/data/images/anomalyDetection/ts.png&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Initial --&gt; &lt;img src=&quot;/data/images/anomalyDetection/init.png&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Anomalous --&gt; &lt;img src=&quot;/data/images/anomalyDetection/learned.png&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;experiments&quot;&gt;Experiments&lt;/h3&gt;
+&lt;p&gt;We conduct experiments on two datasets: &lt;a href=&quot;https://zenodo.org/record/886484#.XFRigctKhhE&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Wikipedia web network&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&quot;https://zenodo.org/record/1342353#.XFRig8tKhhE&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Enron email communication network&lt;/strong&gt;&lt;/a&gt;. The datasets are publicly available (check out the links).&lt;/p&gt;
+
+&lt;h4 id=&quot;wikipedia-web-network&quot;&gt;Wikipedia web network&lt;/h4&gt;
+
+&lt;p&gt;In this experiment, we studied Wikipedia web network. The aim was to detect anomalous behavior of Wikipedia visitors. Here, we use &lt;strong&gt;Wikipedia pages&lt;/strong&gt; as &lt;em&gt;nodes&lt;/em&gt; and &lt;strong&gt;hyperlinks connecting the pages&lt;/strong&gt; as &lt;em&gt;edges&lt;/em&gt; of the graph. Every node has a &lt;strong&gt;time-series attribute&lt;/strong&gt; corresponding to the number of visits per hour. Wikimedia Foundation makes viewership activity publicly available so we used &lt;a href=&quot;https://dumps.wikimedia.org/other/pagecounts-ez/&quot; target=&quot;_blank&quot;&gt;this data&lt;/a&gt; to run the experiment. The pre-processed dataset is on Zenodo (see links in the previous paragraph).&lt;/p&gt;
+
+&lt;p&gt;This experiment is quite interesting because it is hard to validate the results quantitatively or present a numerical measure that would reflect the success rate of the algorithm. As a workaround, we decided to validate its results using another anomaly detection framework as ground truth. In this experiment, we use &lt;a href=&quot;https://trends.google.com/trends/?geo=US&quot; target=&quot;_blank&quot;&gt;Google Trends API&lt;/a&gt; as a benchmark.&lt;/p&gt;
+
+&lt;p&gt;As you see in the figures below, the results are quite impressive. The algorithm has managed to detect multiple anomalies in Wikipedia viewership activity. These anomalies correlate with the trending keywords on Google Trends.&lt;/p&gt;
+
+&lt;p&gt;Besides, there is another detail I want you to focus on. Look at the figure reflecting anomaly related to Germanwings 9525 crash. There is a smaller spike of activity at the end of December 2014. The fact is that there was another airplane crash at the end of December 2014, &lt;a href=&quot;https://en.wikipedia.org/wiki/Indonesia_AirAsia_Flight_8501&quot; target=&quot;_blank&quot;&gt;Indonesia AirAsia Flight 8501&lt;/a&gt;. We detected this event not because of a bug or a noisy activity pattern. This is a feature of our approach that reflects an aspect of collective behavior of Wikipedia visitors, which is called &lt;a href=&quot;https://en.wikipedia.org/wiki/Collective_memory&quot; target=&quot;_blank&quot;&gt;Collective Memory&lt;/a&gt;. The phenomenon of collective memory suggests that social groups recall past traumatic events when another similar traumatic event happens at present. This is exactly what our algorithm detected. When Germanwings crash happened, people started searching for other related airplane accidents. Google Trends has not reflected this since it focuses on particular keywords whereas our approach looks at more general picture due to the graph representation of the data. This means that our algorithm detects complex anomalies in the viewership dynamics that can only be spotted if one looks at the group of concepts rather than a particular keyword.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Ferguson unrest&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Charlie Hebdo attack&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Germanwings 9525 crash&lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Ferguson --&gt; &lt;img src=&quot;/data/images/anomalyDetection/ferguson_activity.svg&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Charlie Hebdo --&gt; &lt;img src=&quot;/data/images/anomalyDetection/charlie_activity.svg&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Germanwings --&gt; &lt;img src=&quot;/data/images/anomalyDetection/germanwings_activity.svg&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;enron-email-network&quot;&gt;Enron email network&lt;/h4&gt;
+
+&lt;p&gt;We also investigated Enron email dataset and ran another anomaly detection experiment on it. We built a communication network based on the emails sent among employees. Nodes of the network correspond to employees; we drew an edge between two employees if they have exchanged at least a few emails. Activity on the nodes is the number of emails sent by corresponding employees.&lt;/p&gt;
+
+&lt;p&gt;In this experiment, we had ground truth. We knew when the anomalies in the dynamics happened. This gave us a chance to verify the accuracy of our algorithm. There are four main events related to the Enron scandal (see details in the paper). We found that the real-world events related to the scandal triggered the anomalies in the communication dynamics of the corporate email network. The image below shows the result of the anomaly detection algorithm.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/data/images/anomalyDetection/enron.svg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;attack-investigation-data-recovery&quot;&gt;Attack investigation. Data recovery&lt;/h3&gt;
+&lt;p&gt;We got to the final part of the blog post. Imagine, someone attacked your network trying to wipe network activity data and this resulted in an anomalous spike of activity on the nodes of your network. Or, simply, you lost information about network activity due to an unexpected shutdown of the hosting server. In any case, the main problem when this happens is to &lt;strong&gt;recover missing information about the network activity&lt;/strong&gt;. Our algorithm can help.&lt;/p&gt;
+
+&lt;p&gt;Below, you see an example of the recovery of damaged parts of the data. Here, we wipe 20% of viewership activity data in a cluster of Wikipedia pages and recover it using our algorithm. To memorize and recover missing data we used Hopfield neural network, a basic model of artificial associative memory. Incidentally, Hopfield nets also use the Hebbian learning rule.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.miz.space/ferguson-recall.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/ferguson-recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We use prior activity of the network to learn collective patterns in the network dynamics. The patterns correspond to clusters of pages with similar anomalous behavior. We then use these clusters to recover the missing data. We found that the algorithm allows recovering missing data for the period when the anomaly has happened (in this example, it is bounded by the red vertical lines). It is also possible to recover more information outside these bounds but here we focused on the information that is most interesting for us, the missing information related to the moment of the attack.&lt;/p&gt;
+
+&lt;p&gt;As you can see, when recovering the data we heavily rely on the neighboring nodes in the cluster. This means, if we had the entire cluster wiped by the intruders, we would not be able to recover the original data. To recover missing information in the cluster we need to have at least 50% of nodes with valid undamaged observations. This is a limitation of our approach.&lt;/p&gt;
+
+&lt;p&gt;Read more about the memory properties and the data recovery feature of our algorithm in my &lt;a href=&quot;https://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/&quot; target=&quot;_blank&quot;&gt;previous blog post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h3&gt;
+&lt;p&gt;Networks are everywhere. We are surrounded by networks in pretty much all aspects of our lives explicitly or implicitly. It is important to develop a stable and robust toolkit for monitoring these networks and protect us from unexpected accidents related to them. Here, we introduced a new method for anomaly detection and missing information recovery in the large networks. We showed that the network structure carries a lot of useful information in itself, hence, it is very important to use it when working with the dynamic or time-varying data that have spatial or structural component. All things considered, I believe that in the following years, we will see more and more applications related to spatio-temporal data mining (for more details about this emerging field, take a look at &lt;a href=&quot;https://arxiv.org/abs/1711.04710&quot; target=&quot;_blank&quot;&gt;this recent survey&lt;/a&gt;).&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 13 Feb 2019 12:13:13 +0100</pubDate>
+        <link>http://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/</link>
+        <guid isPermaLink="true">http://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/</guid>
+        
+        <category>Anomaly Detection</category>
+        
+        <category>Data analysis</category>
+        
+        <category>Temporal Graph</category>
+        
+        <category>Time-series</category>
+        
+        <category>Dynamic Networks</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Research</category>
+        
+        <category>Network analysis</category>
+        
+        
+        <category>Research</category>
+        
+      </item>
+    
+      <item>
+        <title>Movie genres classification using character interaction networks</title>
+        <description>&lt;p&gt;Social interactions are among the most &lt;a href=&quot;https://www.nytimes.com/2017/06/12/well/live/having-friends-is-good-for-you.html&quot; target=&quot;_blank&quot;&gt;important needs&lt;/a&gt; of everyday life. Whenever we communicate with relatives, colleagues, friends or acquaintances, we create invisible social links adding those people into our personal social network (here, I mean the real one, not 500+ Facebook friends and LinkedIn connections). Sometimes, we look at interactions in our networks and compare our lives to movies and TV series trying to find similarities with real life. This made me think of a couple of interesting questions. Can the structure of our social network tell us anything about ourselves? What if it defines the genre of our life? Let’s try to look at this question from a data scientist’s perspective.&lt;/p&gt;
+
+&lt;p&gt;To do that, first, we would need a labeled dataset reflecting &lt;em&gt;“social network”=&amp;gt;”genre”&lt;/em&gt; relation. Clearly, we do not have access to real-life social networks or even if we were able to extract them from, say, Facebook,  first, that would be considered a privacy violation, and second, we would not have labels or “genres” characterizing each network. Although, the good news is that we have got movies and it is possible to extract networks of character interactions. Also, we know the genres of each movie. Fortunately, the &lt;a href=&quot;http://moviegalaxies.com/team&quot; target=&quot;_blank&quot;&gt;guys&lt;/a&gt; from &lt;a href=&quot;http://moviegalaxies.com/&quot; target=&quot;_blank&quot;&gt;Moviegalaxies&lt;/a&gt; have already captured quite a few of these networks and published them on their &lt;a href=&quot;http://moviegalaxies.com/&quot; target=&quot;_blank&quot;&gt;website&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;All in all, we found a suitably labeled dataset containing a &lt;em&gt;“character network of a movie”=&amp;gt;”genre”&lt;/em&gt; relation. Now, &lt;strong&gt;we can build a machine learning model to find out whether the structure of character networks has anything to do with genres of corresponding movies&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;data&quot;&gt;Data&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://moviegalaxies.com/&quot; target=&quot;_blank&quot;&gt;Moviegalaxies&lt;/a&gt; is a collection of social graphs in movies. A team of researchers from &lt;a href=&quot;http://www.rwth-aachen.de/cms/~a/root/?lidx=1&quot; target=&quot;_blank&quot;&gt;RWTH&lt;/a&gt;, &lt;a href=&quot;http://www.uni-koeln.de/&quot; target=&quot;_blank&quot;&gt;Cologne University&lt;/a&gt;, and &lt;a href=&quot;http://macro.media.mit.edu/&quot; target=&quot;_blank&quot;&gt;MIT&lt;/a&gt; (&lt;a href=&quot;http://jermainkaminski.com/&quot; target=&quot;_blank&quot;&gt;Jermain Kaminski&lt;/a&gt;, Michael Schober, Raymond Albaladejo, Oleksandr Zastupailo, and &lt;a href=&quot;http://www.chidalgo.com/&quot; target=&quot;_blank&quot;&gt;Cesar Hidalgo&lt;/a&gt;) has collected and published social network interactions among characters in 774 movies (and counting). They used “same-scene appearance” approach to build these social networks. This means, for example, if Padme and Anakin appear in the same scene in &lt;a href=&quot;http://moviegalaxies.com/movies/774-Star-Wars:-Episode-II---Attack-of-the-Clones&quot; target=&quot;_blank&quot;&gt;Star Wars: Episode II Attack of Clones&lt;/a&gt;, they are connected in the social network of the movie. On the other hand, Amidala and Yoda have never appeared together, therefore there is no edge linking them in the graph.&lt;/p&gt;
+
+&lt;p&gt;Although, it is not that easy to get genre information for each movie from Moviegalaxies website. In order to obtain this information, I used &lt;a href=&quot;http://www.omdbapi.com/&quot; target=&quot;_blank&quot;&gt;Open Movie Database (OMDB) API&lt;/a&gt;. The service provides 1000 requests per day for free which are enough to get more information about each movie in the Moviegalaxies collection.&lt;/p&gt;
+
+&lt;p&gt;For each movie, we consider only the main genre and omit the secondary ones. Here and in all experiments below, we keep only the top 7 most popular genres. As we can see in the chart below, the dataset is quite imbalanced.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Visualizations work best with Chrome.&lt;/p&gt;
+
+&lt;style&gt;
+.bar {
+  fill: #6F257F;
+}
+
+.axisX {
+  font-size: 13px;
+}
+
+.axisX text {
+  fill: white;
+}
+
+.axisY {
+  font-size: 13px;
+}
+
+.axisY text {
+  fill: white;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  min-width: 60px;
+  height: auto;
+  padding: 2px;
+  font: 15px sans-serif;
+  background: black;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+}
+   
+&lt;/style&gt;
+
+&lt;div id=&quot;barchart&quot;&gt;&lt;/div&gt;
+&lt;script src=&quot;https://d3js.org/d3.v4.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+function getDivWidth (div) {
+    var width = d3.select(div)
+      // get the width of div element
+      .style('width')
+      // take of 'px'
+      .slice(0, -2)
+    // return as an integer
+    return Math.round(Number(width))
+  }
+
+var svgBar = d3.select(&quot;#barchart&quot;).append(&quot;svg&quot;).attr(&quot;width&quot;,getDivWidth('.content')).attr(&quot;height&quot;,300);
+
+    margin = {top: 20, right: 20, bottom: 30, left: 80},
+    width = +svgBar.attr(&quot;width&quot;) - margin.left - margin.right,
+    height = +svgBar.attr(&quot;height&quot;) - margin.top - margin.bottom;
+  
+var x = d3.scaleLinear().range([0, width]);
+var y = d3.scaleBand().range([height, 0]);
+
+var g = svgBar.append(&quot;g&quot;)
+    .attr(&quot;transform&quot;, &quot;translate(&quot; + margin.left + &quot;,&quot; + margin.top + &quot;)&quot;);
+
+var div = d3.select(&quot;body&quot;).append(&quot;div&quot;)
+    .attr(&quot;class&quot;, &quot;tooltip&quot;)
+    .style(&quot;opacity&quot;, 0);
+  
+d3.json(&quot;/data/moviegalaxies/genres-barchart.json&quot;, function(error, data) {
+    if (error) throw error;
+  
+    data.sort(function(a, b) { return a.value - b.value; });
+  
+    x.domain([0, d3.max(data, function(d) { return d.value; })]);
+    y.domain(data.map(function(d) { return d.genre; })).padding(0.1);
+
+    g.append(&quot;g&quot;)
+        .attr(&quot;class&quot;, &quot;axisX&quot;)
+        .attr(&quot;transform&quot;, &quot;translate(0,&quot; + height + &quot;)&quot;)
+        .call(d3.axisBottom(x).ticks(5).tickFormat(function(d) { return d; }));
+
+    g.append(&quot;g&quot;)
+        .attr(&quot;class&quot;, &quot;axisY&quot;)
+        .call(d3.axisLeft(y));
+
+    g.selectAll(&quot;.bar&quot;)
+        .data(data)
+      .enter().append(&quot;rect&quot;)
+        .attr(&quot;class&quot;, &quot;bar&quot;)
+        .attr(&quot;x&quot;, 0)
+        .attr(&quot;height&quot;, y.bandwidth())
+        .attr(&quot;y&quot;, function(d) { return y(d.genre); })
+        .attr(&quot;width&quot;, function(d) { return x(d.value); })
+        .on(&quot;mouseover&quot;, function(d) {
+       div.transition()
+         .duration(200)
+         .style(&quot;opacity&quot;, .5);
+       div.html(d.genre + &quot;&lt;br/&gt;&quot; + d.value)
+         .style(&quot;left&quot;, d3.event.pageX + &quot;px&quot;)
+         .style(&quot;top&quot;, d3.event.pageY + &quot;px&quot;)
+       })
+     .on(&quot;mouseout&quot;, function(d) {
+       div.transition()
+         .duration(500)
+         .style(&quot;opacity&quot;, 0);
+       });
+});
+&lt;/script&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;features&quot;&gt;Features&lt;/h3&gt;
+&lt;p&gt;We want to find out whether the structure of character networks is enough to define movie genres. To do that, we are going to look at the topological properties of graphs, corresponding to the character networks. In particular, we are interested in &lt;a href=&quot;https://en.wikipedia.org/wiki/Assortativity&quot; target=&quot;_blank&quot;&gt;assortativity&lt;/a&gt;, &lt;a href=&quot;https://www.sci.unich.it/~francesc/teaching/network/transitivity.html&quot; target=&quot;_blank&quot;&gt;transitivity&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Degree_distribution&quot; target=&quot;_blank&quot;&gt;degree distribution&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Clustering_coefficient&quot; target=&quot;_blank&quot;&gt;clustering coefficient&lt;/a&gt;, and &lt;a href=&quot;https://en.wikipedia.org/wiki/Modularity_(networks)&quot; target=&quot;_blank&quot;&gt;modularity&lt;/a&gt;. Also, we consider the number of nodes and edges in social graphs as features.&lt;/p&gt;
+
+&lt;p&gt;Apart from having fancy names, topological properties of graphs can tell us interesting stories about social networks. For example, &lt;em&gt;clustering coefficient&lt;/em&gt;, &lt;em&gt;transitivity&lt;/em&gt;, and &lt;em&gt;modularity&lt;/em&gt; reflect to what extent members of a network tend to connect or cluster together. High &lt;em&gt;assortativity&lt;/em&gt; coefficient indicates that people in the network tend to socialize with peers that have similar properties (popularity, for instance).&lt;/p&gt;
+
+&lt;p&gt;After removing outliers and normalizing, let’s take a look at pairwise relationships of the features in our dataset. To reduce clutter, you can choose genres using check-boxes below. I recommend comparing genres that have a similar number of samples, e.g. Horror vs Adventure.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; you may need to wait a second after you press a checkbox. Works best with Chrome.&lt;/p&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+  svg {
+    font: 10px sans-serif;
+    padding: 10px;
+}
+
+/*.axis,*/
+.frame {
+    shape-rendering: crispEdges;
+}
+
+.cell text {
+    font-weight: bold;
+    text-transform: capitalize;
+    fill: white;
+    font-size: 15px;
+}
+
+.frame {
+    fill: none;
+    stroke: #aaa;
+}
+
+circle {
+    fill-opacity: .7;
+}
+
+circle.hidden {
+    fill: #ccc !important;
+}
+
+.extent {
+    fill: #000;
+    fill-opacity: .125;
+    stroke: #fff;
+}
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;div&gt;
+        &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;region&quot; class=&quot;target&quot; value=&quot;Comedy&quot; checked=&quot;checked&quot; /&gt; Comedy&lt;/label&gt;
+        &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;region&quot; class=&quot;target&quot; value=&quot;Drama&quot; checked=&quot;checked&quot; /&gt; Drama&lt;/label&gt;
+        &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;region&quot; class=&quot;target&quot; value=&quot;Action&quot; checked=&quot;checked&quot; /&gt; Action&lt;/label&gt;
+            &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;region&quot; class=&quot;target&quot; value=&quot;Crime&quot; checked=&quot;checked&quot; /&gt; Crime&lt;/label&gt;
+            &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;region&quot; class=&quot;target&quot; value=&quot;Biography&quot; checked=&quot;checked&quot; /&gt; Biography&lt;/label&gt;
+            &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;region&quot; class=&quot;target&quot; value=&quot;Adventure&quot; checked=&quot;checked&quot; /&gt; Adventure&lt;/label&gt;
+                       &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;region&quot; class=&quot;target&quot; value=&quot;Horror&quot; checked=&quot;checked&quot; /&gt; Horror&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;chart&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+
+// hardcoded number of features
+  var num_features = 9;
+  var size = getDivWidth('.content') / num_features,
+    padding = 10;
+
+var xScaleScatter = d3.scaleLinear()
+    .range([padding / 2, size - padding / 2]);
+
+var yScaleScatter = d3.scaleLinear()
+    .range([size - padding / 2, padding / 2]);
+
+var xAxisScatter = d3.axisBottom()
+    .scale(xScaleScatter)
+    .ticks(3);
+
+var yAxisScatter = d3.axisLeft()
+    .scale(yScaleScatter)
+    .ticks(3);
+
+var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+d3.csv(&quot;/data/moviegalaxies/mg-features.csv&quot;, function(error, data) {
+    if (error) throw error;
+
+    var filtered_data = data.map(function(d) { return d; });
+
+    var domainByTrait = {},
+        traits = d3.keys(data[0]).filter(function(d) { return d !== &quot;genres&quot;; }),
+        n = traits.length;
+
+    traits.forEach(function(trait) {
+        domainByTrait[trait] = d3.extent(data, function(d) { return d[trait]; });
+    });
+
+    xAxisScatter.tickSize(size * n);
+    yAxisScatter.tickSize(-size * n);
+
+    var svgScatter = d3.select(&quot;#chart&quot;).append(&quot;svg&quot;)
+        .attr(&quot;width&quot;, size * n + padding)
+        .attr(&quot;height&quot;, size * n + padding)
+        .append(&quot;g&quot;)
+        .attr(&quot;transform&quot;, &quot;translate(&quot; + padding + &quot;,&quot; + padding / 2 + &quot;)&quot;);
+
+    svgScatter.selectAll(&quot;.x.axis&quot;)
+        .data(traits)
+        .enter().append(&quot;g&quot;)
+        .attr(&quot;class&quot;, &quot;axisX&quot;)
+        .attr(&quot;transform&quot;, function(d, i) { return &quot;translate(&quot; + (n - i - 1) * size + &quot;,0)&quot;; })
+        .each(function(d) { xScaleScatter.domain(domainByTrait[d]);
+            d3.select(this).call(xAxisScatter); });
+
+    svgScatter.selectAll(&quot;.y.axis&quot;)
+        .data(traits)
+        .enter().append(&quot;g&quot;)
+        .attr(&quot;class&quot;, &quot;axisY&quot;)
+        .attr(&quot;transform&quot;, function(d, i) { return &quot;translate(0,&quot; + i * size + &quot;)&quot;; })
+        .each(function(d) { yScaleScatter.domain(domainByTrait[d]);
+            d3.select(this).call(yAxisScatter); });
+
+    update();
+
+    d3.selectAll('.target').on(&quot;change&quot;, function() {
+        var type = this.value;
+        if (this.checked) {
+            // console.log(type + &quot; checked&quot;);
+            var new_targets = data.filter(function(d) { return d.genres == type; });
+            filtered_data = filtered_data.concat(new_targets);
+            // console.log(filtered_data);
+        } else {
+            // console.log(type + &quot; unchecked&quot;);
+            filtered_data = filtered_data.filter(function(d) { return d.genres != type; });
+            // console.log(filtered_data);
+        }
+        update();
+    });
+
+    function update() {
+
+        svgScatter.selectAll(&quot;.cell&quot;).remove();
+
+        var cell = svgScatter.selectAll(&quot;.cell&quot;).data(cross(traits, traits));
+
+        cell.enter().append(&quot;g&quot;)
+            .attr(&quot;class&quot;, &quot;cell&quot;)
+            .attr(&quot;transform&quot;, function(d) { return &quot;translate(&quot; + (n - d.i - 1) * size + &quot;,&quot; + d.j * size + &quot;)&quot;; })
+            .each(plot);
+
+        svgScatter.selectAll(&quot;.cell&quot;).data(cross(traits, traits)).filter(function(d) { return d.i === d.j; }).append(&quot;text&quot;)
+            .attr(&quot;x&quot;, padding)
+            .attr(&quot;y&quot;, padding)
+            .attr(&quot;dy&quot;, &quot;.71em&quot;)
+            .text(function(d) { return d.x; });
+    }
+
+    function plot(p) {
+        var cell = d3.select(this);
+
+        xScaleScatter.domain(domainByTrait[p.x]);
+        yScaleScatter.domain(domainByTrait[p.y]);
+
+        var dot = cell.selectAll('.dot').data(filtered_data);
+
+        cell.append(&quot;rect&quot;)
+            .attr(&quot;class&quot;, &quot;frame&quot;)
+            .attr(&quot;x&quot;, padding / 2)
+            .attr(&quot;y&quot;, padding / 2)
+            .attr(&quot;width&quot;, size - padding)
+            .attr(&quot;height&quot;, size - padding);
+
+        dot.enter().append(&quot;circle&quot;).attr(&quot;class&quot;, &quot;dot&quot;)
+            .attr(&quot;cx&quot;, function(d) { return xScaleScatter(d[p.x]); })
+            .attr(&quot;cy&quot;, function(d) { return yScaleScatter(d[p.y]); })
+            .attr(&quot;r&quot;, 2)
+            .style(&quot;fill&quot;, function(d) { return color(d.genres); });
+
+        dot.exit().remove()
+    }
+});
+
+function cross(a, b) {
+    var c = [],
+        n = a.length,
+        m = b.length,
+        i, j;
+    for (i = -1; ++i &lt; n;)
+        for (j = -1; ++j &lt; m;) c.push({ x: a[i], i: i, y: b[j], j: j });
+    return c;
+}
+&lt;/script&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;As we can see, our dataset is quite complicated since we have overlapping classes. I had an assumption that the features may have non-linear relationships that would help to separate the classes. To verify that, I applied &lt;a href=&quot;http://scikit-learn.org/stable/modules/manifold.html#manifold&quot; target=&quot;_blank&quot;&gt;manifold learning&lt;/a&gt; to the dataset in order to learn non-linear features, although this had not improved the classification results. Check out this &lt;a href=&quot;http://nbviewer.jupyter.org/gist/mizvol/086bd31f86a7e352dd0f59519392f5ba&quot; target=&quot;_blank&quot;&gt;Jupyter notebook&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;p&gt;Even though the dataset is far from being perfect, we see that feature distributions of some genres are slightly different. Take a look at Horror, Biography, and Adventure, for example. This means we could try to use these features to classify movie genres.&lt;/p&gt;
+
+&lt;h3 id=&quot;classification&quot;&gt;Classification&lt;/h3&gt;
+&lt;p&gt;We want an interpretable model since we need to know which topological properties are common to a certain genre. Hence, &lt;a href=&quot;https://en.wikipedia.org/wiki/Decision_tree_learning&quot; target=&quot;_blank&quot;&gt;Decision tree&lt;/a&gt; algorithm is a good candidate.&lt;/p&gt;
+
+&lt;p&gt;Our dataset is imbalanced. Fighting imbalanced problems is quite difficult especially when we have a very limited number of samples. Also, this is not the purpose of this experiment, so we go for a workaround. To simplify our task and the model itself, let’s split the data into two groups to have more or less the same number of samples in each group: &lt;strong&gt;1) Action, Comedy, Drama&lt;/strong&gt; and &lt;strong&gt;2) Biography, Adventure, Horror&lt;/strong&gt;. Also, let’s put aside Crime movies for now.&lt;/p&gt;
+
+&lt;p&gt;Below, you can see the results of classification using Decision tree model that we trained using our data. We built decision trees for each pair of genres in our groups. We can see that when we try to classify only two genres (&lt;a href=&quot;https://en.wikipedia.org/wiki/Binary_classification&quot; target=&quot;_blank&quot;&gt;binary classification&lt;/a&gt;), the accuracy of the models is quite high, reaching 79% for Horror vs Biography pair, for example. However, when we have more classes in our model, the results are only slightly better than a random guess for Horror vs Adventure vs Biography (56%) and even worse than that for Action vs Comedy vs Drama (45%). This implies that some genres have similar topological properties of character networks.&lt;/p&gt;
+
+&lt;p&gt;To read and interpret the trees below, assume that the upper branches correspond to True conditions and the lower ones are False.&lt;/p&gt;
+
+&lt;style&gt;
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+  fill: white;
+  font-size: 15px;
+}
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+select {
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+
+&lt;/style&gt;
+
+&lt;div&gt;
+&lt;select id=&quot;selectTree&quot;&gt;
+  &lt;option value=&quot;horrorAdventure&quot;&gt;Horror vs Adventure&lt;/option&gt;
+  &lt;option value=&quot;adventureBiography&quot;&gt;Adventure vs Biography&lt;/option&gt;
+  &lt;option value=&quot;horrorBiography&quot;&gt;Horror vs Biography&lt;/option&gt;
+  &lt;option value=&quot;horrorAdventureBiography&quot;&gt;Horror vs Adventure vs Biography&lt;/option&gt;
+  &lt;option value=&quot;comedyDrama&quot;&gt;Comedy vs Drama&lt;/option&gt;
+  &lt;option value=&quot;actionDrama&quot;&gt;Action vs Drama&lt;/option&gt;
+  &lt;option value=&quot;actionComedy&quot;&gt;Action vs Comedy&lt;/option&gt;
+  &lt;option value=&quot;actionComedyDrama&quot;&gt;Action vs Comedy vs Drama&lt;/option&gt;
+&lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;classificationAccuracy&quot; style=&quot;padding-top: 10px;&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;treesChart&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+
+var horrorAdventure = {&quot;name&quot;: &quot;degree st. dev. &gt; 0.26&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;assortativity &gt; 0.69&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;0 of Adventure, 3 of Horror&quot;}, {&quot;name&quot;: &quot;degree st. dev. &gt; 0.29&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;22 of Adventure, 10 of Horror&quot;}, {&quot;name&quot;: &quot;8 of Adventure, 0 of Horror&quot;}]}]}, {&quot;name&quot;: &quot;nodes &gt; 0.18&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;assortativity &gt; 0.63&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;3 of Adventure, 0 of Horror&quot;}, {&quot;name&quot;: &quot;5 of Adventure, 7 of Horror&quot;}]}, {&quot;name&quot;: &quot;assortativity &gt; 0.22&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;1 of Adventure, 20 of Horror&quot;}, {&quot;name&quot;: &quot;2 of Adventure, 0 of Horror&quot;}]}]}]};
+
+var horrorAdventureBiography = {&quot;name&quot;: &quot;degree st. dev. &gt; 0.27&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;mean degree &gt; 0.32&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;edges &gt; 0.37&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;5 of Adventure, 1 of Horror, 0 of Biography&quot;}, {&quot;name&quot;: &quot;2 of Adventure, 14 of Horror, 10 of Biography&quot;}]}, {&quot;name&quot;: &quot;nodes &gt; 0.28&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;26 of Adventure, 4 of Horror, 0 of Biography&quot;}, {&quot;name&quot;: &quot;4 of Adventure, 8 of Horror, 2 of Biography&quot;}]}]}, {&quot;name&quot;: &quot;assortativity &gt; 0.32&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;degree st. dev. &gt; 0.15&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;5 of Adventure, 10 of Horror, 17 of Biography&quot;}, {&quot;name&quot;: &quot;0 of Adventure, 0 of Horror, 11 of Biography&quot;}]}, {&quot;name&quot;: &quot;mean degree &gt; 0.10&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;2 of Adventure, 1 of Horror, 0 of Biography&quot;}, {&quot;name&quot;: &quot;0 of Adventure, 3 of Horror, 0 of Biography&quot;}]}]}]};
+
+var comedyDrama = {&quot;name&quot;: &quot;mean degree &gt; 0.29&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;assortativity &gt; 0.67&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;5 of Comedy, 0 of Drama&quot;}, {&quot;name&quot;: &quot;degree st. dev. &gt; 0.38&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;51 of Comedy, 13 of Drama&quot;}, {&quot;name&quot;: &quot;11 of Comedy, 11 of Drama&quot;}]}]}, {&quot;name&quot;: &quot;mean degree &gt; 0.10&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;modularity &gt; 0.72&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;3 of Comedy, 0 of Drama&quot;}, {&quot;name&quot;: &quot;99 of Comedy, 105 of Drama&quot;}]}, {&quot;name&quot;: &quot;transitivity &gt; 0.17&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;0 of Comedy, 13 of Drama&quot;}, {&quot;name&quot;: &quot;2 of Comedy, 4 of Drama&quot;}]}]}]};
+
+var actionDrama = {&quot;name&quot;: &quot;mean degree &gt; 0.29&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;edges &gt; 0.14&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;edges &gt; 0.15&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;45 of Action, 20 of Drama&quot;}, {&quot;name&quot;: &quot;0 of Action, 2 of Drama&quot;}]}, {&quot;name&quot;: &quot;mean degree &gt; 0.39&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;0 of Action, 1 of Drama&quot;}, {&quot;name&quot;: &quot;13 of Action, 0 of Drama&quot;}]}]}, {&quot;name&quot;: &quot;degree st. dev. &gt; 0.43&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;assortativity &gt; 0.46&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;1 of Action, 6 of Drama&quot;}, {&quot;name&quot;: &quot;0 of Action, 8 of Drama&quot;}]}, {&quot;name&quot;: &quot;mean degree &gt; 0.17&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;93 of Action, 57 of Drama&quot;}, {&quot;name&quot;: &quot;47 of Action, 52 of Drama&quot;}]}]}]};
+
+var actionComedy = {&quot;name&quot;: &quot;degree st. dev. &gt; 0.42&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;edges &gt; 0.21&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;modularity &gt; 0.29&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;14 of Action, 42 of Comedy&quot;}, {&quot;name&quot;: &quot;10 of Action, 7 of Comedy&quot;}]}, {&quot;name&quot;: &quot;0 of Action, 14 of Comedy&quot;}]}, {&quot;name&quot;: &quot;assortativity &gt; 0.44&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;assortativity &gt; 0.59&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;38 of Action, 7 of Comedy&quot;}, {&quot;name&quot;: &quot;74 of Action, 38 of Comedy&quot;}]}, {&quot;name&quot;: &quot;mean degree &gt; 0.10&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;51 of Action, 61 of Comedy&quot;}, {&quot;name&quot;: &quot;12 of Action, 2 of Comedy&quot;}]}]}]};
+
+var adventureBiography = {&quot;name&quot;: &quot;modularity &gt; 0.36&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;nodes &gt; 0.30&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;modularity &gt; 0.44&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;17 of Adventure, 6 of Biography&quot;}, {&quot;name&quot;: &quot;11 of Adventure, 0 of Biography&quot;}]}, {&quot;name&quot;: &quot;5 of Adventure, 11 of Biography&quot;}]}, {&quot;name&quot;: &quot;nodes &gt; 0.25&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;8 of Adventure, 6 of Biography&quot;}, {&quot;name&quot;: &quot;degree st. dev. &gt; 0.28&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;0 of Adventure, 11 of Biography&quot;}, {&quot;name&quot;: &quot;3 of Adventure, 7 of Biography&quot;}]}]}]};
+
+var horrorBiography = {&quot;name&quot;: &quot;modularity &gt; 0.34&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;degree st. dev. &gt; 0.31&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;mean degree &gt; 0.32&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;6 of Horror, 4 of Biography&quot;}, {&quot;name&quot;: &quot;23 of Horror, 0 of Biography&quot;}]}, {&quot;name&quot;: &quot;6 of Horror, 13 of Biography&quot;}]}, {&quot;name&quot;: &quot;assortativity &gt; 0.45&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;0 of Horror, 13 of Biography&quot;}, {&quot;name&quot;: &quot;9 of Horror, 10 of Biography&quot;}]}]};
+
+var actionComedyDrama = {&quot;name&quot;: &quot;degree st. dev. &gt; 0.42&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;mean degree &gt; 0.28&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;assortativity &gt; 0.38&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;20 of Action, 37 of Comedy, 13 of Drama&quot;}, {&quot;name&quot;: &quot;3 of Action, 10 of Comedy, 0 of Drama&quot;}]}, {&quot;name&quot;: &quot;assortativity &gt; 0.39&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;1 of Action, 7 of Comedy, 11 of Drama&quot;}, {&quot;name&quot;: &quot;0 of Action, 9 of Comedy, 3 of Drama&quot;}]}]}, {&quot;name&quot;: &quot;assortativity &gt; 0.59&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;clustering &gt; 0.58&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;23 of Action, 7 of Comedy, 2 of Drama&quot;}, {&quot;name&quot;: &quot;15 of Action, 0 of Comedy, 4 of Drama&quot;}]}, {&quot;name&quot;: &quot;assortativity &gt; 0.43&quot;, &quot;children&quot;: [{&quot;name&quot;: &quot;83 of Action, 44 of Comedy, 47 of Drama&quot;}, {&quot;name&quot;: &quot;54 of Action, 57 of Comedy, 66 of Drama&quot;}]}]}]};
+
+var treeData = horrorAdventure;
+
+// Set the dimensions and margins of the diagram
+var margin = {top: 20, right: 90, bottom: 30, left: 90},
+    width = getDivWidth('.content') - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var svg = d3.select(&quot;#treesChart&quot;).append(&quot;svg&quot;)
+    .attr(&quot;width&quot;, width + margin.right + margin.left)
+    .attr(&quot;height&quot;, height + margin.top + margin.bottom)
+  .append(&quot;g&quot;)
+    .attr(&quot;transform&quot;, &quot;translate(&quot;
+          + margin.left + &quot;,&quot; + margin.top + &quot;)&quot;);
+
+
+var i = 0,
+    duration = 750,
+    root;
+
+var accuracy = &quot;67%&quot;;
+d3.select(&quot;#classificationAccuracy&quot;).text(&quot;Classification accuracy: &quot; + accuracy);
+// declares a tree layout and assigns the size
+var treemap = d3.tree().size([height, width]);
+
+// Assigns parent, children, height, depth
+root = d3.hierarchy(treeData, function(d) { return d.children; });
+root.x0 = height / 2;
+root.y0 = 0;
+
+// Collapse after the second level
+// root.children.forEach(collapse);
+
+update(root);
+
+var dropdown = d3.select(&quot;#selectTree&quot;);
+
+dropdown.on(&quot;change&quot;, function() {
+   var selectedTree = d3.select(&quot;#selectTree&quot;).property(&quot;value&quot;);
+
+   // console.log(selectedTree);
+
+   d3.selectAll(&quot;.node&quot;).remove();
+   d3.selectAll(&quot;.link&quot;).remove();
+   // d3.selectAll(&quot;#classificationAccuracy&quot;).remove();
+
+// Assigns parent, children, height, depth
+switch(selectedTree) {
+    case &quot;horrorAdventure&quot;:
+        root = d3.hierarchy(horrorAdventure, function(d) { return d.children; });
+        accuracy = &quot;67%&quot;;
+        break;
+    case &quot;horrorAdventureBiography&quot;:
+        root = d3.hierarchy(horrorAdventureBiography, function(d) { return d.children; });
+        accuracy = &quot;56%&quot;;
+        break;
+    case &quot;comedyDrama&quot;:
+        root = d3.hierarchy(comedyDrama, function(d) { return d.children; });
+        accuracy = &quot;61%&quot;;
+        break;
+    case &quot;actionDrama&quot;:
+        root = d3.hierarchy(actionDrama, function(d) { return d.children; });
+        accuracy = &quot;60%&quot;;
+        break;
+    case &quot;actionComedy&quot;:
+        root = d3.hierarchy(actionComedy, function(d) { return d.children; });
+        accuracy = &quot;63%&quot;;
+        break;
+    case &quot;adventureBiography&quot;:
+        root = d3.hierarchy(adventureBiography, function(d) { return d.children; });
+        accuracy = &quot;70%&quot;;
+        break;
+    case &quot;horrorBiography&quot;:
+        root = d3.hierarchy(horrorBiography, function(d) { return d.children; });
+        accuracy = &quot;79%&quot;;
+        break;
+    case &quot;actionComedyDrama&quot;:
+        root = d3.hierarchy(actionComedyDrama, function(d) { return d.children; });
+        accuracy = &quot;45%&quot;;
+        break;
+    default:
+        root = d3.hierarchy(horrorAdventure, function(d) { return d.children; });
+        accuracy = &quot;67%&quot;;
+}
+
+root.x0 = height / 2;
+root.y0 = 0;
+
+// Collapse after the second level
+// root.children.forEach(collapse);
+d3.select(&quot;#classificationAccuracy&quot;).text(&quot;Classification accuracy: &quot; + accuracy);
+update(root);
+});
+
+// Collapse the node and all it's children
+function collapse(d) {
+  if(d.children) {
+    d._children = d.children
+    d._children.forEach(collapse)
+    d.children = null
+  }
+}
+
+function update(source) {
+
+  // Assigns the x and y position for the nodes
+  var treeData = treemap(root);
+
+  // Compute the new tree layout.
+  var nodes = treeData.descendants(),
+      links = treeData.descendants().slice(1);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d){ d.y = d.depth * width / 5});
+
+  // ****************** Nodes section ***************************
+
+  // Update the nodes...
+  var node = svg.selectAll('g.node')
+      .data(nodes, function(d) {return d.id || (d.id = ++i); });
+
+  // Enter any new modes at the parent's previous position.
+  var nodeEnter = node.enter().append('g')
+      .attr('class', 'node')
+      .attr(&quot;transform&quot;, function(d) {
+        return &quot;translate(&quot; + source.y0 + &quot;,&quot; + source.x0 + &quot;)&quot;;
+    })
+    .on('click', click);
+
+  // Add Circle for the nodes
+  nodeEnter.append('circle')
+      .attr('class', 'node')
+      .attr('r', 1e-6)
+      .style(&quot;fill&quot;, function(d) {
+          return d._children ? &quot;lightsteelblue&quot; : &quot;#fff&quot;;
+      });
+
+  // Add labels for the nodes
+  nodeEnter.append('text')
+      .attr(&quot;dy&quot;, &quot;.35em&quot;)
+      .attr(&quot;x&quot;, function(d) {
+          return d.children || d._children ? -13 : 13;
+      })
+      .attr(&quot;y&quot;, function(d) {
+          return d.children || d._children ? -20 : 0;
+      })
+      .attr(&quot;text-anchor&quot;, function(d) {
+          return d.children || d._children ? &quot;middle&quot; : &quot;start&quot;;
+      })
+      .text(function(d) { return d.data.name; });
+
+  // UPDATE
+  var nodeUpdate = nodeEnter.merge(node);
+
+  // Transition to the proper position for the node
+  nodeUpdate.transition()
+    .duration(duration)
+    .attr(&quot;transform&quot;, function(d) { 
+        return &quot;translate(&quot; + d.y + &quot;,&quot; + d.x + &quot;)&quot;;
+     });
+
+  // Update the node attributes and style
+  nodeUpdate.select('circle.node')
+    .attr('r', 10)
+    .style(&quot;fill&quot;, function(d) {
+        return d.children || d._children ? &quot;lightsteelblue&quot; : &quot;purple&quot;;
+    })
+    .attr('cursor', 'pointer');
+
+
+  // Remove any exiting nodes
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr(&quot;transform&quot;, function(d) {
+          return &quot;translate(&quot; + source.y + &quot;,&quot; + source.x + &quot;)&quot;;
+      })
+      .remove();
+
+  // On exit reduce the node circles size to 0
+  nodeExit.select('circle')
+    .attr('r', 1e-6);
+
+  // On exit reduce the opacity of text labels
+  nodeExit.select('text')
+    .style('fill-opacity', 1e-6);
+
+  // ****************** links section ***************************
+
+  // Update the links...
+  var link = svg.selectAll('path.link')
+      .data(links, function(d) { return d.id; });
+
+  // Enter any new links at the parent's previous position.
+  var linkEnter = link.enter().insert('path', &quot;g&quot;)
+      .attr(&quot;class&quot;, &quot;link&quot;)
+      .attr('d', function(d){
+        var o = {x: source.x0, y: source.y0}
+        return diagonal(o, o)
+      });
+
+  // UPDATE
+  var linkUpdate = linkEnter.merge(link);
+
+  // Transition back to the parent element position
+  linkUpdate.transition()
+      .duration(duration)
+      .attr('d', function(d){ return diagonal(d, d.parent) });
+
+  // Remove any exiting links
+  var linkExit = link.exit().transition()
+      .duration(duration)
+      .attr('d', function(d) {
+        var o = {x: source.x, y: source.y}
+        return diagonal(o, o)
+      })
+      .remove();
+
+  // Store the old positions for transition.
+  nodes.forEach(function(d){
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+
+  // Creates a curved (diagonal) path from parent to the child nodes
+  function diagonal(s, d) {
+
+    path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`
+
+    return path
+  }
+
+  // Toggle children on click.
+  function click(d) {
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+    update(d);
+  }
+}
+
+&lt;/script&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s take look at the actual output of the model. Below, you can see classification results for each genre in every group. We can see that the majority of the movies are classified correctly in all cases. Although, the number of misclassified movies grows with the number of classes in our model.&lt;/p&gt;
+
+&lt;div&gt;
+&lt;select id=&quot;selectBar&quot;&gt;
+&lt;option value=&quot;horrorAdventureBar&quot;&gt;Horror vs Adventure&lt;/option&gt;
+  &lt;option value=&quot;horrorBiographyBar&quot;&gt;Horror vs Biography&lt;/option&gt;
+  &lt;option value=&quot;adventureBiographyBar&quot;&gt;Adventure vs Biography&lt;/option&gt;
+    &lt;option value=&quot;horrorAdventureBiographyBar&quot;&gt;Horror vs Adventure vs Biography&lt;/option&gt;
+    &lt;option value=&quot;comedyDramaBar&quot;&gt;Comedy vs Drama&lt;/option&gt;
+    &lt;option value=&quot;actionDramaBar&quot;&gt;Action vs Drama&lt;/option&gt;
+    &lt;option value=&quot;actionComedyBar&quot;&gt;Action vs Comedy&lt;/option&gt;
+  &lt;option value=&quot;actionComedyDramaBar&quot;&gt;Action vs Comedy vs Drama&lt;/option&gt;
+&lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;svg width=&quot;250&quot; height=&quot;20&quot;&gt;
+    &lt;rect width=&quot;250&quot; height=&quot;20&quot; style=&quot;fill: green; float: left&quot; /&gt;
+    &lt;text x=&quot;10&quot; y=&quot;15&quot; font-family=&quot;'Open Sans', sans-serif&quot; font-size=&quot;15px&quot; fill=&quot;white&quot;&gt;Correctly classified movies&lt;/text&gt;
+  &lt;/svg&gt;
+
+  &lt;svg width=&quot;250&quot; height=&quot;20&quot;&gt;
+    &lt;rect width=&quot;250&quot; height=&quot;20&quot; style=&quot;fill: red&quot; /&gt;
+    &lt;text x=&quot;10&quot; y=&quot;15&quot; font-family=&quot;'Open Sans', sans-serif&quot; font-size=&quot;15px&quot; fill=&quot;white&quot;&gt;Misclassified movies&lt;/text&gt;
+  &lt;/svg&gt;
+
+&lt;/div&gt;
+
+&lt;div id=&quot;charts&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+
+var horrorAdventureBar = [[{&quot;genre&quot;:&quot;Horror&quot;, &quot;count&quot;:26}, {&quot;genre&quot;:&quot;Adventure&quot;, &quot;count&quot;:3}],
+[{&quot;genre&quot;:&quot;Adventure&quot;, &quot;count&quot;:38}, {&quot;genre&quot;:&quot;Horror&quot;, &quot;count&quot;:14}]];
+
+var horrorAdventureBiographyBar = [[{&quot;genre&quot;:&quot;Horror&quot;, &quot;count&quot;:20}, {&quot;genre&quot;:&quot;Adventure&quot;, &quot;count&quot;:3}, {&quot;genre&quot;:&quot;Biography&quot;, &quot;count&quot;:2}],
+[{&quot;genre&quot;:&quot;Adventure&quot;, &quot;count&quot;:29}, {&quot;genre&quot;:&quot;Horror&quot;, &quot;count&quot;:16}, {&quot;genre&quot;:&quot;Biography&quot;, &quot;count&quot;:13}],
+[{&quot;genre&quot;:&quot;Biography&quot;, &quot;count&quot;:29}, {&quot;genre&quot;:&quot;Adventure&quot;, &quot;count&quot;:9}, {&quot;genre&quot;:&quot;Horror&quot;, &quot;count&quot;:4}]];
+
+var horrorBiographyBar = [[{&quot;genre&quot;:&quot;Horror&quot;, &quot;count&quot;:30}, {&quot;genre&quot;:&quot;Biography&quot;, &quot;count&quot;:9}],
+[{&quot;genre&quot;:&quot;Biography&quot;, &quot;count&quot;:35}, {&quot;genre&quot;:&quot;Horror&quot;, &quot;count&quot;:10}]];
+
+var adventureBiographyBar = [[{&quot;genre&quot;:&quot;Adventure&quot;, &quot;count&quot;:35}, {&quot;genre&quot;:&quot;Biography&quot;, &quot;count&quot;:14}],
+[{&quot;genre&quot;:&quot;Biography&quot;, &quot;count&quot;:30}, {&quot;genre&quot;:&quot;Adventure&quot;, &quot;count&quot;:6}]];
+
+var comedyDramaBar = [[{&quot;genre&quot;:&quot;Comedy&quot;, &quot;count&quot;:91}, {&quot;genre&quot;:&quot;Drama&quot;, &quot;count&quot;:33}],
+[{&quot;genre&quot;:&quot;Drama&quot;, &quot;count&quot;:113}, {&quot;genre&quot;:&quot;Comedy&quot;, &quot;count&quot;:80}]];
+
+var actionDramaBar = [[{&quot;genre&quot;:&quot;Action&quot;, &quot;count&quot;:184}, {&quot;genre&quot;:&quot;Drama&quot;, &quot;count&quot;:118}],
+[{&quot;genre&quot;:&quot;Drama&quot;, &quot;count&quot;:28}, {&quot;genre&quot;:&quot;Action&quot;, &quot;count&quot;:15}]];
+
+var actionComedyBar = [[{&quot;genre&quot;:&quot;Action&quot;, &quot;count&quot;:155}, {&quot;genre&quot;:&quot;Comedy&quot;, &quot;count&quot;:75}],
+[{&quot;genre&quot;:&quot;Comedy&quot;, &quot;count&quot;:96}, {&quot;genre&quot;:&quot;Action&quot;, &quot;count&quot;:44}]];
+
+var actionComedyDramaBar = [[{&quot;genre&quot;:&quot;Action&quot;, &quot;count&quot;:160}, {&quot;genre&quot;:&quot;Comedy&quot;, &quot;count&quot;:106}, {&quot;genre&quot;:&quot;Drama&quot;, &quot;count&quot;:103}],
+[{&quot;genre&quot;:&quot;Comedy&quot;, &quot;count&quot;:50}, {&quot;genre&quot;:&quot;Action&quot;, &quot;count&quot;:23}, {&quot;genre&quot;:&quot;Drama&quot;, &quot;count&quot;:13}],
+[{&quot;genre&quot;:&quot;Drama&quot;, &quot;count&quot;:30}, {&quot;genre&quot;:&quot;Action&quot;, &quot;count&quot;:16}, {&quot;genre&quot;:&quot;Comedy&quot;, &quot;count&quot;:15}]];
+
+var data = horrorAdventureBar;
+
+// set the dimensions and margins of the graph
+var marginBar = {top: 20, right: 20, bottom: 30, left: 40},
+    widthBar = getDivWidth('.content') / 3 - marginBar.left * 2 - marginBar.right * 2,
+    heightBar = 500 - marginBar.top - marginBar.bottom;
+
+// set the ranges
+var xBar = d3.scaleBand()
+          .range([0, widthBar])
+          .padding(0.1);
+var yBar = d3.scaleLinear()
+          .range([heightBar, 0]);
+
+var dropdownBar = d3.select(&quot;#selectBar&quot;);
+
+dropdownBar.on(&quot;change&quot;, function() {
+   var selectedBar = d3.select(&quot;#selectBar&quot;).property(&quot;value&quot;);
+
+
+   d3.selectAll(&quot;svg#barChartSvg&quot;).remove();
+
+// Assigns parent, children, height, depth
+switch(selectedBar) {
+    case &quot;horrorAdventureBiographyBar&quot;:
+        data = horrorAdventureBiographyBar;
+        break;
+    case &quot;horrorAdventureBar&quot;:
+        data = horrorAdventureBar;
+        break;
+    case &quot;comedyDramaBar&quot;:
+        data = comedyDramaBar;
+        break;
+    case &quot;actionDramaBar&quot;:
+        data = actionDramaBar;
+        break;
+    case &quot;actionComedyBar&quot;:
+        data = actionComedyBar;
+        break;
+    case &quot;adventureBiographyBar&quot;:
+        data = adventureBiographyBar;
+        break;
+    case &quot;horrorBiographyBar&quot;:
+        data = horrorBiographyBar;
+        break;
+    case &quot;actionComedyDramaBar&quot;:
+        data = actionComedyDramaBar;
+        break;
+}
+
+draw(data);
+
+});
+
+draw(data);
+
+function draw(data){
+  d3.select(&quot;#charts&quot;).selectAll(&quot;div&quot;).remove();
+  for (i = 0; i &lt; data.length; i++){
+  var chartDiv = d3.select(&quot;#charts&quot;).append(&quot;div&quot;).attr(&quot;id&quot;, &quot;#chart&quot; + (i+1));
+
+if (i != data.length - 1) {
+  chartDiv.attr(&quot;style&quot;, &quot;float: left&quot;);
+}
+
+var bar = data[i];
+var svgClass = chartDiv.append(&quot;svg&quot;).attr(&quot;id&quot;, &quot;barChartSvg&quot;)
+    .attr(&quot;width&quot;, widthBar + marginBar.left + marginBar.right)
+    .attr(&quot;height&quot;, heightBar + marginBar.top + marginBar.bottom)
+  .append(&quot;g&quot;)
+    .attr(&quot;transform&quot;, 
+          &quot;translate(&quot; + marginBar.left + &quot;,&quot; + marginBar.top + &quot;)&quot;);
+  // format the data
+  var counts = []
+  bar.forEach(function(d) {
+    d.count = +d.count;
+    counts.push(d.count);
+  });
+
+  // Scale the range of the data in the domains
+  xBar.domain(bar.map(function(d) { return d.genre; }));
+  yBar.domain([0, d3.max(bar, function(d) { return d.count; })]);
+
+  // append the rectangles for the bar chart
+  svgClass.selectAll(&quot;.bar&quot;)
+      .data(bar)
+    .enter().append(&quot;rect&quot;)
+      // .attr(&quot;class&quot;, &quot;bar&quot;)
+      .attr(&quot;fill&quot;, function(d) {
+    if (d.count == Math.max(...counts)) {
+      return &quot;green&quot;;
+    } else return &quot;red&quot;;
+  })
+      .attr(&quot;x&quot;, function(d) { return xBar(d.genre); })
+      .attr(&quot;width&quot;, xBar.bandwidth())
+      .attr(&quot;y&quot;, function(d) { return yBar(d.count); })
+      .attr(&quot;height&quot;, function(d) { return heightBar - yBar(d.count); });
+
+  // add the x Axis
+  svgClass.append(&quot;g&quot;)
+      .attr(&quot;transform&quot;, &quot;translate(0,&quot; + heightBar + &quot;)&quot;)
+      .attr(&quot;class&quot;, &quot;axisX&quot;)
+      .call(d3.axisBottom(xBar));
+
+  // add the y Axis
+  svgClass.append(&quot;g&quot;)
+      .attr(&quot;class&quot;, &quot;axisY&quot;)
+      .call(d3.axisLeft(yBar));
+
+      svgClass.append(&quot;text&quot;)
+        .attr(&quot;x&quot;, (widthBar / 2))             
+        .attr(&quot;y&quot;, 0 - (marginBar.top / 4))
+        .attr(&quot;text-anchor&quot;, &quot;middle&quot;)  
+        .style(&quot;font-size&quot;, &quot;16px&quot;) 
+        .style(&quot;font&quot;, &quot;Helvetica&quot;)
+        .style(&quot;fill&quot;, &quot;white&quot;)
+        // .style(&quot;text-decoration&quot;, &quot;underline&quot;)  
+        .text(bar[0].genre);
+    }  
+  }
+&lt;/script&gt;
+
+&lt;h3 id=&quot;interpretation-of-the-results&quot;&gt;Interpretation of the results&lt;/h3&gt;
+&lt;p&gt;By looking at the decision trees we built, we can say which features characterize each genre. For example, if we compare Horror vs Biography, we can see that Biography movies tend to have lower modularity and higher assortativity measures. In other words, characters in Biography movies tend to socialize with those who have a similar level of centrality and importance in a movie, but, at the same time, they do not form strong communities. Reminds of real life, doesn’t it? On the other hand, characters in Horror movies socialize with everybody but tend to interact in groups (to me, this sounds like networking at a conference). Take a look at the decision trees above and try to interpret the results explaining particular features of each genre.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusions-and-possible-extensions&quot;&gt;Conclusions and possible extensions&lt;/h3&gt;
+&lt;p&gt;I always feel like static networks lack an important component – temporal information. In this project, we ignored the time-series of character co-occurrences. It would be interesting to look at the dynamics of character interactions in movies. If we had time-series of character interactions, we would be able to learn weights between nodes in graphs. That would give us insights into the strength and importance of connections in social networks in the movies. One way to learn the weights would be to use the approach we developed for &lt;a href=&quot;https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/?ref=hvper.com&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt; graph mining.&lt;/p&gt;
+
+&lt;p&gt;Besides, this time, we chose to avoid the problem of imbalanced classes. It would be interesting to apply weighted versions of Random trees or XGBoost algorithms to compare classification results for all genres in the dataset.&lt;/p&gt;
+
+&lt;p&gt;Due to the low number of data samples in the Moviegalaxies dataset, it was more of a fun project rather than a serious research. I am looking forward to the next data release by Moviegalaxies team. Nonetheless, the results are quite interesting and we have actually managed to find a few insights about social networks in movies. In general, the idea of using topological properties of graphs for classification problems still excites me. If we had more data related to this problem, it would be interesting to build another model at a larger scale.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 09 Jul 2018 13:06:13 +0200</pubDate>
+        <link>http://blog.miz.space/research/2018/07/09/moviegalaxies-data-analysis-genre-classification-using-social-network-topologies-of-movies/</link>
+        <guid isPermaLink="true">http://blog.miz.space/research/2018/07/09/moviegalaxies-data-analysis-genre-classification-using-social-network-topologies-of-movies/</guid>
+        
+        <category>Data analysis</category>
+        
+        <category>Classification</category>
+        
+        <category>Graph</category>
+        
+        <category>Topology</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Research</category>
+        
+        <category>Network analysis</category>
+        
+        
+        <category>Research</category>
+        
+      </item>
+    
+      <item>
+        <title>How are Web Networks similar to the brain?</title>
+        <description>&lt;p&gt;Web networks resemble the brain if we think of web pages as neurons. Indeed, interconnections have complicated structure, while nodes produce time-series of activations (visits of web pages and spike-trains of neurons). A detailed and very exciting comparison available on &lt;a href=&quot;http://www.explainthatstuff.com/internet-and-brain.html&quot; target=&quot;_blank&quot;&gt;ExplainThatStuff.com&lt;/a&gt;. Here, we focus on memory properties of the Web and show in what way it is similar to human memory.&lt;/p&gt;
+
+&lt;h3 id=&quot;wikipedia-web-network-as-a-global-memory&quot;&gt;Wikipedia Web network as a global memory&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/data/images/wikiBrain/graph.png&quot; alt=&quot;Graph&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;right&quot; /&gt;
+In my &lt;a href=&quot;https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/&quot; target=&quot;_blank&quot;&gt;previous post&lt;/a&gt;, I showed how we can identify collective interests of people over time using &lt;a href=&quot;https://www.wikipedia.org/&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt; Web network and its &lt;a href=&quot;https://dumps.wikimedia.org/other/pagecounts-raw/&quot; target=&quot;_blank&quot;&gt;page view statistics&lt;/a&gt;. We called these collective interests &lt;a href=&quot;https://en.wikipedia.org/wiki/Collective_memory&quot; target=&quot;_blank&quot;&gt;Collective memories&lt;/a&gt;. We demonstrated that the structures, which we extracted from the Wikipedia Web network, comprise pages related to certain events. Clearly, if we look carefully at the structures of the learned graphs we will see that they have associative nature. This insight led us to another interesting question. Are these structures similar to artificial models of human memory?&lt;/p&gt;
+
+&lt;p&gt;To answer this question, we performed a few experiments. We took one of the most popular models of the associative memory, &lt;a href=&quot;https://en.wikipedia.org/wiki/Hopfield_network&quot; target=&quot;_blank&quot;&gt;Hopfield network&lt;/a&gt;, and modeled the recall process. Hopfield network is an artificial recurrent neural network model that serves as an associative memory. This model was also used for understanding of human memory, so we decided to use it to test our assumption.&lt;/p&gt;
+
+&lt;h3 id=&quot;method&quot;&gt;Method&lt;/h3&gt;
+&lt;p&gt;Instead of learning the weights of the neural network in a conventional way, we took the weighted adjacency matrices of the graph structures that correspond to the detected collective memories. As you remember from the &lt;a href=&quot;https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/&quot; target=&quot;_blank&quot;&gt;previous post&lt;/a&gt;, we learned them using a modified Hebbian learning rule. Then, we applied these weight matrices to the time-series of the Wikipedia page views (for more details, read preprint on &lt;a href=&quot;https://arxiv.org/abs/1710.00398&quot; target=&quot;_blank&quot;&gt;arXiv&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;experiments&quot;&gt;Experiments&lt;/h3&gt;
+&lt;p&gt;In the first experiment, we used the collective memory graphs that we learned for each month. In the images below, you can see the recall results. The model re-enforced activity levels for every month in our dataset. &lt;span style=&quot;color:#ff0000&quot;&gt;Red&lt;/span&gt; areas show the periods when the memory is inactive, while &lt;span style=&quot;color:#00ff00&quot;&gt;green&lt;/span&gt; areas correspond to the moments of memory activation.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;October&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;November&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;December&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;January&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;February&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;March&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;April&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--OCT--&gt; &lt;a href=&quot;https://blog.miz.space/october-recall.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/oct_recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--NOV--&gt; &lt;a href=&quot;https://blog.miz.space/november-recall.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/nov_recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--DEC--&gt; &lt;a href=&quot;https://blog.miz.space/december-recall.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/dec_recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--JAN--&gt; &lt;a href=&quot;https://blog.miz.space/january-recall.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/jan_recall.svg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--FEB--&gt; &lt;a href=&quot;https://blog.miz.space/february-recall.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/feb_recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--MAR--&gt; &lt;a href=&quot;https://blog.miz.space/march-recall.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/mar_recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--APR--&gt; &lt;a href=&quot;https://blog.miz.space/april-recall.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/apr_recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;After that, we tested if our model is able to reconstruct missing collective memories. Here, to give an example, we show the second wave of &lt;a href=&quot;https://en.wikipedia.org/wiki/Ferguson_unrest&quot; target=&quot;_blank&quot;&gt;Ferguson unrest&lt;/a&gt; collective memory. The unrest occurred on the 24 of November 2014. We remove 20% of activations in the cluster of the collective memory and apply Hopfield recall model. The image below illustrates a recall from a partial pattern.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.miz.space/ferguson-recall.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/ferguson-recall.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, in this case, the model behavior is quite interesting. The model does reconstruct missing memories, but also it acts as a filter. It keeps only those parts of the signal that are relevant to the event. Indeed, the behavior reminds of the way our memory works. We memorize better if we find an association with something. We focus our memory on a certain period of time when an event occurred and forget scattered unassociated memories.&lt;/p&gt;
+
+&lt;p&gt;Check out the latest version of our &lt;a href=&quot;https://arxiv.org/abs/1710.00398&quot; target=&quot;_blank&quot;&gt;paper on ArXiV&lt;/a&gt; to get the technical details of the experiments. The code is available on &lt;a href=&quot;https://github.com/mizvol/WikiBrain&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;. If you want to try to reproduce the experiments but are new to Spark Scala projects, take a look at &lt;a href=&quot;https://blog.miz.space/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/&quot; target=&quot;_blank&quot;&gt;this tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides, we realized that we can use the aforementioned memory properties to recover missing or corrupted records reflecting the dynamics of social and web networks. Take a look at &lt;a href=&quot;https://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/&quot; target=&quot;_blank&quot;&gt;another blog post&lt;/a&gt; for more details.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 14 Feb 2018 10:59:13 +0100</pubDate>
+        <link>http://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/</link>
+        <guid isPermaLink="true">http://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/</guid>
+        
+        <category>Wikipedia</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Research</category>
+        
+        <category>Network Analysis</category>
+        
+        <category>Collective Memory</category>
+        
+        <category>Hopfield Network</category>
+        
+        <category>Neural Network</category>
+        
+        <category>Memory</category>
+        
+        
+        <category>Research</category>
+        
+      </item>
+    
+      <item>
+        <title>Wikipedia graph mining: dynamic structure of collective memory</title>
+        <description>&lt;p&gt;This is the accompanying blogpost for our upcoming research paper (read preprint on &lt;a href=&quot;https://arxiv.org/abs/1710.00398&quot; target=&quot;_blank&quot;&gt;arXiv&lt;/a&gt;); joint work with &lt;a href=&quot;http://www.kirellbenzi.com/&quot; target=&quot;_blank&quot;&gt;Kirell Benzi&lt;/a&gt;, &lt;a href=&quot;http://www.eviacybernetics.com/en/index.html&quot; target=&quot;_blank&quot;&gt;Benjamin Ricaud&lt;/a&gt;, and &lt;a href=&quot;https://people.epfl.ch/pierre.vandergheynst&quot; target=&quot;_blank&quot;&gt;Pierre Vandergheynst&lt;/a&gt; (&lt;a href=&quot;https://www.epfl.ch/&quot; target=&quot;_blank&quot;&gt;EPFL&lt;/a&gt;, &lt;a href=&quot;https://lts2.epfl.ch/&quot; target=&quot;_blank&quot;&gt;LTS2&lt;/a&gt;). Here, we focus on the results, omitting the details of the algorithm and the implementation.&lt;/p&gt;
+
+&lt;div style=&quot;position:relative;height:0;padding-bottom:56.25%&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/piNgplme6ag?ecver=2&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; style=&quot;position:absolute;width:100%;height:100%;left:0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;intro&quot;&gt;Intro&lt;/h3&gt;
+
+&lt;p&gt;Wikipedia is a great source for data analysis due to its outstanding scale and the graph structure. Tens of millions of visitors surf it daily, leaving their footprint on the Web. The combination of the Wikipedia graph structure and visitor activity on the pages gives us the dynamic graph – the graph with time-series signals on the nodes. The dynamic nature of the graph makes the large-scale analysis problem complicated.&lt;/p&gt;
+
+&lt;p&gt;In the original paper we analyze the &lt;a href=&quot;https://www.wikipedia.org/&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt; graph. The aim is to detect &lt;a href=&quot;https://en.wikipedia.org/wiki/Collective_memory&quot; target=&quot;_blank&quot;&gt;collective memories&lt;/a&gt; using the activity of the Wikipedia visitors. We use graph-based approach to build our model. The computational model is inspired by the &lt;a href=&quot;https://en.wikipedia.org/wiki/Synaptic_plasticity&quot; target=&quot;_blank&quot;&gt;synaptic plasticity&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Hebbian_theory&quot; target=&quot;_blank&quot;&gt;Hebbian theory&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Not surprisingly, we could not fit all the results into the paper. Apart from that, PDF is a poor format for communicating the research findings. The aim of this post is to show the results in an interactive way. While reading the paper and this post, we encourage you to open the graphs, appearing everywhere in this post, and play with them: zoom, click, move, search, and select. This is by far the funniest way to plunge into the main results of our work.&lt;/p&gt;
+
+&lt;h3 id=&quot;graphs-are-interactive&quot;&gt;Graphs are interactive&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Click on any graph in this post to open it in a new window.&lt;/li&gt;
+  &lt;li&gt;Zoom, click on the nodes, search pages by name, highlight clusters by color.
+    &lt;ul&gt;
+      &lt;li&gt;When you click on a node – you select all the neighbors.&lt;/li&gt;
+      &lt;li&gt;When you select a cluster – you select all the nodes in this cluster.&lt;/li&gt;
+      &lt;li&gt;The list of selected nodes appears on the right.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Works best in the latest version of &lt;a href=&quot;https://www.google.com/chrome/browser/desktop/index.html&quot; target=&quot;_blank&quot;&gt;Chrome&lt;/a&gt;. DO NOT try to open the graphs on a smartphone. The graphs are too large and it might take forever to render.&lt;/p&gt;
+
+&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
+&lt;p&gt;The original datasets are publicly available on the &lt;a href=&quot;https://dumps.wikimedia.org/other/&quot; target=&quot;_blank&quot;&gt;Wikimedia&lt;/a&gt; website. We took the SQL dumps of the English Wikipedia articles to create the graph. The visitor activity is the number of visits per page per hour. We consider the period from 02:00, 23 September 2014 to 23:00, 30 April 2015. Pre-processing details are described in our paper in the Dataset section.&lt;/p&gt;
+
+&lt;h3 id=&quot;dynamics-of-the-wikipedia-network&quot;&gt;Dynamics of the Wikipedia network&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.miz.space/wikiBrain/all-time/index.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/all-time-graph.png&quot; alt=&quot;7 months dynamics Wikipedia graph&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In the paper we make an assumption that the dynamics of the graph can affect its structure. We apply the update rule, based on the signal on the nodes, to observe this effect. Here we show that the Wikipedia graph can self-organize into the sets of meaningful communities of the nodes, if we take into account the visitor activity dynamics of the graph. Click on the graph on the right and explore the result by yourself.&lt;/p&gt;
+
+&lt;p&gt;This graph is the result of 7-month dynamics of visitor activity on Wikipedia. Here you can find main events that had taken place over the considered period. The stable or scheduled events, like tournaments, awards ceremonies, contests, and most popular holidays form big clusters. The unstable or unexpected events, like incidents and accidents are grouped in small clusters. Even though, this graph provides good summary of the dynamic patterns, we can see only the final result. What is more important, is to get insights on the dynamics of the graph over time. How the clusters emerge, evolve, and disappear? To answer this question, we pick one particular event and look at its dynamics in details.&lt;/p&gt;
+
+&lt;h3 id=&quot;dynamics-of-an-event-nfl-championship&quot;&gt;Dynamics of an event: NFL championship&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.miz.space/sb-activity.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/sb-activity.svg&quot; alt=&quot;&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to understand the dynamics of evolution of the graph, we pick one of the most popular events, highlighted in English Wikipedia – &lt;a href=&quot;https://en.wikipedia.org/wiki/National_Football_League&quot; target=&quot;_blank&quot;&gt;the National Football League (NFL) championship&lt;/a&gt;. We consider the &lt;a href=&quot;https://en.wikipedia.org/wiki/2014_NFL_season&quot; target=&quot;_blank&quot;&gt;season 2014-2015&lt;/a&gt;. The plot is on the right (click to enlarge). For the plot interpretability we extracted 30 NFL teams out of 485 pages in the original cluster. The &lt;span style=&quot;color:#00ff00&quot;&gt;timeline&lt;/span&gt; shows the overall cluster activity over the period of 7 months. The dynamics timeline of the graph and the &lt;span style=&quot;color:red&quot;&gt;NFL cluster&lt;/span&gt; evolution is illustrated on the top row. It reflects the interest of the NFL fans in the championship. The cluster is small and sparse at the beginning of the championship and becomes denser and bigger, approaching the final game date. The behavior of the Wikipedia visitors during the day of the final game &lt;a href=&quot;https://en.wikipedia.org/wiki/Super_Bowl_XLIX&quot; target=&quot;_blank&quot;&gt;Super Bowl&lt;/a&gt; is outstanding. The activity of the NFL fans is much higher, comparing to the activity of other Wikipedia users. It makes an analogy to the real life, when during the finals the fans become the most active people on the streets.&lt;/p&gt;
+
+&lt;p&gt;The NFL championship is just an example of a detected event and its evolution. You can dig into the graphs of monthly activity and check out other detected event-clusters. The total number of the detected events is 172. Click on the graphs below to open an interactive version and explore by yourself.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;October&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;November&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;December&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;January&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;February&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;March&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;April&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--OCT--&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/october/index.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/october-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--NOV--&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/november/index.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/november-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--DEC--&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/december/index.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/december-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--JAN--&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/january/index.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/january-graph.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--FEB--&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/february/index.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/february-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--MAR--&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/march/index.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/march-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!--APR--&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/april/index.html&quot; target=&quot;_blank&quot;&gt; &lt;img src=&quot;/data/images/wikiBrain/april-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The NFL cluster is a good example of a stable event, represented as one of the biggest clusters in the resulting graph. What about the unscheduled events, like attacks and other accidents?&lt;/p&gt;
+
+&lt;h3 id=&quot;collective-memory&quot;&gt;Collective memory&lt;/h3&gt;
+
+&lt;p&gt;Traumatic events, like terrorist attacks, flight crashes, wars, and conflicts, often remind us of the past. These memories are often common for most people in a social group. That is the reason why they are called &lt;a href=&quot;https://en.wikipedia.org/wiki/Collective_memory&quot; target=&quot;_blank&quot;&gt;Collective memories&lt;/a&gt;. Our approach allows to detect these memories and serves as a general model for collective memory emergence. We provide the examples of 3 events, detected among the others.&lt;/p&gt;
+
+&lt;p&gt;The table below contains examples of collective memories. To show the details of the detected collective memories, we pick 3 particular events among the others detected: &lt;a href=&quot;https://en.wikipedia.org/wiki/Ferguson_unrest&quot; target=&quot;_blank&quot;&gt;Ferguson unrest&lt;/a&gt; (second wave - November 24, 2014), &lt;a href=&quot;https://en.wikipedia.org/wiki/Charlie_Hebdo_shooting&quot; target=&quot;_blank&quot;&gt;Charlie Hebdo attack&lt;/a&gt; (January 7, 2015), &lt;a href=&quot;https://en.wikipedia.org/wiki/Germanwings_Flight_9525&quot; target=&quot;_blank&quot;&gt;Germanwings flight 9525 airplane crash&lt;/a&gt; (March 24, 2015). Top row contains the extracted clusters of collective memories for each of the discussed events. Bottom row shows the detailed activity of each page in the clusters.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Ferguson unrest&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Charlie Hebdo attack&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Germanwings 9525 crash&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Ferguson --&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/ferguson/index.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/ferguson-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Charlie Hebdo --&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/charlie-hebdo/index.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/charlie-graph.png&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Germanwings --&gt; &lt;a href=&quot;https://blog.miz.space/wikiBrain/germanwings-week/index.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/germanwings-graph.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Ferguson --&gt; &lt;a href=&quot;https://blog.miz.space/ferguson-activity.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/ferguson-activity.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Charlie Hebdo --&gt; &lt;a href=&quot;https://blog.miz.space/charlie-activity.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/charlie-activity.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;!-- Germanwings --&gt; &lt;a href=&quot;https://blog.miz.space/germanwings-activity.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/data/images/wikiBrain/germanwings-activity.svg&quot; alt=&quot;&quot; /&gt; &lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We see that the core events trigger relevant memories. Ferguson unrest reminds us of other riots and other shootings of innocent people of color. Charlie Hebdo shooting has links to the other terrorist attacks, bloodshed, and law enforcement agencies. Germanwings crash is surrounded by the dense group of the other airplane crashes, indicating that the flight accidents are thoroughly structured on Wikipedia.&lt;/p&gt;
+
+&lt;p&gt;Although, we can see slightly different behavior in the clusters. For example, the activity during the Ferguson unrest has two distinctive spikes that indicate beginning and end dates of the riot. In case of the Germanwings, the activity of the cluster has a spike in December. The reason is another airplane crash that occurred in December and for this reason got attached to the main cluster.&lt;/p&gt;
+
+&lt;p&gt;The short-term events and their collective memories can be found on the monthly dynamic graphs, presented in the previous section in the timeline table. Check the graphs out and search for the events of your interest.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h3&gt;
+&lt;p&gt;Wikipedia can tell us more than is written on its pages. It is a great source of data for the collective human behavior research. Nonetheless, the dynamic nature of the graph-structured data leads to new challenges for &lt;a href=&quot;https://en.wikipedia.org/wiki/Data_science&quot; target=&quot;_blank&quot;&gt;data science&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Machine_learning&quot; target=&quot;_blank&quot;&gt;machine learning&lt;/a&gt;. In the paper we proposed a new method for collective memory modeling and understanding. We applied the method to the Wikipedia datasets. We detected collective memories using the combination of the Wikipedia Web network graph and the its visitor activity history.&lt;/p&gt;
+
+&lt;p&gt;We assume that the learned graphs have associative memory properties. To verify this assumption, we model the recall process using &lt;a href=&quot;https://en.wikipedia.org/wiki/Hopfield_network&quot; target=&quot;_blank&quot;&gt;Hopfield networks&lt;/a&gt;. The results of these experiments are in my &lt;a href=&quot;https://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/&quot; target=&quot;_blank&quot;&gt;blog post&lt;/a&gt; describing these memory properties.&lt;/p&gt;
+
+&lt;p&gt;Besides, we noticed that the events we detected were triggered by the anomalous activity of Wikipedia users. This inspired an idea of an anomaly detection algorithm that I described in &lt;a href=&quot;https://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/&quot; target=&quot;_blank&quot;&gt;another blog post&lt;/a&gt;. Take a look at the interactive demos of the results on the &lt;a href=&quot;https://wiki-insights.epfl.ch/&quot; target=&quot;_blank&quot;&gt;website&lt;/a&gt; of our &lt;strong&gt;Wikipedia Insights&lt;/strong&gt; project.&lt;/p&gt;
+
+&lt;h3 id=&quot;tools-and-code&quot;&gt;Tools and code&lt;/h3&gt;
+&lt;p&gt;We make all the experiments using &lt;a href=&quot;https://spark.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache Spark&lt;/a&gt; &lt;a href=&quot;https://spark.apache.org/graphx/&quot; target=&quot;_blank&quot;&gt;GraphX&lt;/a&gt;. The code is written in &lt;a href=&quot;https://www.scala-lang.org/&quot; target=&quot;_blank&quot;&gt;Scala&lt;/a&gt; and available on &lt;a href=&quot;https://github.com/mizvol/WikiBrain&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;. If you feel like playing with the code but new to Scala and Spark, take a look at &lt;a href=&quot;https://blog.miz.space/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/&quot; target=&quot;_blank&quot;&gt;this tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;acknowledgments&quot;&gt;Acknowledgments&lt;/h3&gt;
+&lt;p&gt;I would like to thank &lt;a href=&quot;http://deff.ch/&quot; target=&quot;_blank&quot;&gt;Michaël Defferrard&lt;/a&gt; and &lt;a href=&quot;https://andreasloukas.wordpress.com/&quot; target=&quot;_blank&quot;&gt;Andreas Loukas&lt;/a&gt; for fruitful discussions and useful suggestions.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 14 Aug 2017 10:06:13 +0200</pubDate>
+        <link>http://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/</link>
+        <guid isPermaLink="true">http://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/</guid>
+        
+        <category>Apache Spark</category>
+        
+        <category>Wikipedia</category>
+        
+        <category>Scala</category>
+        
+        <category>GraphX</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Research</category>
+        
+        <category>Dynamic graph</category>
+        
+        <category>Network analysis</category>
+        
+        
+        <category>Research</category>
+        
+      </item>
+    
+  </channel>
+</rss>

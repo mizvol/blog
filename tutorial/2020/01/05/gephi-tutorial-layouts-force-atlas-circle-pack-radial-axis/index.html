@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gephi tutorial. Layouts</title>
+
+<meta name="description" content="Want to learn how to create beautiful graph and network visualizations using Gephi? Follow this step by step tutorial. No coding skills required.">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-lightbulb-o fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Gephi tutorial. Layouts</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">January 5, 2020</span>
+           under Tutorial
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          6 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p><img src="/data/images/gephi-tutorials/layouts-teaser-graph-gephi.png" alt="Graph. Gephi. Example" height="50%" width="50%" align="right" /></p>
+
+<p>Colleagues and students often ask me whether it is easy to create a nice graph visualization. My answer is always positive but such conversations often end up where they started for multiple reasons. First, it is hard to understand what people want to do with their visualization. Second, it is hard to summarize everything in one 3-5 minutes step by step explanation. Finally, even if we have managed to resolve first two issues, I still feel like my verbal explanations sound obscure so they feel discouraged and don’t even try. Although, after I show them how to do it, things get much easier. As we all know, it is “better to see something once than to hear about it a hundred times”.</p>
+
+<p>I have decided to create a series of tutorials on Gephi graph visualization. Each tutorial has a short ~3min long walk-through videos. These videos demonstrate that creating interpretable, interactive and nice looking graph data visualizations can be fast and easy. Moreover, it doesn’t require any coding skills, so it can be used by people who just need to get quick insights from their graph-structured data.</p>
+
+<p>I also gave these tutorials after my lecture on data visualization for <a href="https://edu.epfl.ch/coursebook/en/a-network-tour-of-data-science-EE-558" target="_blank">A Network Tour of Data Science course</a> at EPFL.</p>
+
+<p><strong>This tutorial is about some of the most popular layouts in Gephi.</strong> In the <a href="https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/" target="_blank">next one</a>, I’m going to show how to make your graph visualization interactive and publish it online in a few clicks.</p>
+
+<h3 id="layouts-graph-attributes-data-exploration">Layouts. Graph attributes. Data exploration</h3>
+
+<p>In this tutorial, we will try the most popular tools for graph exploration in Gephi. We will learn how to get visual insights by spatializing and highlighting important attributes of graphs. As an example, we will use a subnetwork of Wikipedia pages that had anomalous visitor activity over the period 15-31 October 2018. You can find the corresponding <code class="highlighter-rouge">.gexf</code> in this <a href="https://github.com/mizvol/gephi-tutorials/tree/master/Layouts" target="_blank">repository</a>.</p>
+
+<p><strong>Before starting this tutorial</strong>, install the following plugins (unless they are already installed in your version of Gephi):</p>
+<ul>
+  <li>Multigravity Force Atlas 2</li>
+  <li>Circle Pack layout</li>
+  <li>Leiden algorithm</li>
+  <li>Bridging centrality</li>
+  <li>Clustering coefficient</li>
+</ul>
+
+<p>As promised, here is a short step-by-step walk-through screencast to give you an idea of what we are going to do in this tutorial. Also, if you don’t feel like reading the tutorial, just follow the steps in this video. <strong>The video reproduces all the steps listed below.</strong></p>
+
+<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/aRZIeTroUog?ecver=2" width="640" height="360" frameborder="0" gesture="media" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen=""></iframe></div>
+
+<h3 id="1-spatialize-your-graph-with-force-directed-layouts">1. Spatialize your graph with force-directed layouts.</h3>
+
+<p>To start with, let’s spatialize our graph. To do that, we can use force-directed layouts. They don’t require any attributes and quite easy to setup. We will try four layouts: <strong>Multigravity Force Atlas 2</strong>, <strong>Yuifan Hu</strong>, <strong>Fruchterman-Reingold</strong>, <strong>Open Ord</strong>. You can find all these layouts in the “Layout” pane. Here are some tips related to the parameters of each algorithm:</p>
+
+<ul>
+  <li><strong>Multigravity Force Atlas 2</strong>
+    <ul>
+      <li><em>Scaling</em>. Control scale of the expansion of the graph.</li>
+      <li><em>Dissuade hubs</em>. Apply stronger repulsive forces to hubs.</li>
+      <li><em>Prevent overlap</em>. Prevent nodes from overlapping.</li>
+    </ul>
+  </li>
+  <li><strong>Yifan Hu</strong>
+    <ul>
+      <li><em>Step ratio</em>. High ratio improves quality (at the expense of speed)</li>
+      <li><em>Optimal distance</em>. Controls distance between nodes</li>
+      <li><em>Theta</em>. Smaller Theta gives leads to more accurate results (slower)</li>
+    </ul>
+  </li>
+  <li><strong>Fruchterman-Reingold (expensive)</strong>
+    <ul>
+      <li><em>Gravity</em>. Attraction strength.</li>
+      <li><em>Speed</em>. A tradeoff between speed and accuracy. Higher values lead to faster but less accurate results</li>
+    </ul>
+  </li>
+  <li><strong>Open Ord</strong>
+    <ul>
+      <li><em>Edge Cut (0 to 1)</em>. Higher values lead to more clustered results.</li>
+      <li><em>Num Iterations</em>. Higher values lead to larger expansion.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>In the following examples, colors correspond to <em>modularity</em>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Multigravity Force Atlas 2</th>
+      <th style="text-align: center">Yifan Hu</th>
+      <th style="text-align: center">Fruchterman-Reingold</th>
+      <th style="text-align: center">Open Ord</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/force-atlas.gif" alt="Multigravity Force Atlas 2" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/yifan-hu.gif" alt="Yifan-hu" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/f-r.gif" alt="Fruchterman-Reingold" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/mizvol/gephi-tutorials/master/Layouts/images/openord.gif" alt="Open Ord" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-highlight-attributes">2. Highlight attributes</h3>
+
+<p>With Gephi, we can highlight attributes of the nodes using different colors and sizes, reflecting the scale of the attributes. You can do it using “Appearance” pane. Before using the attributes, we should compute them using “Statistics” pane. Some examples of attributes that can be used for sizing and coloring are listed below.</p>
+
+<h4 id="node-and-label-size">Node and label size</h4>
+
+<p>We can use the size to highlight local attributes of nodes.</p>
+
+<ol>
+  <li><a href="https://en.wikipedia.org/wiki/Degree_(graph_theory)">Degree</a>. Connectivity of a node</li>
+  <li>Centrality
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Betweenness_centrality">Betweenness</a>. Number of random walks passing through the node</li>
+      <li><a href="http://www.cbmc.it/fastcent/doc/Bridging.htm">Bridging</a>. A measure of bi-partisanship of a node. Nodes that connect multiple communities (serve as bridges) have high bridging centrality</li>
+    </ul>
+  </li>
+  <li><a href="https://en.wikipedia.org/wiki/PageRank">Page rank</a>. Importance of a node</li>
+  <li><a href="https://en.wikipedia.org/wiki/Clustering_coefficient">Local clustering coefficient</a>. Determines how close are neighbors of a node to a complete graph</li>
+</ol>
+
+<h4 id="color">Color</h4>
+
+<p>Coloring different communities of the graph is a allows to explore the structure of your graph and make it more visually appealing. To do that, we need to run a community detection algorithm. Once you compute communities, you can color the graph using “Appearance” pane.</p>
+
+<ol>
+  <li>Community detection algorithms
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Louvain_modularity">Louvain modularity</a> (<em>Modularity</em> in Gephi)</li>
+      <li><a href="https://www.nature.com/articles/s41598-019-41695-z">Leiden algorithm</a></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="3-use-attributed-layouts">3. Use attributed layouts</h3>
+
+<p>Gephi also provides a set of attributed layouts. You can use them to spatialize nodes according to their attributes. Here are a few examples of attributed layouts:</p>
+
+<ol>
+  <li><strong>Circular</strong>. We can use it to show the distribution of nodes and their links and order nodes by an attribute and draw them on a circle.</li>
+  <li><strong>Radial Axis</strong>. This layout allows studying homophily by showing distributions of nodes inside groups. Axes radiate from the central circle. The layout groups nodes by an attribute and draw them in axes.</li>
+  <li><strong>Network splitter 3D</strong>. Use this if you want to unfold the graph in layers based on attributes. However, there is a trick. To use it, you need to copy a column with an attribute of interest and add <em>[Z]</em> in the end of the name of the column. <em>Z-maximum level</em> parameter should be equal to the number of layers you want to get, e.g. number of communities if you use communities as a splitting attribute.</li>
+  <li><strong>Circle pack</strong>. This layout allows to group nodes by attribute(s) and plotting them in circles.</li>
+</ol>
+
+<p>In the examples below, we use <em>modularity</em> (community ID) as an attribute.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Circular</th>
+      <th style="text-align: center">Radial Axis</th>
+      <th style="text-align: center">Network splitter 3D</th>
+      <th style="text-align: center">Circle pack</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/data/images/gephi-tutorials/circular-t.png" alt="Circular" /></td>
+      <td style="text-align: center"><img src="/data/images/gephi-tutorials/radial-axis-t.png" alt="Radial Axis" /></td>
+      <td style="text-align: center"><img src="/data/images/gephi-tutorials/net-splitter-t.png" alt="Network splitter 3D" /></td>
+      <td style="text-align: center"><img src="/data/images/gephi-tutorials/circle-pack-t.png" alt="Circle pack" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="4-enhance-readability-with-spatial-transformation-layouts">4. Enhance readability with spatial transformation layouts</h3>
+
+<p>Normally, after all the transformations we have performed, it’s hard to read labels. To enhance readability and interpretability of your graph, use the following layouts.</p>
+
+<ol>
+  <li><strong>Expansion/Contraction</strong>. This layout simply changes the scale of the graph.</li>
+  <li><strong>Noverlap</strong>. Use it to prevent overlapping nodes.</li>
+  <li><strong>Label adjust</strong>. This layout spatializes labels so that they are easier to read. Before running it, you should display labels.</li>
+</ol>
+
+<h3 id="5-additional-resources">5. Additional resources</h3>
+
+<p>If you want to learn how to publish Gephi graphs online, take a look at <a href="https://blog.miz.space/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/" target="_blank">this</a> tutorial. For more information, check out official Gephi tutorials:</p>
+
+<ol>
+  <li><a href="https://gephi.org/users/tutorial-layouts/" target="_blank">Gephi tutorial</a> on layouts.</li>
+  <li>Other <a href="https://gephi.org/users/" target="_blank">Gephi tutorials</a>.</li>
+</ol>
+
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Graph, Gephi, Layouts, Visualization, Network, Tutorial
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

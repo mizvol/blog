@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volodymyr Miz</title>
+
+<meta name="description" content="Volodymyr Miz. Technical Blog. Machine Learning Research. Large Scale Data Mining. Data visulalization."> 
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="container-fluid index">
+  <div class="row index all-posts">
+
+    <h1 class="header author-header"></h1>
+    <h2 class="header" itemprop="headline">All posts</h2>
+    <h2 class="header categories" itemprop="headline"><small>grouped by
+
+      <div class="dropdown btn-group">
+        <button class="btn btn-categories dropdown-toggle btn-xs" type="button" data-toggle="dropdown">Years
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="/posts-by-categories/">Categories</a></li>
+        </ul>
+      </div>
+
+    </small></h2>
+
+      
+      
+      
+
+      
+      <div class="col-md-12 content-panel articles">
+        <h2 id="2020-ref">2020</h2>
+        <ul>
+      
+
+          <li>
+            <a href="/research/2020/08/05/what-is-trending-on-wikipedia-across-languages-during-covid-coronavirus-pandemic/">Wikipedia, COVID-19, and readers' interests across languages</a>
+            <small class="hidden-xs">August 5, 2020</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/research/2020/06/07/what-is-trending-on-wikipedia-across-languages/">What's trending on Wikipedia?</a>
+            <small class="hidden-xs">June 7, 2020</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/">Gephi tutorial. Publishing interactive graphs online</a>
+            <small class="hidden-xs">January 5, 2020</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/tutorial/2020/01/05/gephi-tutorial-layouts-force-atlas-circle-pack-radial-axis/">Gephi tutorial. Layouts</a>
+            <small class="hidden-xs">January 5, 2020</small>
+          </li>
+      
+        
+          </ul>
+        </div>
+        <div class="col-md-12 content-panel articles">
+          <h2 id="2019-ref">2019</h2>
+          <ul>
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/">Wikipedia Graph Dataset</a>
+            <small class="hidden-xs">June 5, 2019</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/tutorial/2019/04/04/how-to-install-spark-using-apache-bigtop-ubuntu/">How to install Apache Spark on Ubuntu using Apache Bigtop</a>
+            <small class="hidden-xs">April 4, 2019</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/">Anomaly detection in the dynamics of Web and social networks</a>
+            <small class="hidden-xs">February 13, 2019</small>
+          </li>
+      
+        
+          </ul>
+        </div>
+        <div class="col-md-12 content-panel articles">
+          <h2 id="2018-ref">2018</h2>
+          <ul>
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/research/2018/07/09/moviegalaxies-data-analysis-genre-classification-using-social-network-topologies-of-movies/">Movie genres classification using character interaction networks</a>
+            <small class="hidden-xs">July 9, 2018</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/">How are Web Networks similar to the brain?</a>
+            <small class="hidden-xs">February 14, 2018</small>
+          </li>
+      
+        
+          </ul>
+        </div>
+        <div class="col-md-12 content-panel articles">
+          <h2 id="2017-ref">2017</h2>
+          <ul>
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/">Wikipedia graph mining: dynamic structure of collective memory</a>
+            <small class="hidden-xs">August 14, 2017</small>
+          </li>
+      
+        
+          </ul>
+        </div>
+        <div class="col-md-12 content-panel articles">
+          <h2 id="2016-ref">2016</h2>
+          <ul>
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/">How to integrate Apache Spark, Intellij Idea and Scala</a>
+            <small class="hidden-xs">August 30, 2016</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/visualisation/2016/06/08/instagram-data-visualisation/">Instagram data visualisation</a>
+            <small class="hidden-xs">June 8, 2016</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/clustering/2016/05/13/clustering-instagram-users-using-hashtags/">How to cluster users on Instagram using hashtags and Apache Spark</a>
+            <small class="hidden-xs">May 13, 2016</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/graphs/2016/05/10/instagram-social-graph-analysis-spark-graph-frames/">Instagram social graph analysis using Apache Spark and Graph Frames</a>
+            <small class="hidden-xs">May 10, 2016</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/data/2016/05/08/instagram-api-data-collection/">Instagram API. Data collection using location and time as parameters</a>
+            <small class="hidden-xs">May 8, 2016</small>
+          </li>
+      
+        
+    
+
+    
+      
+      
+
+      
+
+          <li>
+            <a href="/intro/2016/04/04/first-blog-post/">Hello, World!</a>
+            <small class="hidden-xs">April 4, 2016</small>
+          </li>
+      
+        </ul>
+      </div>
+      
+
+    
+    </div>
+
+  </div>
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+
+  function setFontSize() {
+
+    var title, dateOfTitle, fontSizeOfTitle, listOfA, listOfSmall, listOfArticlesDiv, divWidth;
+
+    listOfArticlesDiv = document.getElementsByClassName("articles");
+
+    for (i = 0; i < listOfArticlesDiv.length; i++) {
+
+      listOfA = document.getElementsByClassName("articles")[i].getElementsByTagName("a");
+      listOfSmall = document.getElementsByClassName("articles")[i].getElementsByTagName("small");
+
+      divWidth = document.getElementsByClassName("articles")[i].offsetWidth;
+
+      for (k = 0; k < listOfSmall.length; k++) {
+
+        title = $(listOfA[k]);
+        dateOfTitle = $(listOfSmall[k]);
+
+        fontSizeOfTitle = startingFontSize;
+        title.css("font-size", fontSizeOfTitle);
+
+        while (title.width() + dateOfTitle.width() >= divWidth)
+          title.css("font-size", fontSizeOfTitle -= 0.5);
+
+      }
+    }
+  }
+
+  function getStartFontSize() {
+    try {
+      startingFontSize = parseInt($(document.getElementsByClassName("articles")[0].getElementsByTagName("a")[0]).css("font-size"));
+      setFontSize();
+      window.addEventListener('resize', setFontSize, true);
+    } catch (e) {}
+  }
+
+  $(document).ready(getStartFontSize);
+
+</script>
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

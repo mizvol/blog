@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /data/images/
+Disallow: /data/instagram/
+Disallow: /data/moviegalaxies/
+Disallow: /dataviz/
+Sitemap: https://blog.miz.space/sitemap.xml

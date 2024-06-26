@@ -1,0 +1,79 @@
+<style>
+
+circle {
+  fill: rgb(31, 119, 180);
+  fill-opacity: 0.5;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+.leaf circle {
+  fill: #ff7f0e;
+  fill-opacity: 1;
+}
+
+text {
+  font: 14px sans-serif;
+}
+
+</style>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+
+<script>
+var json = {"name": "data", "children": [{"name": "topics", "children": [{"term":"switzerland","probability":0.019400026827603712,"topicId":0},{"term":"zurich","probability":0.019327834016881977,"topicId":0},{"term":"neverstopexploring","probability":0.017813674373467682,"topicId":0},{"term":"walking","probability":0.01754009967170674,"topicId":0},{"term":"nature","probability":0.01640619937613378,"topicId":0},{"term":"visitswitzerland","probability":0.035565850189856744,"topicId":1},{"term":"swissalps","probability":0.033587180697864163,"topicId":1},{"term":"myswitzerland","probability":0.03249057644033584,"topicId":1},{"term":"switzerlandwonderland","probability":0.02956874301385381,"topicId":1},{"term":"schweiz","probability":0.025286035970147478,"topicId":1},{"term":"instagood","probability":0.03356595676038735,"topicId":2},{"term":"like4like","probability":0.027832104685160577,"topicId":2},{"term":"followme","probability":0.02775328467519804,"topicId":2},{"term":"instalike","probability":0.027425863851828016,"topicId":2},{"term":"instadaily","probability":0.026121949502077163,"topicId":2},{"term":"architecture","probability":0.03101365484909526,"topicId":3},{"term":"lucerne","probability":0.026114905034729193,"topicId":3},{"term":"switzerland","probability":0.02386747051069944,"topicId":3},{"term":"luzern","probability":0.022853852502429838,"topicId":3},{"term":"zurich","probability":0.018524818601438085,"topicId":3},{"term":"fitness","probability":0.0391560225252119,"topicId":4},{"term":"workout","probability":0.025025528776750544,"topicId":4},{"term":"fit","probability":0.022706817992695996,"topicId":4},{"term":"gym","probability":0.022190278077174008,"topicId":4},{"term":"motivation","probability":0.021328745398237394,"topicId":4},{"term":"travel","probability":0.054392370765516486,"topicId":5},{"term":"instatravel","probability":0.038098995970359185,"topicId":5},{"term":"travelgram","probability":0.03315134637933813,"topicId":5},{"term":"traveling","probability":0.02745211674598374,"topicId":5},{"term":"trip","probability":0.02642474314563316,"topicId":5},{"term":"nature","probability":0.03541569760770173,"topicId":6},{"term":"sky","probability":0.03306355806121938,"topicId":6},{"term":"clouds","probability":0.028083261626204045,"topicId":6},{"term":"landscape","probability":0.027879855189343574,"topicId":6},{"term":"sunset","probability":0.02217623618374487,"topicId":6},{"term":"sunday","probability":0.02390597599944317,"topicId":7},{"term":"sunny","probability":0.02317392042783372,"topicId":7},{"term":"saturday","probability":0.023149930444629922,"topicId":7},{"term":"happyeaster","probability":0.02264943134913591,"topicId":7},{"term":"zurich","probability":0.02193860503865184,"topicId":7},{"term":"zurich","probability":0.03545330834972715,"topicId":8},{"term":"easter","probability":0.028574803683584275,"topicId":8},{"term":"switzerland","probability":0.0270475711936484,"topicId":8},{"term":"and","probability":0.018280692413285934,"topicId":8},{"term":"love","probability":0.017062578329090958,"topicId":8},{"term":"vscocam","probability":0.04289543261424325,"topicId":9},{"term":"vsco","probability":0.04184861370161478,"topicId":9},{"term":"switzerland","probability":0.028058750061759334,"topicId":9},{"term":"nofilter","probability":0.020879263806776186,"topicId":9},{"term":"geneva","probability":0.020128138451340923,"topicId":9},{"term":"basel","probability":0.052358725328439736,"topicId":10},{"term":"baselworld2016","probability":0.05022882997693061,"topicId":10},{"term":"baselworld","probability":0.04522332443714813,"topicId":10},{"term":"luxury","probability":0.03864082843211962,"topicId":10},{"term":"watch","probability":0.030302213057879522,"topicId":10},{"term":"switzerland","probability":0.039940669962320985,"topicId":11},{"term":"verbier","probability":0.03594013041370396,"topicId":11},{"term":"skiing","probability":0.03389202104709591,"topicId":11},{"term":"ski","probability":0.033751588231932916,"topicId":11},{"term":"alps","probability":0.03328334958462634,"topicId":11},{"term":"music","probability":0.03918878798781885,"topicId":12},{"term":"party","probability":0.03787595031561831,"topicId":12},{"term":"zurich","probability":0.03241229259409165,"topicId":12},{"term":"switzerland","probability":0.026523609257383285,"topicId":12},{"term":"friends","probability":0.02525396431281389,"topicId":12},{"term":"food","probability":0.04084811927165484,"topicId":13},{"term":"foodporn","probability":0.03756202030570058,"topicId":13},{"term":"instafood","probability":0.02938387247228618,"topicId":13},{"term":"chocolate","probability":0.027246695042672096,"topicId":13},{"term":"yummy","probability":0.025327981027256165,"topicId":13},{"term":"lake","probability":0.03642539698467651,"topicId":14},{"term":"switzerland","probability":0.025767715681619514,"topicId":14},{"term":"lugano","probability":0.023327643671134143,"topicId":14},{"term":"geneva","probability":0.020104341834965928,"topicId":14},{"term":"montreux","probability":0.019665470852485403,"topicId":14}]}]};
+
+var r = 1500,
+    format = d3.format(",d"),
+    fill = d3.scale.category20c();
+
+var bubble = d3.layout.pack()
+    .sort(null)
+    .size([r, r])
+    .padding(1.5);
+
+var vis = d3.select("body").append("svg")
+    .attr("width", r)
+    .attr("height", r)
+    .attr("class", "bubble");
+
+  
+var node = vis.selectAll("g.node")
+    .data(bubble.nodes(classes(json))
+    .filter(function(d) { return !d.children; }))
+    .enter().append("g")
+    .attr("class", "node")
+    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    color = d3.scale.category20();
+  
+  node.append("title")
+      .text(function(d) { return d.className + ": " + format(d.value); });
+
+  node.append("circle")
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) {return color(d.topicName);});
+
+var text = node.append("text")
+    .attr("text-anchor", "middle")
+    .attr("dy", ".3em")
+    .text(function(d) { return d.className.substring(0, d.r / 3)});
+  
+  text.append("tspan")
+      .attr("dy", "1.2em")
+      .attr("x", 0)
+      .text(function(d) {return Math.ceil(d.value * 10000) /10000; });
+
+// Returns a flattened hierarchy containing all leaf nodes under the root.
+function classes(root) {
+  var classes = [];
+
+  function recurse(term, node) {
+    if (node.children) node.children.forEach(function(child) { recurse(node.term, child); });
+    else classes.push({topicName: node.topicId, className: node.term, value: node.probability});
+  }
+
+  recurse(null, root);
+  return {children: classes};
+}
+
+</script>

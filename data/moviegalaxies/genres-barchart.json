@@ -1,0 +1,9 @@
+[
+    {"genre": "Action ", "value": 200},
+    {"genre": "Comedy ", "value": 171},
+    {"genre": "Drama ", "value": 151},
+    {"genre": "Crime", "value": 82},
+    {"genre": "Biography ", "value": 45},
+    {"genre": "Adventure ", "value": 41},
+    {"genre": "Horror", "value": 41}
+]

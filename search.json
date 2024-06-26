@@ -1,0 +1,131 @@
+[
+  
+  {
+    "title"    : "Wikipedia, COVID-19, and readers&#39; interests across languages",
+    "category" : "",
+    "tags"     : "Collective behavior, Data analysis, Graph, Time-series, Dynamic Networks, Machine Learning, Research, Network analysis, Wikipedia",
+    "url"      : "/research/2020/08/05/what-is-trending-on-wikipedia-across-languages-during-covid-coronavirus-pandemic/",
+    "date"     : "2020-08-05 13:13:13 +0200"
+    } ,
+    
+  {
+    "title"    : "What&#39;s trending on Wikipedia?",
+    "category" : "",
+    "tags"     : "Collective behavior, Data analysis, Graph, Time-series, Dynamic Networks, Machine Learning, Research, Network analysis, Wikipedia",
+    "url"      : "/research/2020/06/07/what-is-trending-on-wikipedia-across-languages/",
+    "date"     : "2020-06-07 13:13:13 +0200"
+    } ,
+    
+  {
+    "title"    : "Gephi tutorial. Publishing interactive graphs online",
+    "category" : "",
+    "tags"     : "Graph, Gephi, SigmaJS, Interactive, Visualization, Network, Tutorial",
+    "url"      : "/tutorial/2020/01/05/gephi-tutorial-sigma-js-plugin-publishing-interactive-graph-online/",
+    "date"     : "2020-01-05 13:13:13 +0100"
+    } ,
+    
+  {
+    "title"    : "Gephi tutorial. Layouts",
+    "category" : "",
+    "tags"     : "Graph, Gephi, Layouts, Visualization, Network, Tutorial",
+    "url"      : "/tutorial/2020/01/05/gephi-tutorial-layouts-force-atlas-circle-pack-radial-axis/",
+    "date"     : "2020-01-05 12:13:13 +0100"
+    } ,
+    
+  {
+    "title"    : "Wikipedia Graph Dataset",
+    "category" : "",
+    "tags"     : "Wikipedia Graph, Data analysis, Temporal Graph, Time-series, Dynamic Networks, Machine Learning, Research, Network analysis",
+    "url"      : "/research/2019/06/05/wikipedia-graph-dataset-neo4j-mongodb-time-series-networks/",
+    "date"     : "2019-06-05 13:13:13 +0200"
+    } ,
+    
+  {
+    "title"    : "How to install Apache Spark on Ubuntu using Apache Bigtop",
+    "category" : "",
+    "tags"     : "Apache Spark, Apache Bigtop, Development, Machine Learning, Tutorial, Install",
+    "url"      : "/tutorial/2019/04/04/how-to-install-spark-using-apache-bigtop-ubuntu/",
+    "date"     : "2019-04-04 17:07:13 +0200"
+    } ,
+    
+  {
+    "title"    : "Anomaly detection in the dynamics of Web and social networks",
+    "category" : "",
+    "tags"     : "Anomaly Detection, Data analysis, Temporal Graph, Time-series, Dynamic Networks, Machine Learning, Research, Network analysis",
+    "url"      : "/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/",
+    "date"     : "2019-02-13 12:13:13 +0100"
+    } ,
+    
+  {
+    "title"    : "Movie genres classification using character interaction networks",
+    "category" : "",
+    "tags"     : "Data analysis, Classification, Graph, Topology, Machine Learning, Research, Network analysis",
+    "url"      : "/research/2018/07/09/moviegalaxies-data-analysis-genre-classification-using-social-network-topologies-of-movies/",
+    "date"     : "2018-07-09 13:06:13 +0200"
+    } ,
+    
+  {
+    "title"    : "How are Web Networks similar to the brain?",
+    "category" : "",
+    "tags"     : "Wikipedia, Machine Learning, Research, Network Analysis, Collective Memory, Hopfield Network, Neural Network, Memory",
+    "url"      : "/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/",
+    "date"     : "2018-02-14 10:59:13 +0100"
+    } ,
+    
+  {
+    "title"    : "Wikipedia graph mining: dynamic structure of collective memory",
+    "category" : "",
+    "tags"     : "Apache Spark, Wikipedia, Scala, GraphX, Machine Learning, Research, Dynamic graph, Network analysis",
+    "url"      : "/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/",
+    "date"     : "2017-08-14 10:06:13 +0200"
+    } ,
+    
+  {
+    "title"    : "How to integrate Apache Spark, Intellij Idea and Scala",
+    "category" : "",
+    "tags"     : "Apache Spark, Intellij Idea, Scala, Development, Machine Learning, Tutorial, Install",
+    "url"      : "/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/",
+    "date"     : "2016-08-30 17:07:13 +0200"
+    } ,
+    
+  {
+    "title"    : "Instagram data visualisation",
+    "category" : "",
+    "tags"     : "Visualisation, Instagram, Map, Location, LeafletJS",
+    "url"      : "/visualisation/2016/06/08/instagram-data-visualisation/",
+    "date"     : "2016-06-08 12:59:13 +0200"
+    } ,
+    
+  {
+    "title"    : "How to cluster users on Instagram using hashtags and Apache Spark",
+    "category" : "",
+    "tags"     : "Data analysis, Instagram, Clustering, Spark, Python",
+    "url"      : "/clustering/2016/05/13/clustering-instagram-users-using-hashtags/",
+    "date"     : "2016-05-13 13:12:45 +0200"
+    } ,
+    
+  {
+    "title"    : "Instagram social graph analysis using Apache Spark and Graph Frames",
+    "category" : "",
+    "tags"     : "Data analysis, Instagram, Social graph, Spark, Python",
+    "url"      : "/graphs/2016/05/10/instagram-social-graph-analysis-spark-graph-frames/",
+    "date"     : "2016-05-10 10:11:22 +0200"
+    } ,
+    
+  {
+    "title"    : "Instagram API. Data collection using location and time as parameters",
+    "category" : "",
+    "tags"     : "Data collection, Instagram API, Time, Location, Python",
+    "url"      : "/data/2016/05/08/instagram-api-data-collection/",
+    "date"     : "2016-05-08 11:23:34 +0200"
+    } ,
+    
+  {
+    "title"    : "Hello, World!",
+    "category" : "",
+    "tags"     : "Volodymyr, Miz, welcome, blog, intro",
+    "url"      : "/intro/2016/04/04/first-blog-post/",
+    "date"     : "2016-04-04 22:04:40 +0200"
+    } 
+    
+  ]

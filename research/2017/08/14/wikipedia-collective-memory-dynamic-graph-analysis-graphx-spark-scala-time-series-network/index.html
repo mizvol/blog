@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wikipedia graph mining: dynamic structure of collective memory</title>
+
+<meta name="description" content="Wikipedia graph dynamic pattern discovery. Dynamic graph analysis in GraphX. Collective memory research. Gephi graph visualization.">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-wikipedia-w fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Wikipedia graph mining: dynamic structure of collective memory</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">August 14, 2017</span>
+           under Research
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          9 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p>This is the accompanying blogpost for our upcoming research paper (read preprint on <a href="https://arxiv.org/abs/1710.00398" target="_blank">arXiv</a>); joint work with <a href="http://www.kirellbenzi.com/" target="_blank">Kirell Benzi</a>, <a href="http://www.eviacybernetics.com/en/index.html" target="_blank">Benjamin Ricaud</a>, and <a href="https://people.epfl.ch/pierre.vandergheynst" target="_blank">Pierre Vandergheynst</a> (<a href="https://www.epfl.ch/" target="_blank">EPFL</a>, <a href="https://lts2.epfl.ch/" target="_blank">LTS2</a>). Here, we focus on the results, omitting the details of the algorithm and the implementation.</p>
+
+<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/piNgplme6ag?ecver=2" width="640" height="360" frameborder="0" gesture="media" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen=""></iframe></div>
+
+<h3 id="intro">Intro</h3>
+
+<p>Wikipedia is a great source for data analysis due to its outstanding scale and the graph structure. Tens of millions of visitors surf it daily, leaving their footprint on the Web. The combination of the Wikipedia graph structure and visitor activity on the pages gives us the dynamic graph – the graph with time-series signals on the nodes. The dynamic nature of the graph makes the large-scale analysis problem complicated.</p>
+
+<p>In the original paper we analyze the <a href="https://www.wikipedia.org/" target="_blank">Wikipedia</a> graph. The aim is to detect <a href="https://en.wikipedia.org/wiki/Collective_memory" target="_blank">collective memories</a> using the activity of the Wikipedia visitors. We use graph-based approach to build our model. The computational model is inspired by the <a href="https://en.wikipedia.org/wiki/Synaptic_plasticity" target="_blank">synaptic plasticity</a> and <a href="https://en.wikipedia.org/wiki/Hebbian_theory" target="_blank">Hebbian theory</a>.</p>
+
+<p>Not surprisingly, we could not fit all the results into the paper. Apart from that, PDF is a poor format for communicating the research findings. The aim of this post is to show the results in an interactive way. While reading the paper and this post, we encourage you to open the graphs, appearing everywhere in this post, and play with them: zoom, click, move, search, and select. This is by far the funniest way to plunge into the main results of our work.</p>
+
+<h3 id="graphs-are-interactive">Graphs are interactive</h3>
+
+<ol>
+  <li>Click on any graph in this post to open it in a new window.</li>
+  <li>Zoom, click on the nodes, search pages by name, highlight clusters by color.
+    <ul>
+      <li>When you click on a node – you select all the neighbors.</li>
+      <li>When you select a cluster – you select all the nodes in this cluster.</li>
+      <li>The list of selected nodes appears on the right.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Works best in the latest version of <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">Chrome</a>. DO NOT try to open the graphs on a smartphone. The graphs are too large and it might take forever to render.</p>
+
+<h3 id="dataset">Dataset</h3>
+<p>The original datasets are publicly available on the <a href="https://dumps.wikimedia.org/other/" target="_blank">Wikimedia</a> website. We took the SQL dumps of the English Wikipedia articles to create the graph. The visitor activity is the number of visits per page per hour. We consider the period from 02:00, 23 September 2014 to 23:00, 30 April 2015. Pre-processing details are described in our paper in the Dataset section.</p>
+
+<h3 id="dynamics-of-the-wikipedia-network">Dynamics of the Wikipedia network</h3>
+
+<p><a href="https://blog.miz.space/wikiBrain/all-time/index.html" target="_blank"><img src="/data/images/wikiBrain/all-time-graph.png" alt="7 months dynamics Wikipedia graph" height="50%" width="50%" align="right" /></a></p>
+
+<p>In the paper we make an assumption that the dynamics of the graph can affect its structure. We apply the update rule, based on the signal on the nodes, to observe this effect. Here we show that the Wikipedia graph can self-organize into the sets of meaningful communities of the nodes, if we take into account the visitor activity dynamics of the graph. Click on the graph on the right and explore the result by yourself.</p>
+
+<p>This graph is the result of 7-month dynamics of visitor activity on Wikipedia. Here you can find main events that had taken place over the considered period. The stable or scheduled events, like tournaments, awards ceremonies, contests, and most popular holidays form big clusters. The unstable or unexpected events, like incidents and accidents are grouped in small clusters. Even though, this graph provides good summary of the dynamic patterns, we can see only the final result. What is more important, is to get insights on the dynamics of the graph over time. How the clusters emerge, evolve, and disappear? To answer this question, we pick one particular event and look at its dynamics in details.</p>
+
+<h3 id="dynamics-of-an-event-nfl-championship">Dynamics of an event: NFL championship</h3>
+
+<p><a href="https://blog.miz.space/sb-activity.html" target="_blank"><img src="/data/images/wikiBrain/sb-activity.svg" alt="" height="50%" width="50%" align="right" /></a></p>
+
+<p>In order to understand the dynamics of evolution of the graph, we pick one of the most popular events, highlighted in English Wikipedia – <a href="https://en.wikipedia.org/wiki/National_Football_League" target="_blank">the National Football League (NFL) championship</a>. We consider the <a href="https://en.wikipedia.org/wiki/2014_NFL_season" target="_blank">season 2014-2015</a>. The plot is on the right (click to enlarge). For the plot interpretability we extracted 30 NFL teams out of 485 pages in the original cluster. The <span style="color:#00ff00">timeline</span> shows the overall cluster activity over the period of 7 months. The dynamics timeline of the graph and the <span style="color:red">NFL cluster</span> evolution is illustrated on the top row. It reflects the interest of the NFL fans in the championship. The cluster is small and sparse at the beginning of the championship and becomes denser and bigger, approaching the final game date. The behavior of the Wikipedia visitors during the day of the final game <a href="https://en.wikipedia.org/wiki/Super_Bowl_XLIX" target="_blank">Super Bowl</a> is outstanding. The activity of the NFL fans is much higher, comparing to the activity of other Wikipedia users. It makes an analogy to the real life, when during the finals the fans become the most active people on the streets.</p>
+
+<p>The NFL championship is just an example of a detected event and its evolution. You can dig into the graphs of monthly activity and check out other detected event-clusters. The total number of the detected events is 172. Click on the graphs below to open an interactive version and explore by yourself.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">October</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">November</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">December</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">January</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">February</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">March</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">April</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><!--OCT--> <a href="https://blog.miz.space/wikiBrain/october/index.html" target="_blank"><img src="/data/images/wikiBrain/october-graph.png" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!--NOV--> <a href="https://blog.miz.space/wikiBrain/november/index.html" target="_blank"> <img src="/data/images/wikiBrain/november-graph.png" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!--DEC--> <a href="https://blog.miz.space/wikiBrain/december/index.html" target="_blank"> <img src="/data/images/wikiBrain/december-graph.png" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!--JAN--> <a href="https://blog.miz.space/wikiBrain/january/index.html" target="_blank"><img src="/data/images/wikiBrain/january-graph.png" alt="" /></a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!--FEB--> <a href="https://blog.miz.space/wikiBrain/february/index.html" target="_blank"> <img src="/data/images/wikiBrain/february-graph.png" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!--MAR--> <a href="https://blog.miz.space/wikiBrain/march/index.html" target="_blank"> <img src="/data/images/wikiBrain/march-graph.png" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!--APR--> <a href="https://blog.miz.space/wikiBrain/april/index.html" target="_blank"> <img src="/data/images/wikiBrain/april-graph.png" alt="" /> </a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The NFL cluster is a good example of a stable event, represented as one of the biggest clusters in the resulting graph. What about the unscheduled events, like attacks and other accidents?</p>
+
+<h3 id="collective-memory">Collective memory</h3>
+
+<p>Traumatic events, like terrorist attacks, flight crashes, wars, and conflicts, often remind us of the past. These memories are often common for most people in a social group. That is the reason why they are called <a href="https://en.wikipedia.org/wiki/Collective_memory" target="_blank">Collective memories</a>. Our approach allows to detect these memories and serves as a general model for collective memory emergence. We provide the examples of 3 events, detected among the others.</p>
+
+<p>The table below contains examples of collective memories. To show the details of the detected collective memories, we pick 3 particular events among the others detected: <a href="https://en.wikipedia.org/wiki/Ferguson_unrest" target="_blank">Ferguson unrest</a> (second wave - November 24, 2014), <a href="https://en.wikipedia.org/wiki/Charlie_Hebdo_shooting" target="_blank">Charlie Hebdo attack</a> (January 7, 2015), <a href="https://en.wikipedia.org/wiki/Germanwings_Flight_9525" target="_blank">Germanwings flight 9525 airplane crash</a> (March 24, 2015). Top row contains the extracted clusters of collective memories for each of the discussed events. Bottom row shows the detailed activity of each page in the clusters.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ferguson unrest</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Charlie Hebdo attack</th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Germanwings 9525 crash</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><!-- Ferguson --> <a href="https://blog.miz.space/wikiBrain/ferguson/index.html" target="_blank"><img src="/data/images/wikiBrain/ferguson-graph.png" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Charlie Hebdo --> <a href="https://blog.miz.space/wikiBrain/charlie-hebdo/index.html" target="_blank"><img src="/data/images/wikiBrain/charlie-graph.png" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Germanwings --> <a href="https://blog.miz.space/wikiBrain/germanwings-week/index.html" target="_blank"><img src="/data/images/wikiBrain/germanwings-graph.png" alt="" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><!-- Ferguson --> <a href="https://blog.miz.space/ferguson-activity.html" target="_blank"><img src="/data/images/wikiBrain/ferguson-activity.svg" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Charlie Hebdo --> <a href="https://blog.miz.space/charlie-activity.html" target="_blank"><img src="/data/images/wikiBrain/charlie-activity.svg" alt="" /> </a></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"><!-- Germanwings --> <a href="https://blog.miz.space/germanwings-activity.html" target="_blank"><img src="/data/images/wikiBrain/germanwings-activity.svg" alt="" /> </a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We see that the core events trigger relevant memories. Ferguson unrest reminds us of other riots and other shootings of innocent people of color. Charlie Hebdo shooting has links to the other terrorist attacks, bloodshed, and law enforcement agencies. Germanwings crash is surrounded by the dense group of the other airplane crashes, indicating that the flight accidents are thoroughly structured on Wikipedia.</p>
+
+<p>Although, we can see slightly different behavior in the clusters. For example, the activity during the Ferguson unrest has two distinctive spikes that indicate beginning and end dates of the riot. In case of the Germanwings, the activity of the cluster has a spike in December. The reason is another airplane crash that occurred in December and for this reason got attached to the main cluster.</p>
+
+<p>The short-term events and their collective memories can be found on the monthly dynamic graphs, presented in the previous section in the timeline table. Check the graphs out and search for the events of your interest.</p>
+
+<h3 id="conclusions">Conclusions</h3>
+<p>Wikipedia can tell us more than is written on its pages. It is a great source of data for the collective human behavior research. Nonetheless, the dynamic nature of the graph-structured data leads to new challenges for <a href="https://en.wikipedia.org/wiki/Data_science" target="_blank">data science</a> and <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">machine learning</a>. In the paper we proposed a new method for collective memory modeling and understanding. We applied the method to the Wikipedia datasets. We detected collective memories using the combination of the Wikipedia Web network graph and the its visitor activity history.</p>
+
+<p>We assume that the learned graphs have associative memory properties. To verify this assumption, we model the recall process using <a href="https://en.wikipedia.org/wiki/Hopfield_network" target="_blank">Hopfield networks</a>. The results of these experiments are in my <a href="https://blog.miz.space/research/2018/02/14/wikipedia-collective-memory-hopfield-network-how-are-web-networks-similar-to-brain/" target="_blank">blog post</a> describing these memory properties.</p>
+
+<p>Besides, we noticed that the events we detected were triggered by the anomalous activity of Wikipedia users. This inspired an idea of an anomaly detection algorithm that I described in <a href="https://blog.miz.space/research/2019/02/13/anomaly-detection-in-dynamic-graphs-and-time-series-networks/" target="_blank">another blog post</a>. Take a look at the interactive demos of the results on the <a href="https://wiki-insights.epfl.ch/" target="_blank">website</a> of our <strong>Wikipedia Insights</strong> project.</p>
+
+<h3 id="tools-and-code">Tools and code</h3>
+<p>We make all the experiments using <a href="https://spark.apache.org/" target="_blank">Apache Spark</a> <a href="https://spark.apache.org/graphx/" target="_blank">GraphX</a>. The code is written in <a href="https://www.scala-lang.org/" target="_blank">Scala</a> and available on <a href="https://github.com/mizvol/WikiBrain" target="_blank">GitHub</a>. If you feel like playing with the code but new to Scala and Spark, take a look at <a href="https://blog.miz.space/tutorial/2016/08/30/how-to-integrate-spark-intellij-idea-and-scala-install-setup-ubuntu-windows-mac/" target="_blank">this tutorial</a>.</p>
+
+<h3 id="acknowledgments">Acknowledgments</h3>
+<p>I would like to thank <a href="http://deff.ch/" target="_blank">Michaël Defferrard</a> and <a href="https://andreasloukas.wordpress.com/" target="_blank">Andreas Loukas</a> for fruitful discussions and useful suggestions.</p>
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Apache Spark, Wikipedia, Scala, GraphX, Machine Learning, Research, Dynamic graph, Network analysis
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

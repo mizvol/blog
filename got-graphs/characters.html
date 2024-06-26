@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GoT characters graph</title>
+    <link rel="stylesheet" href="./css/introjs.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="./lib/sigma.min.js"></script>
+    <script src="./lib/plugins/sigma.parsers.json/sigma.parsers.json.js"></script>
+    <script src="./lib/intro.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div class='container'>
+            <div class="row">
+                <div class="col-5">
+                    <div class="row">
+                        <div data-step="1" data-intro="Check this to draw labels." class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="drawHideLabelsCheckBox" onclick="drawHideLabelsTrigger();">
+                            <label class="custom-control-label" for="drawHideLabelsCheckBox">
+                                Labels
+                            </label>
+                        </div>
+                        <div data-step="2" data-intro="Tick this to show edges." class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="drawHideEdgesCheckBox" onclick="drawHideEdgesTrigger();">
+                            <label class="custom-control-label" for="drawHideEdgesCheckBox">
+                                Edges
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+                <div data-step="3" data-intro="Zoom controls." class="col-4">
+                    <button class="btn btn-secondary" type="button" onclick='zoomIn()'><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+                    <button class="btn btn-secondary" type="button" onclick='zoomOut()'><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+                    <button class="btn btn-secondary" type="button" onclick='initZoom()'><i class="fa fa-undo" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div data-step="4" data-intro="Double click on a node to see activity of a corresponding Wikipedia page." class='center'></div>
+    </div>
+    <script src="characters.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie genres classification using character interaction networks</title>
+
+<meta name="description" content="Defining movie genres using topologies of character interaction networks. Classification of graphs based on their topological properties, such as assortativity, transitivity, degree distribution, clustering coefficient, and modularity. Decision tree. D3JS visualization.">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-film fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Movie genres classification using character interaction networks</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">July 9, 2018</span>
+           under Research
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          24 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p>Social interactions are among the most <a href="https://www.nytimes.com/2017/06/12/well/live/having-friends-is-good-for-you.html" target="_blank">important needs</a> of everyday life. Whenever we communicate with relatives, colleagues, friends or acquaintances, we create invisible social links adding those people into our personal social network (here, I mean the real one, not 500+ Facebook friends and LinkedIn connections). Sometimes, we look at interactions in our networks and compare our lives to movies and TV series trying to find similarities with real life. This made me think of a couple of interesting questions. Can the structure of our social network tell us anything about ourselves? What if it defines the genre of our life? Let’s try to look at this question from a data scientist’s perspective.</p>
+
+<p>To do that, first, we would need a labeled dataset reflecting <em>“social network”=&gt;”genre”</em> relation. Clearly, we do not have access to real-life social networks or even if we were able to extract them from, say, Facebook,  first, that would be considered a privacy violation, and second, we would not have labels or “genres” characterizing each network. Although, the good news is that we have got movies and it is possible to extract networks of character interactions. Also, we know the genres of each movie. Fortunately, the <a href="http://moviegalaxies.com/team" target="_blank">guys</a> from <a href="http://moviegalaxies.com/" target="_blank">Moviegalaxies</a> have already captured quite a few of these networks and published them on their <a href="http://moviegalaxies.com/" target="_blank">website</a>.</p>
+
+<p>All in all, we found a suitably labeled dataset containing a <em>“character network of a movie”=&gt;”genre”</em> relation. Now, <strong>we can build a machine learning model to find out whether the structure of character networks has anything to do with genres of corresponding movies</strong>.</p>
+
+<h3 id="data">Data</h3>
+
+<p><a href="http://moviegalaxies.com/" target="_blank">Moviegalaxies</a> is a collection of social graphs in movies. A team of researchers from <a href="http://www.rwth-aachen.de/cms/~a/root/?lidx=1" target="_blank">RWTH</a>, <a href="http://www.uni-koeln.de/" target="_blank">Cologne University</a>, and <a href="http://macro.media.mit.edu/" target="_blank">MIT</a> (<a href="http://jermainkaminski.com/" target="_blank">Jermain Kaminski</a>, Michael Schober, Raymond Albaladejo, Oleksandr Zastupailo, and <a href="http://www.chidalgo.com/" target="_blank">Cesar Hidalgo</a>) has collected and published social network interactions among characters in 774 movies (and counting). They used “same-scene appearance” approach to build these social networks. This means, for example, if Padme and Anakin appear in the same scene in <a href="http://moviegalaxies.com/movies/774-Star-Wars:-Episode-II---Attack-of-the-Clones" target="_blank">Star Wars: Episode II Attack of Clones</a>, they are connected in the social network of the movie. On the other hand, Amidala and Yoda have never appeared together, therefore there is no edge linking them in the graph.</p>
+
+<p>Although, it is not that easy to get genre information for each movie from Moviegalaxies website. In order to obtain this information, I used <a href="http://www.omdbapi.com/" target="_blank">Open Movie Database (OMDB) API</a>. The service provides 1000 requests per day for free which are enough to get more information about each movie in the Moviegalaxies collection.</p>
+
+<p>For each movie, we consider only the main genre and omit the secondary ones. Here and in all experiments below, we keep only the top 7 most popular genres. As we can see in the chart below, the dataset is quite imbalanced.</p>
+
+<p><strong>Note:</strong> Visualizations work best with Chrome.</p>
+
+<style>
+.bar {
+  fill: #6F257F;
+}
+
+.axisX {
+  font-size: 13px;
+}
+
+.axisX text {
+  fill: white;
+}
+
+.axisY {
+  font-size: 13px;
+}
+
+.axisY text {
+  fill: white;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  min-width: 60px;
+  height: auto;
+  padding: 2px;
+  font: 15px sans-serif;
+  background: black;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+}
+   
+</style>
+
+<div id="barchart"></div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+
+function getDivWidth (div) {
+    var width = d3.select(div)
+      // get the width of div element
+      .style('width')
+      // take of 'px'
+      .slice(0, -2)
+    // return as an integer
+    return Math.round(Number(width))
+  }
+
+var svgBar = d3.select("#barchart").append("svg").attr("width",getDivWidth('.content')).attr("height",300);
+
+    margin = {top: 20, right: 20, bottom: 30, left: 80},
+    width = +svgBar.attr("width") - margin.left - margin.right,
+    height = +svgBar.attr("height") - margin.top - margin.bottom;
+  
+var x = d3.scaleLinear().range([0, width]);
+var y = d3.scaleBand().range([height, 0]);
+
+var g = svgBar.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+  
+d3.json("/data/moviegalaxies/genres-barchart.json", function(error, data) {
+    if (error) throw error;
+  
+    data.sort(function(a, b) { return a.value - b.value; });
+  
+    x.domain([0, d3.max(data, function(d) { return d.value; })]);
+    y.domain(data.map(function(d) { return d.genre; })).padding(0.1);
+
+    g.append("g")
+        .attr("class", "axisX")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x).ticks(5).tickFormat(function(d) { return d; }));
+
+    g.append("g")
+        .attr("class", "axisY")
+        .call(d3.axisLeft(y));
+
+    g.selectAll(".bar")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", 0)
+        .attr("height", y.bandwidth())
+        .attr("y", function(d) { return y(d.genre); })
+        .attr("width", function(d) { return x(d.value); })
+        .on("mouseover", function(d) {
+       div.transition()
+         .duration(200)
+         .style("opacity", .5);
+       div.html(d.genre + "<br/>" + d.value)
+         .style("left", d3.event.pageX + "px")
+         .style("top", d3.event.pageY + "px")
+       })
+     .on("mouseout", function(d) {
+       div.transition()
+         .duration(500)
+         .style("opacity", 0);
+       });
+});
+</script>
+
+<p></p>
+
+<h3 id="features">Features</h3>
+<p>We want to find out whether the structure of character networks is enough to define movie genres. To do that, we are going to look at the topological properties of graphs, corresponding to the character networks. In particular, we are interested in <a href="https://en.wikipedia.org/wiki/Assortativity" target="_blank">assortativity</a>, <a href="https://www.sci.unich.it/~francesc/teaching/network/transitivity.html" target="_blank">transitivity</a>, <a href="https://en.wikipedia.org/wiki/Degree_distribution" target="_blank">degree distribution</a>, <a href="https://en.wikipedia.org/wiki/Clustering_coefficient" target="_blank">clustering coefficient</a>, and <a href="https://en.wikipedia.org/wiki/Modularity_(networks)" target="_blank">modularity</a>. Also, we consider the number of nodes and edges in social graphs as features.</p>
+
+<p>Apart from having fancy names, topological properties of graphs can tell us interesting stories about social networks. For example, <em>clustering coefficient</em>, <em>transitivity</em>, and <em>modularity</em> reflect to what extent members of a network tend to connect or cluster together. High <em>assortativity</em> coefficient indicates that people in the network tend to socialize with peers that have similar properties (popularity, for instance).</p>
+
+<p>After removing outliers and normalizing, let’s take a look at pairwise relationships of the features in our dataset. To reduce clutter, you can choose genres using check-boxes below. I recommend comparing genres that have a similar number of samples, e.g. Horror vs Adventure.</p>
+
+<p><strong>Note:</strong> you may need to wait a second after you press a checkbox. Works best with Chrome.</p>
+
+<style type="text/css">
+  svg {
+    font: 10px sans-serif;
+    padding: 10px;
+}
+
+/*.axis,*/
+.frame {
+    shape-rendering: crispEdges;
+}
+
+.cell text {
+    font-weight: bold;
+    text-transform: capitalize;
+    fill: white;
+    font-size: 15px;
+}
+
+.frame {
+    fill: none;
+    stroke: #aaa;
+}
+
+circle {
+    fill-opacity: .7;
+}
+
+circle.hidden {
+    fill: #ccc !important;
+}
+
+.extent {
+    fill: #000;
+    fill-opacity: .125;
+    stroke: #fff;
+}
+</style>
+
+<body>
+    <div>
+        <label>
+            <input type="checkbox" name="region" class="target" value="Comedy" checked="checked" /> Comedy</label>
+        <label>
+            <input type="checkbox" name="region" class="target" value="Drama" checked="checked" /> Drama</label>
+        <label>
+            <input type="checkbox" name="region" class="target" value="Action" checked="checked" /> Action</label>
+            <label>
+            <input type="checkbox" name="region" class="target" value="Crime" checked="checked" /> Crime</label>
+            <label>
+            <input type="checkbox" name="region" class="target" value="Biography" checked="checked" /> Biography</label>
+            <label>
+            <input type="checkbox" name="region" class="target" value="Adventure" checked="checked" /> Adventure</label>
+                       <label>
+            <input type="checkbox" name="region" class="target" value="Horror" checked="checked" /> Horror</label>
+    </div>
+    <div id="chart"></div>
+</body>
+<script>
+
+// hardcoded number of features
+  var num_features = 9;
+  var size = getDivWidth('.content') / num_features,
+    padding = 10;
+
+var xScaleScatter = d3.scaleLinear()
+    .range([padding / 2, size - padding / 2]);
+
+var yScaleScatter = d3.scaleLinear()
+    .range([size - padding / 2, padding / 2]);
+
+var xAxisScatter = d3.axisBottom()
+    .scale(xScaleScatter)
+    .ticks(3);
+
+var yAxisScatter = d3.axisLeft()
+    .scale(yScaleScatter)
+    .ticks(3);
+
+var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+d3.csv("/data/moviegalaxies/mg-features.csv", function(error, data) {
+    if (error) throw error;
+
+    var filtered_data = data.map(function(d) { return d; });
+
+    var domainByTrait = {},
+        traits = d3.keys(data[0]).filter(function(d) { return d !== "genres"; }),
+        n = traits.length;
+
+    traits.forEach(function(trait) {
+        domainByTrait[trait] = d3.extent(data, function(d) { return d[trait]; });
+    });
+
+    xAxisScatter.tickSize(size * n);
+    yAxisScatter.tickSize(-size * n);
+
+    var svgScatter = d3.select("#chart").append("svg")
+        .attr("width", size * n + padding)
+        .attr("height", size * n + padding)
+        .append("g")
+        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+
+    svgScatter.selectAll(".x.axis")
+        .data(traits)
+        .enter().append("g")
+        .attr("class", "axisX")
+        .attr("transform", function(d, i) { return "translate(" + (n - i - 1) * size + ",0)"; })
+        .each(function(d) { xScaleScatter.domain(domainByTrait[d]);
+            d3.select(this).call(xAxisScatter); });
+
+    svgScatter.selectAll(".y.axis")
+        .data(traits)
+        .enter().append("g")
+        .attr("class", "axisY")
+        .attr("transform", function(d, i) { return "translate(0," + i * size + ")"; })
+        .each(function(d) { yScaleScatter.domain(domainByTrait[d]);
+            d3.select(this).call(yAxisScatter); });
+
+    update();
+
+    d3.selectAll('.target').on("change", function() {
+        var type = this.value;
+        if (this.checked) {
+            // console.log(type + " checked");
+            var new_targets = data.filter(function(d) { return d.genres == type; });
+            filtered_data = filtered_data.concat(new_targets);
+            // console.log(filtered_data);
+        } else {
+            // console.log(type + " unchecked");
+            filtered_data = filtered_data.filter(function(d) { return d.genres != type; });
+            // console.log(filtered_data);
+        }
+        update();
+    });
+
+    function update() {
+
+        svgScatter.selectAll(".cell").remove();
+
+        var cell = svgScatter.selectAll(".cell").data(cross(traits, traits));
+
+        cell.enter().append("g")
+            .attr("class", "cell")
+            .attr("transform", function(d) { return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")"; })
+            .each(plot);
+
+        svgScatter.selectAll(".cell").data(cross(traits, traits)).filter(function(d) { return d.i === d.j; }).append("text")
+            .attr("x", padding)
+            .attr("y", padding)
+            .attr("dy", ".71em")
+            .text(function(d) { return d.x; });
+    }
+
+    function plot(p) {
+        var cell = d3.select(this);
+
+        xScaleScatter.domain(domainByTrait[p.x]);
+        yScaleScatter.domain(domainByTrait[p.y]);
+
+        var dot = cell.selectAll('.dot').data(filtered_data);
+
+        cell.append("rect")
+            .attr("class", "frame")
+            .attr("x", padding / 2)
+            .attr("y", padding / 2)
+            .attr("width", size - padding)
+            .attr("height", size - padding);
+
+        dot.enter().append("circle").attr("class", "dot")
+            .attr("cx", function(d) { return xScaleScatter(d[p.x]); })
+            .attr("cy", function(d) { return yScaleScatter(d[p.y]); })
+            .attr("r", 2)
+            .style("fill", function(d) { return color(d.genres); });
+
+        dot.exit().remove()
+    }
+});
+
+function cross(a, b) {
+    var c = [],
+        n = a.length,
+        m = b.length,
+        i, j;
+    for (i = -1; ++i < n;)
+        for (j = -1; ++j < m;) c.push({ x: a[i], i: i, y: b[j], j: j });
+    return c;
+}
+</script>
+
+<p></p>
+
+<p>As we can see, our dataset is quite complicated since we have overlapping classes. I had an assumption that the features may have non-linear relationships that would help to separate the classes. To verify that, I applied <a href="http://scikit-learn.org/stable/modules/manifold.html#manifold" target="_blank">manifold learning</a> to the dataset in order to learn non-linear features, although this had not improved the classification results. Check out this <a href="http://nbviewer.jupyter.org/gist/mizvol/086bd31f86a7e352dd0f59519392f5ba" target="_blank">Jupyter notebook</a> for more details.</p>
+
+<p>Even though the dataset is far from being perfect, we see that feature distributions of some genres are slightly different. Take a look at Horror, Biography, and Adventure, for example. This means we could try to use these features to classify movie genres.</p>
+
+<h3 id="classification">Classification</h3>
+<p>We want an interpretable model since we need to know which topological properties are common to a certain genre. Hence, <a href="https://en.wikipedia.org/wiki/Decision_tree_learning" target="_blank">Decision tree</a> algorithm is a good candidate.</p>
+
+<p>Our dataset is imbalanced. Fighting imbalanced problems is quite difficult especially when we have a very limited number of samples. Also, this is not the purpose of this experiment, so we go for a workaround. To simplify our task and the model itself, let’s split the data into two groups to have more or less the same number of samples in each group: <strong>1) Action, Comedy, Drama</strong> and <strong>2) Biography, Adventure, Horror</strong>. Also, let’s put aside Crime movies for now.</p>
+
+<p>Below, you can see the results of classification using Decision tree model that we trained using our data. We built decision trees for each pair of genres in our groups. We can see that when we try to classify only two genres (<a href="https://en.wikipedia.org/wiki/Binary_classification" target="_blank">binary classification</a>), the accuracy of the models is quite high, reaching 79% for Horror vs Biography pair, for example. However, when we have more classes in our model, the results are only slightly better than a random guess for Horror vs Adventure vs Biography (56%) and even worse than that for Action vs Comedy vs Drama (45%). This implies that some genres have similar topological properties of character networks.</p>
+
+<p>To read and interpret the trees below, assume that the upper branches correspond to True conditions and the lower ones are False.</p>
+
+<style>
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+  fill: white;
+  font-size: 15px;
+}
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+select {
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+
+</style>
+
+<div>
+<select id="selectTree">
+  <option value="horrorAdventure">Horror vs Adventure</option>
+  <option value="adventureBiography">Adventure vs Biography</option>
+  <option value="horrorBiography">Horror vs Biography</option>
+  <option value="horrorAdventureBiography">Horror vs Adventure vs Biography</option>
+  <option value="comedyDrama">Comedy vs Drama</option>
+  <option value="actionDrama">Action vs Drama</option>
+  <option value="actionComedy">Action vs Comedy</option>
+  <option value="actionComedyDrama">Action vs Comedy vs Drama</option>
+</select>
+</div>
+
+<div id="classificationAccuracy" style="padding-top: 10px;"></div>
+<div id="treesChart"></div>
+
+<script>
+
+var horrorAdventure = {"name": "degree st. dev. > 0.26", "children": [{"name": "assortativity > 0.69", "children": [{"name": "0 of Adventure, 3 of Horror"}, {"name": "degree st. dev. > 0.29", "children": [{"name": "22 of Adventure, 10 of Horror"}, {"name": "8 of Adventure, 0 of Horror"}]}]}, {"name": "nodes > 0.18", "children": [{"name": "assortativity > 0.63", "children": [{"name": "3 of Adventure, 0 of Horror"}, {"name": "5 of Adventure, 7 of Horror"}]}, {"name": "assortativity > 0.22", "children": [{"name": "1 of Adventure, 20 of Horror"}, {"name": "2 of Adventure, 0 of Horror"}]}]}]};
+
+var horrorAdventureBiography = {"name": "degree st. dev. > 0.27", "children": [{"name": "mean degree > 0.32", "children": [{"name": "edges > 0.37", "children": [{"name": "5 of Adventure, 1 of Horror, 0 of Biography"}, {"name": "2 of Adventure, 14 of Horror, 10 of Biography"}]}, {"name": "nodes > 0.28", "children": [{"name": "26 of Adventure, 4 of Horror, 0 of Biography"}, {"name": "4 of Adventure, 8 of Horror, 2 of Biography"}]}]}, {"name": "assortativity > 0.32", "children": [{"name": "degree st. dev. > 0.15", "children": [{"name": "5 of Adventure, 10 of Horror, 17 of Biography"}, {"name": "0 of Adventure, 0 of Horror, 11 of Biography"}]}, {"name": "mean degree > 0.10", "children": [{"name": "2 of Adventure, 1 of Horror, 0 of Biography"}, {"name": "0 of Adventure, 3 of Horror, 0 of Biography"}]}]}]};
+
+var comedyDrama = {"name": "mean degree > 0.29", "children": [{"name": "assortativity > 0.67", "children": [{"name": "5 of Comedy, 0 of Drama"}, {"name": "degree st. dev. > 0.38", "children": [{"name": "51 of Comedy, 13 of Drama"}, {"name": "11 of Comedy, 11 of Drama"}]}]}, {"name": "mean degree > 0.10", "children": [{"name": "modularity > 0.72", "children": [{"name": "3 of Comedy, 0 of Drama"}, {"name": "99 of Comedy, 105 of Drama"}]}, {"name": "transitivity > 0.17", "children": [{"name": "0 of Comedy, 13 of Drama"}, {"name": "2 of Comedy, 4 of Drama"}]}]}]};
+
+var actionDrama = {"name": "mean degree > 0.29", "children": [{"name": "edges > 0.14", "children": [{"name": "edges > 0.15", "children": [{"name": "45 of Action, 20 of Drama"}, {"name": "0 of Action, 2 of Drama"}]}, {"name": "mean degree > 0.39", "children": [{"name": "0 of Action, 1 of Drama"}, {"name": "13 of Action, 0 of Drama"}]}]}, {"name": "degree st. dev. > 0.43", "children": [{"name": "assortativity > 0.46", "children": [{"name": "1 of Action, 6 of Drama"}, {"name": "0 of Action, 8 of Drama"}]}, {"name": "mean degree > 0.17", "children": [{"name": "93 of Action, 57 of Drama"}, {"name": "47 of Action, 52 of Drama"}]}]}]};
+
+var actionComedy = {"name": "degree st. dev. > 0.42", "children": [{"name": "edges > 0.21", "children": [{"name": "modularity > 0.29", "children": [{"name": "14 of Action, 42 of Comedy"}, {"name": "10 of Action, 7 of Comedy"}]}, {"name": "0 of Action, 14 of Comedy"}]}, {"name": "assortativity > 0.44", "children": [{"name": "assortativity > 0.59", "children": [{"name": "38 of Action, 7 of Comedy"}, {"name": "74 of Action, 38 of Comedy"}]}, {"name": "mean degree > 0.10", "children": [{"name": "51 of Action, 61 of Comedy"}, {"name": "12 of Action, 2 of Comedy"}]}]}]};
+
+var adventureBiography = {"name": "modularity > 0.36", "children": [{"name": "nodes > 0.30", "children": [{"name": "modularity > 0.44", "children": [{"name": "17 of Adventure, 6 of Biography"}, {"name": "11 of Adventure, 0 of Biography"}]}, {"name": "5 of Adventure, 11 of Biography"}]}, {"name": "nodes > 0.25", "children": [{"name": "8 of Adventure, 6 of Biography"}, {"name": "degree st. dev. > 0.28", "children": [{"name": "0 of Adventure, 11 of Biography"}, {"name": "3 of Adventure, 7 of Biography"}]}]}]};
+
+var horrorBiography = {"name": "modularity > 0.34", "children": [{"name": "degree st. dev. > 0.31", "children": [{"name": "mean degree > 0.32", "children": [{"name": "6 of Horror, 4 of Biography"}, {"name": "23 of Horror, 0 of Biography"}]}, {"name": "6 of Horror, 13 of Biography"}]}, {"name": "assortativity > 0.45", "children": [{"name": "0 of Horror, 13 of Biography"}, {"name": "9 of Horror, 10 of Biography"}]}]};
+
+var actionComedyDrama = {"name": "degree st. dev. > 0.42", "children": [{"name": "mean degree > 0.28", "children": [{"name": "assortativity > 0.38", "children": [{"name": "20 of Action, 37 of Comedy, 13 of Drama"}, {"name": "3 of Action, 10 of Comedy, 0 of Drama"}]}, {"name": "assortativity > 0.39", "children": [{"name": "1 of Action, 7 of Comedy, 11 of Drama"}, {"name": "0 of Action, 9 of Comedy, 3 of Drama"}]}]}, {"name": "assortativity > 0.59", "children": [{"name": "clustering > 0.58", "children": [{"name": "23 of Action, 7 of Comedy, 2 of Drama"}, {"name": "15 of Action, 0 of Comedy, 4 of Drama"}]}, {"name": "assortativity > 0.43", "children": [{"name": "83 of Action, 44 of Comedy, 47 of Drama"}, {"name": "54 of Action, 57 of Comedy, 66 of Drama"}]}]}]};
+
+var treeData = horrorAdventure;
+
+// Set the dimensions and margins of the diagram
+var margin = {top: 20, right: 90, bottom: 30, left: 90},
+    width = getDivWidth('.content') - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var svg = d3.select("#treesChart").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate("
+          + margin.left + "," + margin.top + ")");
+
+
+var i = 0,
+    duration = 750,
+    root;
+
+var accuracy = "67%";
+d3.select("#classificationAccuracy").text("Classification accuracy: " + accuracy);
+// declares a tree layout and assigns the size
+var treemap = d3.tree().size([height, width]);
+
+// Assigns parent, children, height, depth
+root = d3.hierarchy(treeData, function(d) { return d.children; });
+root.x0 = height / 2;
+root.y0 = 0;
+
+// Collapse after the second level
+// root.children.forEach(collapse);
+
+update(root);
+
+var dropdown = d3.select("#selectTree");
+
+dropdown.on("change", function() {
+   var selectedTree = d3.select("#selectTree").property("value");
+
+   // console.log(selectedTree);
+
+   d3.selectAll(".node").remove();
+   d3.selectAll(".link").remove();
+   // d3.selectAll("#classificationAccuracy").remove();
+
+// Assigns parent, children, height, depth
+switch(selectedTree) {
+    case "horrorAdventure":
+        root = d3.hierarchy(horrorAdventure, function(d) { return d.children; });
+        accuracy = "67%";
+        break;
+    case "horrorAdventureBiography":
+        root = d3.hierarchy(horrorAdventureBiography, function(d) { return d.children; });
+        accuracy = "56%";
+        break;
+    case "comedyDrama":
+        root = d3.hierarchy(comedyDrama, function(d) { return d.children; });
+        accuracy = "61%";
+        break;
+    case "actionDrama":
+        root = d3.hierarchy(actionDrama, function(d) { return d.children; });
+        accuracy = "60%";
+        break;
+    case "actionComedy":
+        root = d3.hierarchy(actionComedy, function(d) { return d.children; });
+        accuracy = "63%";
+        break;
+    case "adventureBiography":
+        root = d3.hierarchy(adventureBiography, function(d) { return d.children; });
+        accuracy = "70%";
+        break;
+    case "horrorBiography":
+        root = d3.hierarchy(horrorBiography, function(d) { return d.children; });
+        accuracy = "79%";
+        break;
+    case "actionComedyDrama":
+        root = d3.hierarchy(actionComedyDrama, function(d) { return d.children; });
+        accuracy = "45%";
+        break;
+    default:
+        root = d3.hierarchy(horrorAdventure, function(d) { return d.children; });
+        accuracy = "67%";
+}
+
+root.x0 = height / 2;
+root.y0 = 0;
+
+// Collapse after the second level
+// root.children.forEach(collapse);
+d3.select("#classificationAccuracy").text("Classification accuracy: " + accuracy);
+update(root);
+});
+
+// Collapse the node and all it's children
+function collapse(d) {
+  if(d.children) {
+    d._children = d.children
+    d._children.forEach(collapse)
+    d.children = null
+  }
+}
+
+function update(source) {
+
+  // Assigns the x and y position for the nodes
+  var treeData = treemap(root);
+
+  // Compute the new tree layout.
+  var nodes = treeData.descendants(),
+      links = treeData.descendants().slice(1);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d){ d.y = d.depth * width / 5});
+
+  // ****************** Nodes section ***************************
+
+  // Update the nodes...
+  var node = svg.selectAll('g.node')
+      .data(nodes, function(d) {return d.id || (d.id = ++i); });
+
+  // Enter any new modes at the parent's previous position.
+  var nodeEnter = node.enter().append('g')
+      .attr('class', 'node')
+      .attr("transform", function(d) {
+        return "translate(" + source.y0 + "," + source.x0 + ")";
+    })
+    .on('click', click);
+
+  // Add Circle for the nodes
+  nodeEnter.append('circle')
+      .attr('class', 'node')
+      .attr('r', 1e-6)
+      .style("fill", function(d) {
+          return d._children ? "lightsteelblue" : "#fff";
+      });
+
+  // Add labels for the nodes
+  nodeEnter.append('text')
+      .attr("dy", ".35em")
+      .attr("x", function(d) {
+          return d.children || d._children ? -13 : 13;
+      })
+      .attr("y", function(d) {
+          return d.children || d._children ? -20 : 0;
+      })
+      .attr("text-anchor", function(d) {
+          return d.children || d._children ? "middle" : "start";
+      })
+      .text(function(d) { return d.data.name; });
+
+  // UPDATE
+  var nodeUpdate = nodeEnter.merge(node);
+
+  // Transition to the proper position for the node
+  nodeUpdate.transition()
+    .duration(duration)
+    .attr("transform", function(d) { 
+        return "translate(" + d.y + "," + d.x + ")";
+     });
+
+  // Update the node attributes and style
+  nodeUpdate.select('circle.node')
+    .attr('r', 10)
+    .style("fill", function(d) {
+        return d.children || d._children ? "lightsteelblue" : "purple";
+    })
+    .attr('cursor', 'pointer');
+
+
+  // Remove any exiting nodes
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) {
+          return "translate(" + source.y + "," + source.x + ")";
+      })
+      .remove();
+
+  // On exit reduce the node circles size to 0
+  nodeExit.select('circle')
+    .attr('r', 1e-6);
+
+  // On exit reduce the opacity of text labels
+  nodeExit.select('text')
+    .style('fill-opacity', 1e-6);
+
+  // ****************** links section ***************************
+
+  // Update the links...
+  var link = svg.selectAll('path.link')
+      .data(links, function(d) { return d.id; });
+
+  // Enter any new links at the parent's previous position.
+  var linkEnter = link.enter().insert('path', "g")
+      .attr("class", "link")
+      .attr('d', function(d){
+        var o = {x: source.x0, y: source.y0}
+        return diagonal(o, o)
+      });
+
+  // UPDATE
+  var linkUpdate = linkEnter.merge(link);
+
+  // Transition back to the parent element position
+  linkUpdate.transition()
+      .duration(duration)
+      .attr('d', function(d){ return diagonal(d, d.parent) });
+
+  // Remove any exiting links
+  var linkExit = link.exit().transition()
+      .duration(duration)
+      .attr('d', function(d) {
+        var o = {x: source.x, y: source.y}
+        return diagonal(o, o)
+      })
+      .remove();
+
+  // Store the old positions for transition.
+  nodes.forEach(function(d){
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+
+  // Creates a curved (diagonal) path from parent to the child nodes
+  function diagonal(s, d) {
+
+    path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`
+
+    return path
+  }
+
+  // Toggle children on click.
+  function click(d) {
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+    update(d);
+  }
+}
+
+</script>
+
+<p></p>
+
+<p>Let’s take look at the actual output of the model. Below, you can see classification results for each genre in every group. We can see that the majority of the movies are classified correctly in all cases. Although, the number of misclassified movies grows with the number of classes in our model.</p>
+
+<div>
+<select id="selectBar">
+<option value="horrorAdventureBar">Horror vs Adventure</option>
+  <option value="horrorBiographyBar">Horror vs Biography</option>
+  <option value="adventureBiographyBar">Adventure vs Biography</option>
+    <option value="horrorAdventureBiographyBar">Horror vs Adventure vs Biography</option>
+    <option value="comedyDramaBar">Comedy vs Drama</option>
+    <option value="actionDramaBar">Action vs Drama</option>
+    <option value="actionComedyBar">Action vs Comedy</option>
+  <option value="actionComedyDramaBar">Action vs Comedy vs Drama</option>
+</select>
+</div>
+
+<div>
+  <svg width="250" height="20">
+    <rect width="250" height="20" style="fill: green; float: left" />
+    <text x="10" y="15" font-family="'Open Sans', sans-serif" font-size="15px" fill="white">Correctly classified movies</text>
+  </svg>
+
+  <svg width="250" height="20">
+    <rect width="250" height="20" style="fill: red" />
+    <text x="10" y="15" font-family="'Open Sans', sans-serif" font-size="15px" fill="white">Misclassified movies</text>
+  </svg>
+
+</div>
+
+<div id="charts"></div>
+
+<script>
+
+var horrorAdventureBar = [[{"genre":"Horror", "count":26}, {"genre":"Adventure", "count":3}],
+[{"genre":"Adventure", "count":38}, {"genre":"Horror", "count":14}]];
+
+var horrorAdventureBiographyBar = [[{"genre":"Horror", "count":20}, {"genre":"Adventure", "count":3}, {"genre":"Biography", "count":2}],
+[{"genre":"Adventure", "count":29}, {"genre":"Horror", "count":16}, {"genre":"Biography", "count":13}],
+[{"genre":"Biography", "count":29}, {"genre":"Adventure", "count":9}, {"genre":"Horror", "count":4}]];
+
+var horrorBiographyBar = [[{"genre":"Horror", "count":30}, {"genre":"Biography", "count":9}],
+[{"genre":"Biography", "count":35}, {"genre":"Horror", "count":10}]];
+
+var adventureBiographyBar = [[{"genre":"Adventure", "count":35}, {"genre":"Biography", "count":14}],
+[{"genre":"Biography", "count":30}, {"genre":"Adventure", "count":6}]];
+
+var comedyDramaBar = [[{"genre":"Comedy", "count":91}, {"genre":"Drama", "count":33}],
+[{"genre":"Drama", "count":113}, {"genre":"Comedy", "count":80}]];
+
+var actionDramaBar = [[{"genre":"Action", "count":184}, {"genre":"Drama", "count":118}],
+[{"genre":"Drama", "count":28}, {"genre":"Action", "count":15}]];
+
+var actionComedyBar = [[{"genre":"Action", "count":155}, {"genre":"Comedy", "count":75}],
+[{"genre":"Comedy", "count":96}, {"genre":"Action", "count":44}]];
+
+var actionComedyDramaBar = [[{"genre":"Action", "count":160}, {"genre":"Comedy", "count":106}, {"genre":"Drama", "count":103}],
+[{"genre":"Comedy", "count":50}, {"genre":"Action", "count":23}, {"genre":"Drama", "count":13}],
+[{"genre":"Drama", "count":30}, {"genre":"Action", "count":16}, {"genre":"Comedy", "count":15}]];
+
+var data = horrorAdventureBar;
+
+// set the dimensions and margins of the graph
+var marginBar = {top: 20, right: 20, bottom: 30, left: 40},
+    widthBar = getDivWidth('.content') / 3 - marginBar.left * 2 - marginBar.right * 2,
+    heightBar = 500 - marginBar.top - marginBar.bottom;
+
+// set the ranges
+var xBar = d3.scaleBand()
+          .range([0, widthBar])
+          .padding(0.1);
+var yBar = d3.scaleLinear()
+          .range([heightBar, 0]);
+
+var dropdownBar = d3.select("#selectBar");
+
+dropdownBar.on("change", function() {
+   var selectedBar = d3.select("#selectBar").property("value");
+
+
+   d3.selectAll("svg#barChartSvg").remove();
+
+// Assigns parent, children, height, depth
+switch(selectedBar) {
+    case "horrorAdventureBiographyBar":
+        data = horrorAdventureBiographyBar;
+        break;
+    case "horrorAdventureBar":
+        data = horrorAdventureBar;
+        break;
+    case "comedyDramaBar":
+        data = comedyDramaBar;
+        break;
+    case "actionDramaBar":
+        data = actionDramaBar;
+        break;
+    case "actionComedyBar":
+        data = actionComedyBar;
+        break;
+    case "adventureBiographyBar":
+        data = adventureBiographyBar;
+        break;
+    case "horrorBiographyBar":
+        data = horrorBiographyBar;
+        break;
+    case "actionComedyDramaBar":
+        data = actionComedyDramaBar;
+        break;
+}
+
+draw(data);
+
+});
+
+draw(data);
+
+function draw(data){
+  d3.select("#charts").selectAll("div").remove();
+  for (i = 0; i < data.length; i++){
+  var chartDiv = d3.select("#charts").append("div").attr("id", "#chart" + (i+1));
+
+if (i != data.length - 1) {
+  chartDiv.attr("style", "float: left");
+}
+
+var bar = data[i];
+var svgClass = chartDiv.append("svg").attr("id", "barChartSvg")
+    .attr("width", widthBar + marginBar.left + marginBar.right)
+    .attr("height", heightBar + marginBar.top + marginBar.bottom)
+  .append("g")
+    .attr("transform", 
+          "translate(" + marginBar.left + "," + marginBar.top + ")");
+  // format the data
+  var counts = []
+  bar.forEach(function(d) {
+    d.count = +d.count;
+    counts.push(d.count);
+  });
+
+  // Scale the range of the data in the domains
+  xBar.domain(bar.map(function(d) { return d.genre; }));
+  yBar.domain([0, d3.max(bar, function(d) { return d.count; })]);
+
+  // append the rectangles for the bar chart
+  svgClass.selectAll(".bar")
+      .data(bar)
+    .enter().append("rect")
+      // .attr("class", "bar")
+      .attr("fill", function(d) {
+    if (d.count == Math.max(...counts)) {
+      return "green";
+    } else return "red";
+  })
+      .attr("x", function(d) { return xBar(d.genre); })
+      .attr("width", xBar.bandwidth())
+      .attr("y", function(d) { return yBar(d.count); })
+      .attr("height", function(d) { return heightBar - yBar(d.count); });
+
+  // add the x Axis
+  svgClass.append("g")
+      .attr("transform", "translate(0," + heightBar + ")")
+      .attr("class", "axisX")
+      .call(d3.axisBottom(xBar));
+
+  // add the y Axis
+  svgClass.append("g")
+      .attr("class", "axisY")
+      .call(d3.axisLeft(yBar));
+
+      svgClass.append("text")
+        .attr("x", (widthBar / 2))             
+        .attr("y", 0 - (marginBar.top / 4))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("font", "Helvetica")
+        .style("fill", "white")
+        // .style("text-decoration", "underline")  
+        .text(bar[0].genre);
+    }  
+  }
+</script>
+
+<h3 id="interpretation-of-the-results">Interpretation of the results</h3>
+<p>By looking at the decision trees we built, we can say which features characterize each genre. For example, if we compare Horror vs Biography, we can see that Biography movies tend to have lower modularity and higher assortativity measures. In other words, characters in Biography movies tend to socialize with those who have a similar level of centrality and importance in a movie, but, at the same time, they do not form strong communities. Reminds of real life, doesn’t it? On the other hand, characters in Horror movies socialize with everybody but tend to interact in groups (to me, this sounds like networking at a conference). Take a look at the decision trees above and try to interpret the results explaining particular features of each genre.</p>
+
+<h3 id="conclusions-and-possible-extensions">Conclusions and possible extensions</h3>
+<p>I always feel like static networks lack an important component – temporal information. In this project, we ignored the time-series of character co-occurrences. It would be interesting to look at the dynamics of character interactions in movies. If we had time-series of character interactions, we would be able to learn weights between nodes in graphs. That would give us insights into the strength and importance of connections in social networks in the movies. One way to learn the weights would be to use the approach we developed for <a href="https://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/?ref=hvper.com" target="_blank">Wikipedia</a> graph mining.</p>
+
+<p>Besides, this time, we chose to avoid the problem of imbalanced classes. It would be interesting to apply weighted versions of Random trees or XGBoost algorithms to compare classification results for all genres in the dataset.</p>
+
+<p>Due to the low number of data samples in the Moviegalaxies dataset, it was more of a fun project rather than a serious research. I am looking forward to the next data release by Moviegalaxies team. Nonetheless, the results are quite interesting and we have actually managed to find a few insights about social networks in movies. In general, the idea of using topological properties of graphs for classification problems still excites me. If we had more data related to this problem, it would be interesting to build another model at a larger scale.</p>
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Data analysis, Classification, Graph, Topology, Machine Learning, Research, Network analysis
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

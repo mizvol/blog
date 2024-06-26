@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram social graph analysis using Apache Spark and Graph Frames</title>
+
+<meta name="description" content="Instagram social graph analysis using Apache Spark, Graph Frames and MongoDB. Insights into tourist flow identification based on social graph properties.">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/icon.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/icon.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</head>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76210007-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Volodymyr Miz</p>
+
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+
+    <p class="links">
+	
+	<a href="https://www.linkedin.com/in/volodymyrmiz" target="_new"><i class="fa fa-linkedin"></i></a>
+	<a href="https://github.com/mizvol" target="_new"><i class="fa fa-github-alt"></i></a>
+	<a href="CV-Volodymyr-Miz.pdf" target="_new"><i class="fa fa-id-card"></i></a>
+	<a href="https://twitter.com/mizvladimir" target="_new"><i class="fa fa-twitter"></i></a>
+	<a href="feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+</p>
+
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <i class="fa fa-instagram fa-4x"></i>
+      </div>
+      
+
+      <h1 class="header" itemprop="name">Instagram social graph analysis using Apache Spark and Graph Frames</h1>
+
+      <div class="author">
+        <small><i>
+          
+          by
+          <span itemprop="author">
+            
+              <a rel="author" href="https://miz.space/">
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">Volodymyr Miz</span>
+            </span>
+            
+              </a>
+            
+          </span>
+          
+          on <span itemprop="datePublished" content="2014-08-28">May 10, 2016</span>
+           under Graphs
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          4 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+
+        
+
+        <span itemprop="articleBody"><p>Databricks recently released <a href="https://databricks.com/blog/2016/03/03/introducing-graphframes.html">Graph Frames</a> -  graph processing library for Apache Spark. I was so excited, so I decided to play with it - build a graph and try out most popular methods of the library.</p>
+
+<p>In this post I will show how to build and analyze social graph based on the data that we collected using Instagram API. Check out my previous <a href="/data/2016/05/08/instagram-api-data-collection/">post</a> if you want to know how to collect the data for the analysis.</p>
+
+<p>I store the data in my local MongoDB instance, so I will be doing all my queries using <a href="https://api.mongodb.com/python/current/">PyMongo</a>. I will use <a href="https://docs.mongodb.com/manual/aggregation/">Mongo Aggregation</a> on the preprocessing stage. After that I will show how to use recently released <a href="http://graphframes.github.io/">Graph Frames</a> library in order to build and analyze Instagram social graph.</p>
+
+<h3 id="data-preparation">Data preparation</h3>
+<p>First, extract follower ids from collected <code class="highlighter-rouge">followers</code>. Here I show the code only for <code class="highlighter-rouge">followers</code>. You should do the same for <code class="highlighter-rouge">follows</code> as well. The code is identical.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/2ae0f294030af4b258cab6a4656122c9.js"> </script>
+
+<!-- ```js
+db.followers.aggregate({$project: {_id: 1}}).forEach(function(obj){
+    db.followerIds.insert(obj)
+    })
+``` -->
+
+<p>After that, I extract user ids and follower ids and represent them as vertices and edges respectively in order to construct our social graph.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/227a2e29ee1ade03a5696c5d678a2839.js"> </script>
+
+<!-- ``` python
+import pymongo as pm
+
+client = pm.MongoClient()
+db = client.instagram
+followerIds = db.followerIds
+
+pipeline = [{"$unwind": "$follows"}]
+
+relationships = list(followerIds.aggregate(pipeline))
+userIds = list(followerIds.aggregate([{"$match": {"follows": {"$exists": True}}},{"$project": {"_id": 1}}]))
+
+edgesList = []
+for relationship in relationships:
+    edgesList.append(tuple([str(relationship['_id']), str(relationship['followers']), 'followed_by']))
+``` -->
+
+<h3 id="graph-frames">Graph Frames</h3>
+<p>Now we can construct a graph using Graph Frames and Apache Spark.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/c0a1a17970fb3e568350a2a9390d2512.js"> </script>
+
+<!-- ``` python
+from graphframes import *
+
+vertices = sqlContext.createDataFrame(userIds, ["id"])
+edges = sqlContext.createDataFrame(edgesList, ["src", "dst", "relationship"])
+g = GraphFrame(vertices, edges)
+``` -->
+
+<p>Now we have social graph, so we can extract information about its properties. You can check out the <a href="http://graphframes.github.io/user-guide.html">documentation</a> if you want to know all features that are available in Graph Frames.</p>
+
+<h3 id="page-rank-of-a-user">Page Rank of a user</h3>
+<p>I am interested in Page Rank and degree of each user. Page Rank (PR) of each vertex – numerical measure of importance of a vertex in a graph. In the context of a social graph PR represents the influence of a user over a social network. The algorithm considers only incoming links, in other words - who follows a user, instead of counting all edges (in other words calculating degree) which would not give reasonable result. Moreover, PR algorithm takes into account the PR of a user who subscribes. Hence, the higher PR of subscriber, the higher influence it has to a user’s PR.</p>
+
+<p>We can compute degree and PR calling corresponding methods of Graph Frames library:</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/ea910d83acb6d98e53d2a11cc1d0c90c.js"> </script>
+
+<!-- ``` python
+degreesCount = g.degrees.count()
+pr = g.pageRank(resetProbability = 0.15, tol=0.01)
+``` -->
+
+<p><code class="highlighter-rouge">tol</code> in this case sets algorithm to run until convergence. <code class="highlighter-rouge">resetProbability</code> represent <code class="highlighter-rouge">alpha</code> parameter. For more information about the Page Rank algorithm realisation read the <a href="http://graphframes.github.io/api/scala/index.html#org.graphframes.lib.PageRank">documentation</a></p>
+
+<p>I build the graph using 45 588 unique users as vertices. Edges represent the sum of 197 643 and 274 726 connections of followers and follows respectively.</p>
+
+<p>The result of the analysis shows that influence over the Instagram network depends on the number of follows links, which is not surprising. However the term <code class="highlighter-rouge">influence</code> in this case refers only to the fact that the higher PR user has the higher number of people see his content in their timelines. Nonetheless, this does not mean that higher PR implies popularity on Instagram, which is expressed in likes.</p>
+
+<h3 id="degrees-of-a-social-graph">Degrees of a social graph</h3>
+
+<p>Another interesting property of a graph is the degrees of its nodes. I collected data from a certain location and intended to separate the group of potential tourists. We can do this by computing degrees of the nodes of our social graph. I have an assumption that those users (nodes) who have 0-degree in this area represent the potential group of tourists. We can easily check the assumption if we compare latest locations of the users to the locations, collected during holidays. Indeed, if we look at the <a href="/visualisation/2016/06/08/instagram-data-visualisation/">map</a> of the users spread, we will see that our assumption concerning the tourists is confirmed.</p>
+
+<p>This means that we can use Instagram social graph for tourist flow identification and analysis.</p>
+
+</span>
+
+        
+
+
+        
+        <div class="tags">
+          <small>
+          <i class="fa fa-tags"></i>
+            Data analysis, Instagram, Social graph, Spark, Python
+          </small>
+        </div>
+        
+
+      </div>
+
+      
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/mizvladimir">@mizvladimir</a> or leave a comment below!
+      </div>
+      
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mizspace.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-5  pull-left">
+    Powered by <a href="https://jekyllrb.com ">Jekyll</a>
+  </div>
+  <div class="col-md-5 pull-right">
+    Jekyll template <a href="https://github.com/jacobtomlinson/carte-noire"><i class="fa fa-github"></i></a>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-76210007-1']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Map of Instagram hashtags</title>
+ <meta name="description" content="Instagram hashtags on map. Instagram hashtag visualization using the data extracted from public Instagram accounts.">
+ <link rel="icon" href="../favicons/icon.png"/>
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/leaflet.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="../libs/leaflet/leaflet.ie.css" /><![endif]-->
+    <link rel="stylesheet" href="../libs/leaflet.label.css" />
+<script src="../libs/leaflet-src.js"></script>
+
+<script src="../src/Label.js"></script>
+<script src="../src/BaseMarkerMethods.js"></script>
+<script src="../src/Marker.Label.js"></script>
+<script src="../src/Map.Label.js"></script>
+<script src="../data/instagram/hashtagLabels.js"></script>
+</head>
+<body>
+    <div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+    <script>
+        
+            osm = new L.TileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mizvol.03e2an4k',
+    accessToken: 'pk.eyJ1IjoibWl6dm9sIiwiYSI6ImNpbnd5MmNjYzAwb2d2dmx5MHJ3YnUyNTQifQ.lwEqpnq8lYKoRvEgloDHUQ'
+}),
+            map = new L.Map('map', {layers: [osm], center: new L.LatLng(46.8061438, 8.2791428), zoom: 8 });
+
+        for (var i = 0; i < labels.length; i++) {
+            var lat = labels[i][0];
+            var lon = labels[i][1];
+            var label = labels[i][2];
+
+            var marker = L.marker([lat, lon]);
+            marker.setOpacity(0.0001);
+            marker.bindLabel(label, { noHide: true }).addTo(map);
+        }
+    </script>
+</body>
+</html>
